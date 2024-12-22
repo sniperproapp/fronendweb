@@ -1,0 +1,39 @@
+.rbt-banner-area {
+    background-color: #0a3de3;
+}
+.rating{
+    color: black !important;
+    margin-right: 0px;
+}
+
+.familia1{
+    
+   background-position: center;
+  background-size: cover;
+  background-repeat:no-repeat ;
+   width: 100%;
+    
+         
+}
+.familia{
+    
+    background-position: center;
+   background-size: cover;
+   background-repeat:no-repeat ;
+   max-width: 100%;
+     
+          
+ }
+
+containerimagen{
+    width: 800px;
+    height: 800px;
+    background-image:  url('../../../assets/images/material/FONDOFAMILIASNIPER.jpg'); 
+}
+static{
+   
+    
+     background-repeat: no-repeat;
+    background-size:cober; 
+}
+

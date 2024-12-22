@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../service/auth.service';
 import { Router } from '@angular/router';
+import { ValidarpagoComponent } from 'src/app/shared/validarpago/validarpago.component';
+import { ModalService } from '@developer-partners/ngx-modal-dialog';
 
 @Component({
   selector: 'app-login-and-register',
@@ -22,7 +24,7 @@ export class LoginAndRegisterComponent {
    
 
 
-  constructor(public authServices: AuthService,public router:Router){
+  constructor(public authServices: AuthService,public router:Router,private readonly _modalService:ModalService){
 
   }
 
@@ -50,7 +52,9 @@ export class LoginAndRegisterComponent {
     })
   }
 
-
+  validarpago():void{
+    this._modalService.show<any>(  ValidarpagoComponent,{title:"pagar",size:1}).result().subscribe((resp:any)=>{console.log(resp)})
+}
   register(){
     if(!this.email_register ||!this.password_register ||!this.name_register ||!this.surname_register  || !this.password_confir_register ){
       alert("faltan datos del usuario")

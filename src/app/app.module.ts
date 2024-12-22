@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastNotificationsModule } from 'ngx-toast-notifications';
+import { RouterModule } from '@angular/router';
  
 
 
@@ -15,7 +16,7 @@ import { ToastNotificationsModule } from 'ngx-toast-notifications';
   ],
   imports: [
     BrowserModule,
-     
+    RouterModule,
     ToastNotificationsModule,
     AppRoutingModule,
     HttpClientModule,

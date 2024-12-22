@@ -21,6 +21,13 @@ export const routes:Routes=[
 
 },
 {
+
+  path:'',
+  canActivate:[AuthGuard],
+  loadChildren:()=>import("./modules/tienda-auth/tienda-auth.module").then(m=>m.TiendaAuthModule),
+
+},
+{
   path:'auth',
   loadChildren:()=>import("./modules/auth/auth.module").then(m=>m.AuthModule),
 

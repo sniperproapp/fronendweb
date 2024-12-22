@@ -8,12 +8,24 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { FiltersCoursesComponent } from './filters-courses/filters-courses.component';
+ 
+import { InstructorComponent } from './instructor/instructor.component';
+import { QuienessomosComponent } from './quienessomos/quienessomos.component';
+import { ContactosComponent } from './contactos/contactos.component';
+import { CartsMensualComponent } from './carts/cartsmensual.component';
+import { LandingMensualidadComponent } from './landing-mensualidad/landing-mensualidad.component';
 
 
 @NgModule({
   declarations: [
     TiendaGuestComponent,
-    LandingCourseComponent
+    LandingCourseComponent,
+    FiltersCoursesComponent
+    ,ContactosComponent, 
+    InstructorComponent,
+     QuienessomosComponent
+     ,CartsMensualComponent,LandingMensualidadComponent
   ],
   imports: [
     CommonModule,

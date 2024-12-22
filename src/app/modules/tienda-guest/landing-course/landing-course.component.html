@@ -27,20 +27,20 @@
                         </div>
 
                         <div class="feature-sin rating">
-                            <a href="#">4.8</a>
-                            <a href="#"><i class="fa fa-star"></i></a>
-                            <a href="#"><i class="fa fa-star"></i></a>
-                            <a href="#"><i class="fa fa-star"></i></a>
-                            <a href="#"><i class="fa fa-star"></i></a>
-                            <a href="#"><i class="fa fa-star"></i></a>
+                            <a href="#">{{ COURSE_LANDING.avg_rating }}</a>
+                            <i class="fas fa-star" [ngClass]="{'rating': COURSE_LANDING.avg_rating < 1}"></i>
+                            <i class="fas fa-star" [ngClass]="{'rating': COURSE_LANDING.avg_rating < 2}"></i>
+                            <i class="fas fa-star" [ngClass]="{'rating': COURSE_LANDING.avg_rating < 3}"></i>
+                            <i class="fas fa-star" [ngClass]="{'rating': COURSE_LANDING.avg_rating < 4}"></i>
+                            <i class="fas fa-star" [ngClass]="{'rating': COURSE_LANDING.avg_rating < 5}"></i>
                         </div>
 
                         <div class="feature-sin total-rating">
-                            <a class="rbt-badge-4" href="#">215,475 rating</a>
+                            <a class="rbt-badge-4" href="#">{{ COURSE_LANDING.num_review }}rating</a>
                         </div>
 
                         <div class="feature-sin total-student">
-                            <span>616,029 students</span>
+                            <span> {{ COURSE_LANDING.n_students }} students</span>
                         </div>
 
                     </div>
@@ -52,13 +52,13 @@
                             </a>
                         </div>
                         <div class="rbt-author-info">
-                            By <a href="profile.html">{{ COURSE_LANDING.user.name }}</a> In <a href="#"></a>
+                            By <a href="profile.html">{{ COURSE_LANDING.user.name }}</a>  <a href="#"></a>
                         </div>
                     </div>
 
                     <ul class="rbt-meta">
                         <li><i class="feather-calendar"></i>Last updated {{ COURSE_LANDING.updated_date }}</li>
-                        <li><i class="feather-globe"></i>English</li>
+                        <li><i class="feather-globe"></i>{{ COURSE_LANDING.idioma }}</li>
                         <li><i class="feather-award"></i>Certified Course</li>
                     </ul>
 
@@ -102,11 +102,11 @@
                     </div>
 
                     <!-- Start Course Feature Box  -->
-                    <div class="rbt-course-feature-box overview-wrapper rbt-shadow-box mt--30 has-show-more" id="overview">
-                        <div class="rbt-course-feature-inner has-show-more-inner-content" [innerHtml]="COURSE_LANDING.description">
+                    <div class="rbt-course-feature-box overview-wrapper rbt-shadow-box mt--30  " id="overview">
+                        <div class="rbt-course-feature-inner  " [innerHtml]="COURSE_LANDING.description">
                             
                         </div>
-                        <div class="rbt-show-more-btn">Show More</div>
+                        
                     </div>
                     <!-- End Course Feature Box  -->
 
@@ -216,8 +216,8 @@
                                         </h5>
                                         <span class="b3 subtitle">{{ COURSE_LANDING.user.profession }}</span>
                                         <ul class="rbt-meta mb--20 mt--10">
-                                            <li><i class="fa fa-star color-warning"></i>75,237 Reviews <span class="rbt-badge-5 ml--5">4.4 Rating</span></li>
-                                            <li><i class="feather-users"></i>912,970 Students</li>
+                                            <li><i class="fa fa-star color-warning"></i>{{ COURSE_LANDING.user.num_review }} Reviews <span class="rbt-badge-5 ml--5">{{ COURSE_LANDING.user.avg_rating }} Rating</span></li>
+                                            <li><i class="feather-users"></i>{{ COURSE_LANDING.user.n_students }} Students</li>
                                             <li><a href="#"><i class="feather-video"></i>{{ COURSE_LANDING.user.count_course }} Courses</a></li>
                                         </ul>
                                     </div>
@@ -255,12 +255,12 @@
                     <div class="rbt-review-wrapper rbt-shadow-box review-wrapper mt--30" id="review">
                         <div class="course-content">
                             <div class="section-title">
-                                <h4 class="rbt-title-style-3">Review</h4>
+                                <h4 class="rbt-title-style-3">{{ COURSE_LANDING.user.num_review }}Review</h4>
                             </div>
                             <div class="row g-5 align-items-center">
                                 <div class="col-lg-3">
                                     <div class="rating-box">
-                                        <div class="rating-number">5.0</div>
+                                        <div class="rating-number">{{ COURSE_LANDING.user.avg_rating }}</div>
                                         <div class="rating">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
                                                 <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
@@ -409,205 +409,56 @@
                     </div>
                     <!-- End Edu Review List  -->
 
-                    <div class="about-author-list rbt-shadow-box featured-wrapper mt--30 has-show-more">
+                    <div class="about-author-list rbt-shadow-box featured-wrapper mt--30  ">
                         <div class="section-title">
                             <h4 class="rbt-title-style-3">Featured review</h4>
                         </div>
-                        <div class="has-show-more-inner-content rbt-featured-review-list-wrapper">
-                            <div class="rbt-course-review about-author">
-                                <div class="media">
-                                    <div class="thumbnail">
-                                        <a href="#">
-                                            <img src="assets/images/testimonial/testimonial-3.jpg" alt="Author Images">
-                                        </a>
-                                    </div>
-                                    <div class="media-body">
-                                        <div class="author-info">
-                                            <h5 class="title">
-                                                <a class="hover-flip-item-wrapper" href="#">
-                                                    Farjana Bawnia
-                                                </a>
-                                            </h5>
-                                            <div class="rating">
-                                                <a href="#"><i class="fa fa-star"></i></a>
-                                                <a href="#"><i class="fa fa-star"></i></a>
-                                                <a href="#"><i class="fa fa-star"></i></a>
-                                                <a href="#"><i class="fa fa-star"></i></a>
-                                                <a href="#"><i class="fa fa-star"></i></a>
-                                            </div>
+                        <div class=" -inner-content rbt-featured-review-list-wrapper">
+                            <ng-container *ngFor="let REVIEW of REVIEWS">
+                                <div class="rbt-course-review about-author">
+                                    <div class="media">
+                                        <div class="thumbnail">
+                                            <a href="#">
+                                                <img [src]="REVIEW.imagen" alt="Author Images">
+                                            </a>
                                         </div>
-                                        <div class="content">
-                                            <p class="description">At 29 years old, my favorite compliment is being
-                                                told that I look like my mom. Seeing myself in her image, like this
-                                                daughter up top.</p>
-                                            <ul class="social-icon social-default transparent-with-border justify-content-start">
-                                                <li><a href="#">
-                                                        <i class="feather-thumbs-up"></i>
+                                        <div class="media-body">
+                                            <div class="author-info">
+                                                <h5 class="title">
+                                                    <a class="hover-flip-item-wrapper" href="#">
+                                                        {{REVIEW.name}}
                                                     </a>
-                                                </li>
-                                                <li><a href="#">
-                                                        <i class="feather-thumbs-down"></i>
-                                                    </a>
-                                                </li>
-                                            </ul>
+                                                </h5>
+                                                <div class="rating">
+                                                    <i class="fas fa-star" [ngClass]="{'rating': REVIEW.rating < 1}"></i>
+                                                    <i class="fas fa-star" [ngClass]="{'rating': REVIEW.rating < 2}"></i>
+                                                    <i class="fas fa-star" [ngClass]="{'rating': REVIEW.rating < 3}"></i>
+                                                    <i class="fas fa-star" [ngClass]="{'rating': REVIEW.rating < 4}"></i>
+                                                    <i class="fas fa-star" [ngClass]="{'rating': REVIEW.rating < 5}"></i>
+                                                </div>
+                                            </div>
+                                            <div class="content">
+                                                <p class="description">{{REVIEW.description}}</p>
+                                                <ul class="social-icon social-default transparent-with-border justify-content-start">
+                                                    <li><a href="#">
+                                                            <i class="feather-thumbs-up"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li><a href="#">
+                                                            <i class="feather-thumbs-down"></i>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="rbt-course-review about-author">
-                                <div class="media">
-                                    <div class="thumbnail">
-                                        <a href="#">
-                                            <img src="assets/images/testimonial/testimonial-4.jpg" alt="Author Images">
-                                        </a>
-                                    </div>
-                                    <div class="media-body">
-                                        <div class="author-info">
-                                            <h5 class="title">
-                                                <a class="hover-flip-item-wrapper" href="#">Razwan Islam</a>
-                                            </h5>
-                                            <div class="rating">
-                                                <a href="#"><i class="fa fa-star"></i></a>
-                                                <a href="#"><i class="fa fa-star"></i></a>
-                                                <a href="#"><i class="fa fa-star"></i></a>
-                                                <a href="#"><i class="fa fa-star"></i></a>
-                                                <a href="#"><i class="fa fa-star"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <p class="description">My favorite compliment is being
-                                                told that I look like my mom. Seeing myself in her image, like this
-                                                daughter up top.</p>
-                                            <ul class="social-icon social-default transparent-with-border justify-content-start">
-                                                <li><a href="#">
-                                                        <i class="feather-thumbs-up"></i>
-                                                    </a>
-                                                </li>
-                                                <li><a href="#">
-                                                        <i class="feather-thumbs-down"></i>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="rbt-course-review about-author">
-                                <div class="media">
-                                    <div class="thumbnail">
-                                        <a href="#">
-                                            <img src="assets/images/testimonial/testimonial-1.jpg" alt="Author Images">
-                                        </a>
-                                    </div>
-                                    <div class="media-body">
-                                        <div class="author-info">
-                                            <h5 class="title">
-                                                <a class="hover-flip-item-wrapper" href="#">Babor Azom</a>
-                                            </h5>
-                                            <div class="rating">
-                                                <a href="#"><i class="fa fa-star"></i></a>
-                                                <a href="#"><i class="fa fa-star"></i></a>
-                                                <a href="#"><i class="fa fa-star"></i></a>
-                                                <a href="#"><i class="fa fa-star"></i></a>
-                                                <a href="#"><i class="fa fa-star"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <p class="description">My favorite compliment is being
-                                                told that I look like my mom. Seeing myself in her image, like this
-                                                daughter up top.</p>
-                                            <ul class="social-icon social-default transparent-with-border justify-content-start">
-                                                <li><a href="#">
-                                                        <i class="feather-thumbs-up"></i>
-                                                    </a>
-                                                </li>
-                                                <li><a href="#">
-                                                        <i class="feather-thumbs-down"></i>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="rbt-course-review about-author">
-                                <div class="media">
-                                    <div class="thumbnail">
-                                        <a href="#">
-                                            <img src="assets/images/testimonial/testimonial-6.jpg" alt="Author Images">
-                                        </a>
-                                    </div>
-                                    <div class="media-body">
-                                        <div class="author-info">
-                                            <h5 class="title">
-                                                <a class="hover-flip-item-wrapper" href="#">Mohammad Ali</a>
-                                            </h5>
-                                            <div class="rating">
-                                                <a href="#"><i class="fa fa-star"></i></a>
-                                                <a href="#"><i class="fa fa-star"></i></a>
-                                                <a href="#"><i class="fa fa-star"></i></a>
-                                                <a href="#"><i class="fa fa-star"></i></a>
-                                                <a href="#"><i class="fa fa-star"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <p class="description">My favorite compliment is being
-                                                told that I look like my mom. Seeing myself in her image, like this
-                                                daughter up top.</p>
-                                            <ul class="social-icon social-default transparent-with-border justify-content-start">
-                                                <li><a href="#">
-                                                        <i class="feather-thumbs-up"></i>
-                                                    </a>
-                                                </li>
-                                                <li><a href="#">
-                                                        <i class="feather-thumbs-down"></i>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="rbt-course-review about-author">
-                                <div class="media">
-                                    <div class="thumbnail">
-                                        <a href="#">
-                                            <img src="assets/images/testimonial/testimonial-8.jpg" alt="Author Images">
-                                        </a>
-                                    </div>
-                                    <div class="media-body">
-                                        <div class="author-info">
-                                            <h5 class="title">
-                                                <a class="hover-flip-item-wrapper" href="#">Sakib Al Hasan</a>
-                                            </h5>
-                                            <div class="rating">
-                                                <a href="#"><i class="fa fa-star"></i></a>
-                                                <a href="#"><i class="fa fa-star"></i></a>
-                                                <a href="#"><i class="fa fa-star"></i></a>
-                                                <a href="#"><i class="fa fa-star"></i></a>
-                                                <a href="#"><i class="fa fa-star"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <p class="description">My favorite compliment is being
-                                                told that I look like my mom. Seeing myself in her image, like this
-                                                daughter up top.</p>
-                                            <ul class="social-icon social-default transparent-with-border justify-content-start">
-                                                <li><a href="#">
-                                                        <i class="feather-thumbs-up"></i>
-                                                    </a>
-                                                </li>
-                                                <li><a href="#">
-                                                        <i class="feather-thumbs-down"></i>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+
+                            </ng-container>
+
+                            
                         </div>
-                        <div class="rbt-show-more-btn">Show More</div>
+                       
                     </div>
                 </div>
                 <div class="related-course mt--60">
@@ -631,7 +482,7 @@
                             <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="rbt-card variation-01 rbt-hover">
                                     <div class="rbt-card-img">
-                                        <a href="course-details.html">
+                                        <a [href]="'/landing-curso/'+COURSE.id">
                                             <img [src]="COURSE.imagen" style="height: 244px;" alt="Card image">
                                             <div class="rbt-badge-3 bg-white" *ngIf="COURSE.discount_g">
                                                 <span *ngIf="COURSE.discount_g.type_discount == 1">-{{ COURSE.discount_g.discount }}%</span>
@@ -645,24 +496,24 @@
                                         <div class="rbt-card-top">
                                             <div class="rbt-review">
                                                 <div class="rating">
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star" [ngClass]="{'rating': COURSE.avg_rating < 1}"></i>
+                                        <i class="fas fa-star" [ngClass]="{'rating': COURSE.avg_rating < 2}"></i>
+                                        <i class="fas fa-star" [ngClass]="{'rating': COURSE.avg_rating < 3}"></i>
+                                        <i class="fas fa-star" [ngClass]="{'rating': COURSE.avg_rating < 4}"></i>
+                                        <i class="fas fa-star" [ngClass]="{'rating': COURSE.avg_rating < 5}"></i>
                                                 </div>
-                                                <span class="rating-count"> (15 Reviews)</span>
+                                                <span class="rating-count"> ({{ COURSE.num_review }} Reviews)</span>
                                             </div>
                                             <div class="rbt-bookmark-btn">
                                                 <a class="rbt-round-btn" title="Bookmark" href="#"><i class="feather-bookmark"></i></a>
                                             </div>
                                         </div>
               
-                                        <h4 class="rbt-card-title"><a href="course-details.html">{{ COURSE.title }}</a>
+                                        <h4 class="rbt-card-title"><a [href]="'/landing-curso/'+COURSE.id">{{ COURSE.title }}</a>
                                         </h4>
                                         <ul class="rbt-meta">
-                                            <li><i class="feather-book"></i>{{ COURSE.n_clases }} Lessons</li>
-                                            <li><i class="feather-users"></i>40 Students</li>
+                                            <li><i class="feather-book"></i>{{ COURSE.num_clases }} Lessons</li>
+                                            <li><i class="feather-users"></i>{{ COURSE.n_students }} Students</li>
                                         </ul>
                                         <p class="rbt-card-text">{{ COURSE.subtitle }}</p>
                                         <div class="rbt-author-meta mb--20">
@@ -681,7 +532,7 @@
                                                 <span class="current-price">${{ getTotalPriceCourse(COURSE) }}</span>
                                                 <span class="off-price" *ngIf="COURSE.discount_g">${{ COURSE.price_usd }}</span>
                                             </div>
-                                            <a class="rbt-btn-link" href="course-details.html">Learn
+                                            <a class="rbt-btn-link" [href]="'/landing-curso/'+COURSE.id">Learn
                                                 More<i class="feather-arrow-right"></i></a>
                                         </div>
                                     </div>
@@ -727,26 +578,38 @@
                                 </div>
                             </div>
 
-                            <div class="add-to-card-button mt--15">
-                                <a class="rbt-btn btn-gradient icon-hover w-100 d-block text-center" href="#">
-                                    <span class="btn-text">Add to Cart</span>
-                                    <span class="btn-icon"><i class="feather-arrow-right"></i></span>
-                                </a>
-                            </div>
+                            <ng-container  *ngIf="!cursostuden_have_course">
 
-                            <div class="buy-now-btn mt--15">
-                                <a class="rbt-btn btn-border icon-hover w-100 d-block text-center" href="#">
-                                    <span class="btn-text">Buy Now</span>
-                                    <span class="btn-icon"><i class="feather-arrow-right"></i></span>
-                                </a>
-                            </div>
+                                <div class="add-to-card-button mt--15">
+                                    <a class="rbt-btn btn-gradient icon-hover w-100 d-block text-center" href="#" onclick="return false;" (click)="addCart()">
+                                        <span class="btn-text">Add to Cart</span>
+                                        <span class="btn-icon"><i class="feather-arrow-right"></i></span>
+                                    </a>  </div>
+    
+                                <div class="buy-now-btn mt--15">
+                                    <a class="rbt-btn btn-border icon-hover w-100 d-block text-center" href="#">
+                                        <span class="btn-text">Buy Now</span>
+                                        <span class="btn-icon"><i class="feather-arrow-right"></i></span>
+                                    </a>
+                                </div>
+                            </ng-container>
+                            <ng-container  *ngIf="cursostuden_have_course">
+                                <div class="add-to-card-button mt--15">
+                                      
+                                    <a class="rbt-btn btn-gradient icon-hover w-100 d-block text-center" [href]="'/ver-curso/'+ COURSE_LANDING.id">
+                                        <span class="btn-text">Ir al Curso</span>
+                                        <span class="btn-icon"><i class="feather-arrow-right"></i></span>
+                                    </a>
+                                </div>
+                            </ng-container>
+
 
                             <span class="subtitle"><i class="feather-rotate-ccw"></i> 30-Day Money-Back
                                 Guarantee</span>
 
 
-                            <div class="rbt-widget-details has-show-more">
-                                <ul class="has-show-more-inner-content rbt-course-details-list-wrapper">
+                            <div class="rbt-widget-details  ">
+                                <ul class="  rbt-course-details-list-wrapper">
                                     <li><span>Start Date</span><span class="rbt-feature-value rbt-badge-5">{{ COURSE_LANDING.time_parse }}</span>
                                     </li>
                                     <li><span>Enrolled</span><span class="rbt-feature-value rbt-badge-5">100</span></li>
@@ -757,7 +620,7 @@
                                     <li><span>Certificate</span><span class="rbt-feature-value rbt-badge-5">Yes</span></li>
                                     <li><span>Pass Percentage</span><span class="rbt-feature-value rbt-badge-5">95%</span></li>
                                 </ul>
-                                <div class="rbt-show-more-btn">Show More</div>
+                                 
                             </div>
 
                             <div class="social-share-wrapper mt--30 text-center">
@@ -813,7 +676,7 @@
                 <div class="col-lg-4 col-md-6 col-12">
                     <div class="rbt-card variation-01 rbt-hover">
                         <div class="rbt-card-img">
-                            <a href="course-details.html">
+                            <a [href]="'/landing-curso/'+COURSE.id">
                                 <img [src]="COURSE.imagen" style="height: 244px;" alt="Card image">
                                 <div class="rbt-badge-3 bg-white" *ngIf="COURSE.discount_g">
                                     <span *ngIf="COURSE.discount_g.type_discount == 1">-{{ COURSE.discount_g.discount }}%</span>
@@ -827,24 +690,24 @@
                             <div class="rbt-card-top">
                                 <div class="rbt-review">
                                     <div class="rating">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star" [ngClass]="{'rating': COURSE.avg_rating < 1}"></i>
+                                        <i class="fas fa-star" [ngClass]="{'rating': COURSE.avg_rating < 2}"></i>
+                                        <i class="fas fa-star" [ngClass]="{'rating': COURSE.avg_rating < 3}"></i>
+                                        <i class="fas fa-star" [ngClass]="{'rating': COURSE.avg_rating < 4}"></i>
+                                        <i class="fas fa-star" [ngClass]="{'rating': COURSE.avg_rating < 5}"></i>
                                     </div>
-                                    <span class="rating-count"> (15 Reviews)</span>
+                                    <span class="rating-count"> ({{ COURSE.num_review }} Reviews)</span>
                                 </div>
                                 <div class="rbt-bookmark-btn">
                                     <a class="rbt-round-btn" title="Bookmark" href="#"><i class="feather-bookmark"></i></a>
                                 </div>
                             </div>
   
-                            <h4 class="rbt-card-title"><a href="course-details.html">{{ COURSE.title }}</a>
+                            <h4 class="rbt-card-title"><a [href]="'/landing-curso/'+COURSE.id">{{ COURSE.title }}</a>
                             </h4>
                             <ul class="rbt-meta">
-                                <li><i class="feather-book"></i>{{ COURSE.n_clases }} Lessons</li>
-                                <li><i class="feather-users"></i>40 Students</li>
+                                <li><i class="feather-book"></i>{{ COURSE.num_clases }} Lessons</li>
+                                <li><i class="feather-users"></i>{{ COURSE.n_students }} Students</li>
                             </ul>
                             <p class="rbt-card-text">{{ COURSE.subtitle }}</p>
                             <div class="rbt-author-meta mb--20">
@@ -863,7 +726,7 @@
                                     <span class="current-price">${{ getTotalPriceCourse(COURSE) }}</span>
                                     <span class="off-price" *ngIf="COURSE.discount_g">${{ COURSE.price_usd }}</span>
                                 </div>
-                                <a class="rbt-btn-link" href="course-details.html">Learn
+                                <a class="rbt-btn-link" [href]="'/landing-curso/'+COURSE.id">Learn
                                     More<i class="feather-arrow-right"></i></a>
                             </div>
                         </div>

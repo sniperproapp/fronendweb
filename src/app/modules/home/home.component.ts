@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Toaster } from 'ngx-toast-notifications';
 import { HomeService } from './service/home.service';
+import { CartService } from './service/cart.service';
 declare function HOMEINIT([]):any;
 declare function countdownT(): any
 declare var $:any;
@@ -10,7 +11,7 @@ declare var $:any;
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-
+  user:any;
   CATEGORIES:any=[];
   CURSOS:any=[];
   CURSOSBANERS:any=[];
@@ -18,8 +19,10 @@ export class HomeComponent {
   CURSOSFLASHS:any=[];
   DESCUENTOFLASH:any=[];
   CURSOSCATEGORIS:any=[];
+  REVIEWS:any=[];
   constructor(private toaster: Toaster,
-    public homeservice:HomeService
+    public homeservice:HomeService,
+    public cartService: CartService,
   ){
     
   }
@@ -28,8 +31,9 @@ export class HomeComponent {
   }
   ngOnInit(): void{
 
-    
+    this.user = this.cartService.authService.user;
     this.homeservice.homecursoscategoridescuetoflash().subscribe((resp:any)=>{
+      console.log(resp )
 
       this.CURSOSFLASHS=resp.courses;
       this.DESCUENTOFLASH=resp;
@@ -39,7 +43,7 @@ export class HomeComponent {
       setTimeout(() => {
       
         HOMEINIT($)
-        this.showToast() 
+       // this.showToast() 
         countdownT()
       }, 50);  
     })
@@ -55,6 +59,16 @@ export class HomeComponent {
       console.log(this.DESCUENTOBANERS)
     })
 
+
+    
+    this.homeservice.homereviews().subscribe((resp:any)=>{
+
+      this.REVIEWS=resp;
+      
+      
+      console.log(this.REVIEWS)
+    })
+
     this.homeservice.homecursoscategori().subscribe((resp:any)=>{
 
       this.CURSOSCATEGORIS=resp;
@@ -65,13 +79,15 @@ export class HomeComponent {
       this.CATEGORIES=resp;
       console.log(this.CATEGORIES)
     })
-    this.homeservice.homecursos('allcatego').subscribe((resp:any)=>{
+    // this.homeservice.homecursos('allcatego').subscribe((resp:any)=>{
 
-      this.CURSOS=resp;
-      console.log(this.CURSOS)
+    //   this.CURSOS=resp;
+    //   console.log("this.CURSOS")
+    //   console.log(this.CURSOS)
+    //   console.log("this.CURSOS")
     
 
-    })
+    // })
    
   }
 
@@ -91,5 +107,57 @@ export class HomeComponent {
     }else{
            return curso.price_usd -  this.DESCUENTOFLASH.discount;
     }
+
+
  }
+
+ getNewTotal(COURSE:any,CAMPAING_BANNER:any){
+  if(CAMPAING_BANNER.type_discount == 1){ //%
+    return COURSE.price_usd - COURSE.price_usd*(CAMPAING_BANNER.discount*0.01);
+  }else{
+    return COURSE.price_usd - CAMPAING_BANNER.discount;
+  }
+}
+
+getTotalPriceCourse(COURSE:any){
+    if(COURSE.discount_g){
+      return this.getNewTotal(COURSE,COURSE.discount_g);
+    }
+    return COURSE.price_usd;
+  }
+
+
+ addCart(COURSE:any,CAMPAIGN:any = null){
+  if(!this.user){
+    this.toaster.open({text: 'NECESITAS INGRESAR CON TU CUENTA AL SISTEMA',caption: 'VALIDACIÓN',type: 'warning'});
+    this.cartService.authService.router.navigateByUrl("auth/login");
+    return;
+  }
+  console.log(COURSE)
+  console.log(CAMPAIGN)
+  if(CAMPAIGN){
+    COURSE.discount_g = CAMPAIGN;
+  }
+  let data = {
+    id_curso: COURSE.id,
+    type_discount: COURSE.discount_g ? COURSE.discount_g.type_discount : null,
+    discount: COURSE.discount_g ? COURSE.discount_g.discount : null,
+    campaign_discount: COURSE.discount_g ? COURSE.discount_g.type_campaign : null,
+    code_cupon: null,
+    code_discount: COURSE.discount_g ? COURSE.discount_g.id : null,
+    price_unit: COURSE.price_usd,
+    subtotal: this.getTotalPriceCourse(COURSE),
+    total: this.getTotalPriceCourse(COURSE),
+  }
+
+  this.cartService.registerCart(data).subscribe((resp:any) => {
+    console.log(resp);
+    if(resp.statusCode == 200){
+      this.toaster.open({text: resp.message  ,caption: 'VALIDACIÓN',type: 'danger'});
+    }else{
+      this.cartService.addCart(resp);
+      this.toaster.open({text:'Agregado al carrito',caption: 'VALIDACIÓN',type: 'primary'});
+    }
+  });
+}
 }

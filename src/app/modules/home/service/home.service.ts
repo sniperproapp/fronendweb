@@ -35,6 +35,11 @@ export class HomeService {
     return this.http.get(URL);
   }
 
+  homereviews(){
+    let URL = URL_SERVICIOS+"reviews/getallreviews"
+    return this.http.get(URL);
+  }
+
   homecursoscategoridescuetoflash(){
     let URL = URL_SERVICIOS+"discount/findtiendaflash/0"
     return this.http.get(URL);

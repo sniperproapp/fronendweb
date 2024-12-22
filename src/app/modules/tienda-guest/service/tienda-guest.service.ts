@@ -20,7 +20,7 @@ export class TiendaGuestService {
       let URL = URL_SERVICIOS+"courses/landingcurso/"+slug+"?TIME_NOW="+(new Date().getTime())+"&CAMPAING_SPECIAL="+(CAMPAING_SPECIAL ? CAMPAING_SPECIAL : '');
       return this.http.get(URL,{headers: headers});
     }else{
-      let URL = URL_SERVICIOS+"courses/landingcurso/"+slug+"?TIME_NOW="+(new Date().getTime())+"&CAMPAING_SPECIAL="+(CAMPAING_SPECIAL ? CAMPAING_SPECIAL : '');
+      let URL = URL_SERVICIOS+"courses/landingcursomensualidad/"+slug+"?TIME_NOW="+(new Date().getTime())+"&CAMPAING_SPECIAL="+(CAMPAING_SPECIAL ? CAMPAING_SPECIAL : '');
       return this.http.get(URL);
     }
    

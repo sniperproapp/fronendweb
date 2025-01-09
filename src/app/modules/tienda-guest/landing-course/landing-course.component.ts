@@ -95,7 +95,28 @@ export class LandingCourseComponent {
     return COURSE.price_usd;
   }
 
+  inscribir(){
+    if(!this.user){
+      this.toaster.open({text: 'NECESITAS INGRESAR CON TU CUENTA AL SISTEMA',caption: 'VALIDACIÓN',type: 'warning'});
+      this.cartService.authService.router.navigateByUrl("auth/login");
+      return;
+    }
 
+
+    
+    
+
+    this.cartService.inscribir(this.COURSE_LANDING.id).subscribe((resp:any) => {
+      console.log(resp);
+      if(resp.statusCode == 200){
+        this.toaster.open({text: resp.message,caption: 'VALIDACIÓN',type: 'primary'});
+        this.cursostuden_have_course=true
+      }else{
+         
+        this.toaster.open({text: resp.message,caption: 'VALIDACIÓN',type: 'danger'});
+      }
+    });
+  }
 
   addCart(){
     if(!this.user){
@@ -103,6 +124,9 @@ export class LandingCourseComponent {
       this.cartService.authService.router.navigateByUrl("auth/login");
       return;
     }
+
+
+
     let data = {
       id_curso: this.COURSE_LANDING.id,
       type_discount: this.COURSE_LANDING.discount_g ? this.COURSE_LANDING.discount_g.type_discount : null,

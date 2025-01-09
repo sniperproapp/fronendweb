@@ -49,7 +49,7 @@ export class LandingMensualidadComponent {
     this.activedRouter.queryParams.subscribe((resp:any) => {
       this.CAMPAING_SPECIAL = resp.campaing_discount;
     })
-    this.TiendaGuestService.showCourse(this.SLUG,this.CAMPAING_SPECIAL).subscribe((resp:any) => {
+    this.TiendaGuestService.showCoursemen(this.SLUG,this.CAMPAING_SPECIAL).subscribe((resp:any) => {
       console.log(resp);
       this.COURSE_LANDING = resp;
       this.cursostuden_have_course=this.COURSE_LANDING.cursostuden_have_course
@@ -120,7 +120,7 @@ export class LandingMensualidadComponent {
         this.toaster.open({text: resp.message,caption: 'VALIDACIÓN',type: 'danger'});
       }else{
         this.cartService.addCart(resp);
-        this.toaster.open({text: 'agregado al carrito',caption: 'VALIDACIÓN',type: 'primary'});
+        this.toaster.open({text: 'verifica tu correo con el link de pago',caption: 'VALIDACIÓN',type: 'primary'});
       }
     });
   }

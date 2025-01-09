@@ -3,6 +3,9 @@ import { AuthService } from '../service/auth.service';
 import { Router } from '@angular/router';
 import { ValidarpagoComponent } from 'src/app/shared/validarpago/validarpago.component';
 import { ModalService } from '@developer-partners/ngx-modal-dialog';
+import { UpdatepassComponent } from '../../tienda-guest/updatepass/updatepass.component';
+import { RecuperarpassComponent } from 'src/app/shared/recuperarpass/recuperarpass.component';
+import { Toaster } from 'ngx-toast-notifications';
 
 @Component({
   selector: 'app-login-and-register',
@@ -24,7 +27,7 @@ export class LoginAndRegisterComponent {
    
 
 
-  constructor(public authServices: AuthService,public router:Router,private readonly _modalService:ModalService){
+  constructor(public toaster: Toaster,public authServices: AuthService,public router:Router,private readonly _modalService:ModalService){
 
   }
 
@@ -37,13 +40,14 @@ export class LoginAndRegisterComponent {
 
   login(){
     if(!this.email_login || !this.password_login){
-      alert("faltan datos del usuario")
+      this.toaster.open({text: "faltan datos del usuario", caption: 'VALIDACION',type: 'warning'});
       return;
     }
     this.authServices.login(this.email_login,this.password_login).subscribe((resp:any)=>{
       console.log(resp)
       if(resp.status==403||resp.status==500){
-        alert(resp.error.message)
+        this.toaster.open({text: resp.error.message, caption: 'VALIDACION',type: 'warning'});
+       
        return;
         }
 
@@ -55,9 +59,15 @@ export class LoginAndRegisterComponent {
   validarpago():void{
     this._modalService.show<any>(  ValidarpagoComponent,{title:"pagar",size:1}).result().subscribe((resp:any)=>{console.log(resp)})
 }
+
+recuperarpass():void{
+  this._modalService.show<any>(  RecuperarpassComponent,{title:"Recuperar password",size:1}).result().subscribe((resp:any)=>{console.log(resp)})
+}
   register(){
     if(!this.email_register ||!this.password_register ||!this.name_register ||!this.surname_register  || !this.password_confir_register ){
-      alert("faltan datos del usuario")
+ 
+      this.toaster.open({text: "faltan datos del usuario", caption: 'VALIDACION',type: 'warning'});
+      
       return;
     }
     let  data ={
@@ -74,9 +84,13 @@ export class LoginAndRegisterComponent {
      
 
       if(resp.status==403||resp.status==500){
-        alert(resp.error.message)
+        this.toaster.open({text: resp.error.message, caption: 'VALIDACION',type: 'warning'});
+      
       }else{
-        alert("registro exitoso")
+        this.toaster.open({text:"registro exitoso", caption: 'VALIDACION',type: 'primary'});
+
+   
+        this.clean()
       }
     })
   }

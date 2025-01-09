@@ -479,7 +479,7 @@
                     </div>
                     <div class="row g-5">
                         <ng-container *ngFor="let COURSE of COURSE_INSTRUCTOR">
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-12" *ngIf="COURSE.title!='MENSUALIDAD'">
                                 <div class="rbt-card variation-01 rbt-hover">
                                     <div class="rbt-card-img">
                                         <a [href]="'/landing-curso/'+COURSE.id">
@@ -529,8 +529,8 @@
               
                                         <div class="rbt-card-bottom">
                                             <div class="rbt-price">
-                                                <span class="current-price">${{ getTotalPriceCourse(COURSE) }}</span>
-                                                <span class="off-price" *ngIf="COURSE.discount_g">${{ COURSE.price_usd }}</span>
+                                                <!-- <span class="current-price">${{ getTotalPriceCourse(COURSE) }}</span>
+                                                <span class="off-price" *ngIf="COURSE.discount_g">${{ COURSE.price_usd }}</span> -->
                                             </div>
                                             <a class="rbt-btn-link" [href]="'/landing-curso/'+COURSE.id">Learn
                                                 More<i class="feather-arrow-right"></i></a>
@@ -567,8 +567,8 @@
                         <div class="content-item-content">
                             <div class="rbt-price-wrapper d-flex flex-wrap align-items-center justify-content-between">
                                 <div class="rbt-price">
-                                    <span class="current-price">${{ getTotalPriceCourse(COURSE_LANDING) }}</span>
-                                    <span class="off-price" *ngIf="COURSE_LANDING.discount_g">${{ COURSE_LANDING.price_usd }}</span>
+                                    <!-- <span class="current-price">${{ getTotalPriceCourse(COURSE_LANDING) }}</span>
+                                    <span class="off-price" *ngIf="COURSE_LANDING.discount_g">${{ COURSE_LANDING.price_usd }}</span> -->
                                 </div>
                                 <div class="discount-time" *ngIf="COURSE_LANDING.discount_g">
                                     <span class="rbt-badge color-danger bg-color-danger-opacity" *ngIf="COURSE_LANDING.discount_g.type_discount == 1"><i
@@ -580,18 +580,19 @@
 
                             <ng-container  *ngIf="!cursostuden_have_course">
 
-                                <div class="add-to-card-button mt--15">
-                                    <a class="rbt-btn btn-gradient icon-hover w-100 d-block text-center" href="#" onclick="return false;" (click)="addCart()">
-                                        <span class="btn-text">Add to Cart</span>
+                               <div class="add-to-card-button mt--15">
+                                    <a class="rbt-btn btn-gradient icon-hover w-100 d-block text-center" href="#" onclick="return false;" (click)="inscribir()">
+                                         <span class="btn-text">
+                                            Inscribir</span>  
                                         <span class="btn-icon"><i class="feather-arrow-right"></i></span>
-                                    </a>  </div>
+                                    </a>  </div> 
     
-                                <div class="buy-now-btn mt--15">
+                                <!-- <div class="buy-now-btn mt--15">
                                     <a class="rbt-btn btn-border icon-hover w-100 d-block text-center" href="#">
-                                        <span class="btn-text">Buy Now</span>
+                                        <span class="btn-text"></span>
                                         <span class="btn-icon"><i class="feather-arrow-right"></i></span>
                                     </a>
-                                </div>
+                                </div> -->
                             </ng-container>
                             <ng-container  *ngIf="cursostuden_have_course">
                                 <div class="add-to-card-button mt--15">
@@ -647,7 +648,7 @@
                                 <hr class="mt--20">
                                 <div class="contact-with-us text-center">
                                     <p>For details about the course</p>
-                                    <p class="rbt-badge-2 mt--10 justify-content-center w-100"><i class="feather-phone mr--5"></i> Call Us: <a href="#"><strong>+444 555 666 777</strong></a></p>
+                                    <p class="rbt-badge-2 mt--10 justify-content-center w-100"><i class="feather-phone mr--5"></i> Call Us: <a href="#"><strong>+57-321-417-6779</strong></a></p>
                                 </div>
                             </div>
                         </div>
@@ -673,7 +674,7 @@
         <div class="row g-5">
 
             <ng-container *ngFor="let COURSE of COURSE_CATEGORIES">
-                <div class="col-lg-4 col-md-6 col-12">
+                <div class="col-lg-4 col-md-6 col-12" *ngIf="COURSE.title!='MENSUALIDAD'">
                     <div class="rbt-card variation-01 rbt-hover">
                         <div class="rbt-card-img">
                             <a [href]="'/landing-curso/'+COURSE.id">
@@ -723,8 +724,8 @@
   
                             <div class="rbt-card-bottom">
                                 <div class="rbt-price">
-                                    <span class="current-price">${{ getTotalPriceCourse(COURSE) }}</span>
-                                    <span class="off-price" *ngIf="COURSE.discount_g">${{ COURSE.price_usd }}</span>
+                                    <!-- <span class="current-price">${{ getTotalPriceCourse(COURSE) }}</span>
+                                    <span class="off-price" *ngIf="COURSE.discount_g">${{ COURSE.price_usd }}</span> -->
                                 </div>
                                 <a class="rbt-btn-link" [href]="'/landing-curso/'+COURSE.id">Learn
                                     More<i class="feather-arrow-right"></i></a>

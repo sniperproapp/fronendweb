@@ -17,7 +17,7 @@ import { RouterModule } from '@angular/router';
   imports: [
     BrowserModule,
     RouterModule,
-    ToastNotificationsModule,
+    ToastNotificationsModule.forRoot({duration:6000,type:'primary',position:'top-right'}),
     AppRoutingModule,
     HttpClientModule,
 BrowserAnimationsModule,

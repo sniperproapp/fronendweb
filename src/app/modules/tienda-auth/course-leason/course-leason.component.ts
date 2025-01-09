@@ -18,6 +18,7 @@ export class CourseLeasonComponent {
   slug_course:any;
   COURSE_SELECTED:any;
   CLASE_SELECTED:any;
+  CLASE_SELECTED_titulo:any;
   COURSE_STUDENT:any;
   requirements:any = [];
   clases_checked:any = [];
@@ -48,14 +49,18 @@ export class CourseLeasonComponent {
         this.router.navigateByUrl("/");
       }else{
         this.COURSE_SELECTED = resp;
+        
         this.requirements=JSON.parse(this.COURSE_SELECTED.requirements)
         this.who_is_it_fors=JSON.parse(this.COURSE_SELECTED.who_is_it_for)
          
         console.log(resp);
         // console.log(this.COURSE_SELECTED.malla_curricular[0]);
         this.CLASE_SELECTED = this.COURSE_SELECTED.seciones[0].clases[0];
+        this.CLASE_SELECTED_titulo = this.COURSE_SELECTED.seciones[0].clases[0].title;
         this.COURSE_STUDENT = resp.coursestudent;
         console.log(  'this.COURSE_STUDENT ' );
+        console.log(  this.COURSE_SELECTED.seciones[0].clases[0].title );
+        
         console.log(  this.COURSE_STUDENT  );
 
     // this. clases_checked =JSON.parse(this.COURSE_STUDENT.clases_checked)
@@ -76,8 +81,11 @@ export class CourseLeasonComponent {
     })
   }
 
-  selectedClase(CLASE:any){
+  selectedClase(CLASE:any,titulo:any){
     this.CLASE_SELECTED = CLASE;
+    this.CLASE_SELECTED_titulo = titulo;
+
+    window.scrollTo(0, 0);
   }
   checkedClase(CLASE:any){
 

@@ -9,6 +9,7 @@ import { QuienessomosComponent } from './quienessomos/quienessomos.component';
 import { ContactosComponent } from './contactos/contactos.component';
 import { CartsMensualComponent } from './carts/cartsmensual.component';
 import { LandingMensualidadComponent } from './landing-mensualidad/landing-mensualidad.component';
+import { UpdatepassComponent } from './updatepass/updatepass.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,10 @@ const routes: Routes = [
       {
         path: 'landing-mensualidad/:slug',
         component: LandingMensualidadComponent,
+      },
+      {
+        path: 'updatepass/:id',
+        component: UpdatepassComponent,
       },
       {
         path: 'filtros-de-cursos',

@@ -20,6 +20,7 @@
             </div>
         </div>
     </div>
+   
     <!-- End Breadcrumb Area -->
 
  
@@ -46,10 +47,13 @@
 
                     <!-- Start Single Team  -->
                     <div class="col-lg-3 col-md-6 col-sm-6 col-12 mt--30">
+                        <a href="#" onclick="return false;" (click)="openbio(INSTRUCTOR.imagenbio)" >
+                        
                         <div class="team">
                             <div class="thumbnail"><img [src]="INSTRUCTOR.imagen " alt="Blog Images">
                             </div>
                             <div class="content">
+                               
                                 <h4 class="title">{{INSTRUCTOR.name}}</h4>
                                 <p class="designation"></p>
                             </div>
@@ -59,10 +63,12 @@
                                 <li><a href="#"><i class="fab fa-twitter"></i></a></li>
                             </ul>
                         </div>
+                    </a>
                     </div>
                     <!-- End Single Team  -->
 
                 </ng-container>
+                
 
               
 

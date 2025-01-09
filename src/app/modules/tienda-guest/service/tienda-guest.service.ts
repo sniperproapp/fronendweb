@@ -16,13 +16,28 @@ export class TiendaGuestService {
   showCourse(slug:any,CAMPAING_SPECIAL = null){
     let headers = new HttpHeaders({'Authorization': this.authService.token?this.authService.token:''});
 
-    if(headers){
-      let URL = URL_SERVICIOS+"courses/landingcurso/"+slug+"?TIME_NOW="+(new Date().getTime())+"&CAMPAING_SPECIAL="+(CAMPAING_SPECIAL ? CAMPAING_SPECIAL : '');
+    if(this.authService.token){
+      let URL = URL_SERVICIOS+"courses/landingcursoheader/"+slug+"?TIME_NOW="+(new Date().getTime())+"&CAMPAING_SPECIAL="+(CAMPAING_SPECIAL ? CAMPAING_SPECIAL : '');
       return this.http.get(URL,{headers: headers});
     }else{
-      let URL = URL_SERVICIOS+"courses/landingcursomensualidad/"+slug+"?TIME_NOW="+(new Date().getTime())+"&CAMPAING_SPECIAL="+(CAMPAING_SPECIAL ? CAMPAING_SPECIAL : '');
+      let URL = URL_SERVICIOS+"courses/landingcurso/"+slug+"?TIME_NOW="+(new Date().getTime())+"&CAMPAING_SPECIAL="+(CAMPAING_SPECIAL ? CAMPAING_SPECIAL : '');
       return this.http.get(URL);
     }
+
+    
+    
+     
+       
+     
+   
+  }
+
+
+  showCoursemen(slug:any,CAMPAING_SPECIAL = null){
+   
+      let URL = URL_SERVICIOS+"courses/landingcursomensualidad/"+slug+"?TIME_NOW="+(new Date().getTime())+"&CAMPAING_SPECIAL="+(CAMPAING_SPECIAL ? CAMPAING_SPECIAL : '');
+      return this.http.get(URL);
+     
    
   }
 
@@ -73,4 +88,14 @@ export class TiendaGuestService {
     return this.http.get(URL);
   }
   
+
+  updatepass(data:any){
+    let URL = URL_SERVICIOS+"auth/updatepass";
+    return this.http.post(URL,data);
+  }
+   
+  enviarmail(email:any){
+    let URL = URL_SERVICIOS+"auth/recuperarpass/"+email
+    return this.http.post(URL,null);
+  }
 }

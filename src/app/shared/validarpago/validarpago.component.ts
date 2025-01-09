@@ -20,6 +20,11 @@ export class ValidarpagoComponent {
 
 
   getestadodelpago():void{
+    if( !this.orden ){
+      this.toaster.open({text: 'faltan numero de orden ',caption: 'VALIDACIÓN',type: 'danger'});
+     
+      return;
+    }
 
     this.tiendaGuestService.getstatuspay(this.orden).subscribe((resp:any) => {
       console.log(resp);

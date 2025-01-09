@@ -5,6 +5,8 @@ import { FooterComponent } from './footer/footer.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ValidarpagoComponent } from './validarpago/validarpago.component';
+import { RecuperarpassComponent } from './recuperarpass/recuperarpass.component';
+import { BiografiaComponent } from './biografia/biografia.component';
 
 
 
@@ -12,7 +14,9 @@ import { ValidarpagoComponent } from './validarpago/validarpago.component';
   declarations: [
     HeaderComponent,
     FooterComponent,
-    ValidarpagoComponent
+    ValidarpagoComponent,
+    BiografiaComponent,
+    RecuperarpassComponent
   ],
   imports: [
     RouterModule,
@@ -21,7 +25,7 @@ import { ValidarpagoComponent } from './validarpago/validarpago.component';
   ],
   exports:[
     HeaderComponent,
-    FooterComponent,ValidarpagoComponent
+    FooterComponent,ValidarpagoComponent,BiografiaComponent
   ]
 })
 export class SharedModule { }

@@ -14,7 +14,7 @@ declare function showMoreBtn([]):any;
   styleUrls: ['./course-leason.component.css']
 })
 export class CourseLeasonComponent {
-
+valor=0;
   slug_course:any;
   COURSE_SELECTED:any;
   CLASE_SELECTED:any;
@@ -106,6 +106,9 @@ export class CourseLeasonComponent {
     })
   }
   urlVideo(CLASE_SELECT:any){
-    return this.Sanitizer.bypassSecurityTrustResourceUrl(CLASE_SELECT.vimeo_id);
+   
+    
+    return this.Sanitizer.bypassSecurityTrustResourceUrl(CLASE_SELECT.vimeo_id); 
+    
   }
 }

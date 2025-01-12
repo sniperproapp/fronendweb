@@ -12,7 +12,7 @@ import { StudentDashboardComponent } from './student-dashboard/student-dashboard
 import { CourseLeasonComponent } from './course-leason/course-leason.component';
 import { ModalModule } from '@developer-partners/ngx-modal-dialog';
 import { BinancepayComponent } from './binancepay/binancepay.component';
-
+import {YouTubePlayer} from '@angular/youtube-player';
 
 @NgModule({
   declarations: [
@@ -20,12 +20,14 @@ import { BinancepayComponent } from './binancepay/binancepay.component';
     TiendaAuthComponent,
     StudentDashboardComponent,
     CourseLeasonComponent,
-    BinancepayComponent
+    BinancepayComponent,
+     
   ],
   imports: [
     CommonModule,
     TiendaAuthRoutingModule,
     SharedModule,
+    
     
     FormsModule,
     ReactiveFormsModule,

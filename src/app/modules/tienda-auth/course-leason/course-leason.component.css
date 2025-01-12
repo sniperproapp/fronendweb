@@ -1,0 +1,11 @@
+.video-container 
+{
+  top: 0%;
+  left: 0%;
+  height: 400px;
+  width: 100%;
+  overflow: hidden;
+}
+video.fillWidth {
+  width: 100%;
+}

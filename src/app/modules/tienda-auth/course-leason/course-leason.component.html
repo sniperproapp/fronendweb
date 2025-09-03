@@ -83,17 +83,24 @@
                 </a>  
             </ng-container>  -->
 
-          
-        
-                  <ng-container *ngIf="CLASE_SELECTED">
-                    <iframe style="width: 100%;" height="800" 
-                        [src]="urlVideo(CLASE_SELECTED)"
+         
+
+           
+       <ng-container> 
+
+       <video [src]="url" autoplay allow="fullscreen"  frameBorder="0"  width="100%"  height="700"  controls  controlsList="nodownload" >
+             
+            </video>  
+                      <!-- <iframe style="width: 100%;" height="800" 
+                        [src]="url"
                         [title]="CLASE_SELECTED.title"
                         frameborder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                        allowfullscreen>
-                    </iframe>
-                </ng-container>    
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope;   " 
+                        allowfullscreen 
+                        controls 
+                        controlsList="nodownload">
+                    </iframe>  -->
+                </ng-container>      
                  
                 
                 
@@ -153,22 +160,25 @@
                                                             <ul class="rbt-course-main-content liststyle">
         
                                                                 <ng-container *ngFor="let CLASE of SECTION.clases"> 
-                                                                    <li class="d-flex">
-                                                                        <div class="form-check mx-2">
-                                                                            <!-- [checked]="i == 0" -->
-                                                                           <input type="checkbox" class="form-check-input" [checked]="COURSE_STUDENT.clases_checked.includes( CLASE.id.toString() )" (click)="checkedClase(CLASE)"  [id]="'exampleCheck'+CLASE.id">  
-                                                                            <label class="form-check-label" [for]="'exampleCheck'+CLASE.id">Check</label>
-                                                                        </div>
-                                                                        <a href="#" onclick="return false;" (click)="selectedClase(CLASE,CLASE.title)">
-                                                                            <div class="course-content-left">
-                                                                                <i class="feather-play-circle"></i> <span
-                                                                                    class="text">{{ CLASE.title }}</span>
+                                                                    <li  >
+                                                                        <div class="course-content-left">
+                                                                            <div class="form-check mx-2">
+                                                                                <!-- [checked]="i == 0" -->
+                                                                               <input type="checkbox" class="form-check-input" [checked]="COURSE_STUDENT.clases_checked.includes( CLASE.id.toString() )" (click)="checkedClase(CLASE)"  [id]="'exampleCheck'+CLASE.id">  
+                                                                                <label class="form-check-label" [for]="'exampleCheck'+CLASE.id">Check</label>
                                                                             </div>
+                                                                          
+                                                                      
+                                                                        <a href="#" onclick="return false;" (click)="selectedClase(CLASE,CLASE.title)">
+                                                                              
                                                                             <div class="course-content-right">
-                                                                                <span class="min-lable">{{ CLASE.time_parse }}</span>
+                                                                                <i class="feather-play-circle"></i> <span
+                                                                                class="text">{{ CLASE.title }}</span>
+                                                                                 <span class="min-lable">{{ CLASE.time }}</span>
                                                                                 <span class="rbt-badge variation-03 bg-primary-opacity"><i class="feather-eye"></i> Preview</span>
                                                                             </div>
                                                                         </a>
+                                                                    </div>
                                                                     </li>
                                                                 </ng-container>
             

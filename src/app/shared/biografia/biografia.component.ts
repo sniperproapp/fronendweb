@@ -21,7 +21,7 @@ export class BiografiaComponent {
     {
       let copy ={...this._modalReference.config.model}
      this.url=copy
-  console.log(copy)
+ 
    
 
     }

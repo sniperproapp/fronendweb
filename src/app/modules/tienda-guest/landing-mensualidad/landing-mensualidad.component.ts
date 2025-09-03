@@ -50,24 +50,24 @@ export class LandingMensualidadComponent {
       this.CAMPAING_SPECIAL = resp.campaing_discount;
     })
     this.TiendaGuestService.showCoursemen(this.SLUG,this.CAMPAING_SPECIAL).subscribe((resp:any) => {
-      console.log(resp);
+ 
       this.COURSE_LANDING = resp;
       this.cursostuden_have_course=this.COURSE_LANDING.cursostuden_have_course
       this.requirements=JSON.parse(this.COURSE_LANDING.requirements)
       this.who_is_it_for=JSON.parse(this.COURSE_LANDING.who_is_it_for)
       this.TiendaGuestService.homecursoscategory(this.COURSE_LANDING.id_category_curso).subscribe((resp:any) => {
         this.COURSE_CATEGORIES = resp ;
-        console.log( this.COURSE_CATEGORIES)
+        
       })
 
 
       this.TiendaGuestService.getreview(this.COURSE_LANDING.id).subscribe((resp:any) => {
         this.REVIEWS = resp ;
-        console.log( this.REVIEWS)
+        
       })
       this.TiendaGuestService.homecursosuser(this.COURSE_LANDING.user.id).subscribe((resp:any) => {
         this.COURSE_INSTRUCTOR = resp;
-        console.log( this.COURSE_INSTRUCTOR)
+       
        
         setTimeout(() => {
           HOMEINIT($);
@@ -115,7 +115,7 @@ export class LandingMensualidadComponent {
     }
 
     this.cartService.registerCartmensualidad(data).subscribe((resp:any) => {
-      console.log(resp);
+      
       if(resp.statusCode == 200){
         this.toaster.open({text: resp.message,caption: 'VALIDACIÓN',type: 'danger'});
       }else{

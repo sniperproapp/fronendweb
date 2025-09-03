@@ -3,17 +3,28 @@ import { TiendaAuthService } from '../service/tienda-auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Toaster } from 'ngx-toast-notifications';
 import { DomSanitizer } from '@angular/platform-browser';
+import { YouTubePlayer } from '@angular/youtube-player';
+ 
+ 
 
+ 
+ 
 declare function HOMEINIT([]):any;
 declare var $:any;
 declare function magnigyPopup([]):any;
 declare function showMoreBtn([]):any;
 @Component({
+  
+ 
   selector: 'app-course-leason',
   templateUrl: './course-leason.component.html',
-  styleUrls: ['./course-leason.component.css']
+  styleUrls: ['./course-leason.component.css'],
+  
 })
 export class CourseLeasonComponent {
+
+ url:any
+   
 valor=0;
   slug_course:any;
   COURSE_SELECTED:any;
@@ -26,14 +37,14 @@ valor=0;
   who_is_it_fors:any = [];
 
   CLASES_SELECTEDS:any = [];
-  constructor(
+  constructor( 
     public tiendaAuth: TiendaAuthService,
     public activedRouter: ActivatedRoute,
     public router: Router,
     public toaster: Toaster,
     public Sanitizer: DomSanitizer,
   ) {
-    
+     
   }
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
@@ -49,27 +60,23 @@ valor=0;
         this.router.navigateByUrl("/");
       }else{
         this.COURSE_SELECTED = resp;
-        
+      // console.log(this.COURSE_SELECTED)
         this.requirements=JSON.parse(this.COURSE_SELECTED.requirements)
         this.who_is_it_fors=JSON.parse(this.COURSE_SELECTED.who_is_it_for)
-         
-        console.log(resp);
-        // console.log(this.COURSE_SELECTED.malla_curricular[0]);
+       
+        
         this.CLASE_SELECTED = this.COURSE_SELECTED.seciones[0].clases[0];
+        this.url= this.Sanitizer.bypassSecurityTrustResourceUrl( this.CLASE_SELECTED.vimeo_id); 
         this.CLASE_SELECTED_titulo = this.COURSE_SELECTED.seciones[0].clases[0].title;
         this.COURSE_STUDENT = resp.coursestudent;
-        console.log(  'this.COURSE_STUDENT ' );
-        console.log(  this.COURSE_SELECTED.seciones[0].clases[0].title );
         
-        console.log(  this.COURSE_STUDENT  );
-
     // this. clases_checked =JSON.parse(this.COURSE_STUDENT.clases_checked)
        
         
          this.CLASES_SELECTEDS = this.COURSE_STUDENT.clases_checked?this.COURSE_STUDENT.clases_checked:[];
          if(!this.COURSE_STUDENT.clases_checked){
          this.COURSE_STUDENT.clases_checked=[]}
-         console.log(  this.CLASES_SELECTEDS  );
+        
       }
 
        
@@ -83,6 +90,7 @@ valor=0;
 
   selectedClase(CLASE:any,titulo:any){
     this.CLASE_SELECTED = CLASE;
+    this.url= this.Sanitizer.bypassSecurityTrustResourceUrl( this.CLASE_SELECTED.vimeo_id); 
     this.CLASE_SELECTED_titulo = titulo;
 
     window.scrollTo(0, 0);
@@ -102,13 +110,15 @@ valor=0;
       state: this.CLASES_SELECTEDS.length == this.COURSE_SELECTED.num_clases ? 2 : 1,
     }
     this.tiendaAuth.updateClase(data).subscribe((resp:any) => {
-      console.log(resp);
+      
     })
   }
-  urlVideo(CLASE_SELECT:any){
+  urlVideo(){
    
     
-    return this.Sanitizer.bypassSecurityTrustResourceUrl(CLASE_SELECT.vimeo_id); 
+    
     
   }
+
+  
 }

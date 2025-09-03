@@ -23,7 +23,7 @@ export const routes:Routes=[
 {
 
   path:'',
-  canActivate:[AuthGuard],
+  //canActivate:[AuthGuard],
   loadChildren:()=>import("./modules/tienda-auth/tienda-auth.module").then(m=>m.TiendaAuthModule),
 
 },

@@ -36,7 +36,7 @@ export class CartsMensualComponent {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
     this.cartService.currentData$.subscribe((resp:any) => {
-      console.log(resp);
+     
       this.CARTS = resp;
       this.TOTAL_SUM = this.CARTS.reduce((sum:number,item:any) => sum + parseFloat(item.total),0);
     })
@@ -91,7 +91,7 @@ export class CartsMensualComponent {
             n_transaccion:  Order.purchase_units[0].payments.captures[0].id,
           };
           // this.tiendaAuthService.registerOrder(dataOrder).subscribe((resp:any) => {
-          //   console.log(resp);
+          //    
           //   if(resp.statusCode==200){
           //     this.toaster.open({text: resp.message,caption: 'VALIDACIÓN',type: 'primary'});
           //     this.cartService.resetCart();
@@ -112,7 +112,7 @@ export class CartsMensualComponent {
 
 
   binancepay():void{
-      //this._modalService.show<any>(  BinancepayComponent,{title:"pagar"}).result().subscribe((resp:any)=>{console.log(resp)})
+      //this._modalService.show<any>(  BinancepayComponent,{title:"pagar"}).result().subscribe((resp:any)=>{ })
   }
   getNameCampaign(campaign_discount:number){
     let NAME = "";
@@ -146,8 +146,7 @@ export class CartsMensualComponent {
       if(resp.statusCode == 200){
         this.toaster.open({text: resp.message, caption: 'VALIDACION',type: 'danger'});
       }else{
-        console.log('resp');
-        console.log(resp);
+        
         this.cartService.resetCart();
         setTimeout(() => {
           this.code = null;

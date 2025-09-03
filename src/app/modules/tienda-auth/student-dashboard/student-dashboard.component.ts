@@ -50,7 +50,7 @@ export class StudentDashboardComponent {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
     this.tiendaAuthService.profileStudent().subscribe((resp:any) => {
-      console.log(resp);
+      
       this.enrolled_course_count = resp.enrolled_course_count;
       this.actived_course_count = resp.actived_course_count;
       this.termined_course_count = resp.termined_course_count;
@@ -69,8 +69,8 @@ export class StudentDashboardComponent {
       this.enrolled_course_news = resp.enrolled_course_news;
       this.actived_course_news = resp.actived_course_news;
       this.termined_course_news = resp.termined_course_news;
-      console.log( 'this.termined_course_news')
-      console.log( this.termined_course_news)
+      // console.log(this.termined_course_news)
+      // console.log(this.enrolled_course_news) 
 
       this.sales = resp.sales;
       this.sales_details = resp.sales_details;
@@ -85,7 +85,12 @@ export class StudentDashboardComponent {
     sale.is_detail = true;
   }
   logout(){
-    this.tiendaAuthService.authService.logout();
+    this.tiendaAuthService.authService.logoutweb(this.email).subscribe((resp:any) => {
+      // this.toaste
+      this.tiendaAuthService.authService.logout();
+    })
+    
+   
   }
 
   processFile($event:any){
@@ -120,7 +125,7 @@ export class StudentDashboardComponent {
  }
  
  this.tiendaAuthService.updateStudentpass(data).subscribe((resp:any) => {
-   console.log(resp);
+    
    if(resp){
      this.toaster.open({text: "clave editada correctamente",caption: 'VALIDACIÓN',type: 'primary'});
      this.password=''
@@ -159,7 +164,7 @@ export class StudentDashboardComponent {
       if(this.avatar){
         formData.append("file",this.avatar);
         this.tiendaAuthService.updateStudentwihtimagen(this.iduser,formData).subscribe((resp:any) => {
-          console.log(resp);
+           
           if(resp.message == 200){
             this.toaster.open({text: resp.message_text,caption: 'VALIDACIÓN',type: 'warning'});
           }else{
@@ -186,7 +191,7 @@ export class StudentDashboardComponent {
   }
   
   this.tiendaAuthService.updateStudent(this.iduser,data).subscribe((resp:any) => {
-    console.log(resp);
+     
     if(resp.typecode == 200){
       this.toaster.open({text: resp.message,caption: 'VALIDACIÓN',type: 'warning'});
     }else{
@@ -237,7 +242,7 @@ export class StudentDashboardComponent {
       description: this.description_review,
     }
     this.tiendaAuthService.registerReview(data).subscribe((resp:any) => {
-      console.log(resp);
+       
 
       this.toaster.open({text: "creado correctamente",caption: 'VALIDACIÓN',type: 'primary'});
 
@@ -268,7 +273,7 @@ export class StudentDashboardComponent {
       id: this.sale_detail_selected.review.id,
     }
     this.tiendaAuthService.updateReview(data).subscribe((resp:any) => {
-      console.log(resp);
+      
 
       this.toaster.open({text: "Editado correctamente",caption: 'VALIDACIÓN',type: 'primary'});
 

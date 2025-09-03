@@ -19,32 +19,47 @@ token:any=null;
 
   login(email:string,password:string)
   {
-    let URL =URL_SERVICIOS+"auth/login";
+    let URL =URL_SERVICIOS+"auth/loginweb";
     return this.http.post(URL,{email:email,password:password}).pipe(
       map((auth:any)=>{
-       console.log(auth)
+    
        const result=this.savelocalStorage(auth);
        return result;
       }),
       catchError((err:any)=>{
-        console.log(err);
+         
         return of(err);
       })
     )
   }
 
 
+
+  logoutweb(email:string)
+  {
+    let URL =URL_SERVICIOS+"auth/logoutweb";
+    return this.http.post(URL,{email:email}).pipe(
+      map((auth:any)=>{
+     return auth;
+      }),
+      catchError((err:any)=>{
+         
+        return of(err);
+      })
+    )
+  }
+
   regisster(data:any)
   {
     let URL =URL_SERVICIOS+"auth/register";
     return this.http.post(URL,data).pipe(
       map((auth:any)=>{
-       console.log(auth)
+     
         
        return auth;
       }),
       catchError((err:any)=>{
-        console.log(err);
+        
         return of(err);
       })
     )

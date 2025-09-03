@@ -3,6 +3,7 @@ import { TiendaGuestService } from '../service/tienda-guest.service';
 import { Toaster } from 'ngx-toast-notifications';
 import { CartService } from '../../home/service/cart.service';
 import { AuthService } from '../../auth/service/auth.service';
+import { ActivatedRoute } from '@angular/router';
 
 declare var $:any;
 @Component({
@@ -16,7 +17,7 @@ export class FiltersCoursesComponent {
   INSTRUCTORES:any = [];
   LEVELS:any = [];
   IDIOMAS:any = [];
-
+  idprofesor:any
   select_option:number = 1;
 
   COURSES:any = [];
@@ -32,18 +33,26 @@ export class FiltersCoursesComponent {
   search_course:any;
   constructor(
     public tiendaGuestService: TiendaGuestService,
+    public activedRouter: ActivatedRoute,
     public toaster: Toaster,
     public cartService: CartService,
     
   ) {
+
     
   }
 
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
+    this.activedRouter.params.subscribe((resp:any) => {
+       this.idprofesor= resp.id;
+       this.selected_instructors.push( this.idprofesor);
+       this.filterCourses();
+       
+    })
     this.tiendaGuestService.getConfigAll().subscribe((resp:any) => {
-      console.log(resp);
+    
       this.CATEGORIES = resp.categories;
       this.INSTRUCTORES = resp.instructores;
       this.LEVELS = resp.levels;
@@ -69,7 +78,7 @@ export class FiltersCoursesComponent {
                 // LA FUNCION 
             },
             stop: () => {
-              console.log(this.min_price,this.max_price);
+              
               this.filterCourses();
             },
         });
@@ -114,7 +123,7 @@ export class FiltersCoursesComponent {
     }
 
     this.cartService.registerCart(data).subscribe((resp:any) => {
-      console.log(resp);
+      
       if(resp.message == 403){
         this.toaster.open({text: resp.message_text,caption: 'VALIDACIÓN',type: 'danger'});
       }else{
@@ -183,7 +192,7 @@ export class FiltersCoursesComponent {
     };
 
     this.tiendaGuestService.searchCourse(data).subscribe((resp:any) => {
-      console.log(resp);
+     
       this.COURSES = resp;
     })
   }

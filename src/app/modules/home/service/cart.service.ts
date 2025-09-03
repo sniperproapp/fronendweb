@@ -49,16 +49,14 @@ export class CartService {
   registerCart(data:any){
 
     let headers = new HttpHeaders({"Authorization": this.authService.token});
-    console.log('headers')
-    console.log(headers)
+    
     let URL = URL_SERVICIOS+"carrito/register";
     return this.http.post(URL,data,{headers: headers});
   }
   
   inscribir(id:any){
     let headers = new HttpHeaders({"Authorization": this.authService.token});
-    console.log('headers')
-    console.log(this.authService.user.id)
+   
     let URL = URL_SERVICIOS+"sale/inscribir/"+id;
     return this.http.post(URL ,{} ,{headers: headers});
   }

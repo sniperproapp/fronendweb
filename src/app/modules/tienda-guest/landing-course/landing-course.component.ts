@@ -48,24 +48,24 @@ export class LandingCourseComponent {
       this.CAMPAING_SPECIAL = resp.campaing_discount;
     })
     this.TiendaGuestService.showCourse(this.SLUG,this.CAMPAING_SPECIAL).subscribe((resp:any) => {
-      console.log(resp);
+       
       this.COURSE_LANDING = resp;
       this.cursostuden_have_course=this.COURSE_LANDING.cursostuden_have_course
       this.requirements=JSON.parse(this.COURSE_LANDING.requirements)
       this.who_is_it_for=JSON.parse(this.COURSE_LANDING.who_is_it_for)
       this.TiendaGuestService.homecursoscategory(this.COURSE_LANDING.id_category_curso).subscribe((resp:any) => {
         this.COURSE_CATEGORIES = resp ;
-        console.log( this.COURSE_CATEGORIES)
+         
       })
 
 
       this.TiendaGuestService.getreview(this.COURSE_LANDING.id).subscribe((resp:any) => {
         this.REVIEWS = resp ;
-        console.log( this.REVIEWS)
+        
       })
       this.TiendaGuestService.homecursosuser(this.COURSE_LANDING.user.id).subscribe((resp:any) => {
         this.COURSE_INSTRUCTOR = resp;
-        console.log( this.COURSE_INSTRUCTOR)
+        
        
         setTimeout(() => {
           HOMEINIT($);
@@ -94,7 +94,9 @@ export class LandingCourseComponent {
     }
     return COURSE.price_usd;
   }
-
+  subirscroll(){
+    window.scrollTo(0, 0);
+  }
   inscribir(){
     if(!this.user){
       this.toaster.open({text: 'NECESITAS INGRESAR CON TU CUENTA AL SISTEMA',caption: 'VALIDACIÓN',type: 'warning'});
@@ -107,7 +109,7 @@ export class LandingCourseComponent {
     
 
     this.cartService.inscribir(this.COURSE_LANDING.id).subscribe((resp:any) => {
-      console.log(resp);
+     
       if(resp.statusCode == 200){
         this.toaster.open({text: resp.message,caption: 'VALIDACIÓN',type: 'primary'});
         this.cursostuden_have_course=true
@@ -142,7 +144,7 @@ export class LandingCourseComponent {
     }
 
     this.cartService.registerCart(data).subscribe((resp:any) => {
-      console.log(resp);
+      
       if(resp.statusCode == 200){
         this.toaster.open({text: resp.message,caption: 'VALIDACIÓN',type: 'danger'});
       }else{

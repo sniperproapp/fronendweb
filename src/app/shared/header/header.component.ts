@@ -36,14 +36,14 @@ ngOnInit(): void {
   this.cartService.resetCart();
 
   this.cartService.currentData$.subscribe((resp:any) => {
-    console.log(resp);
+     
     this.CARTS = resp;
     this.SUM_TOTAL = this.CARTS.reduce((sum:number, item:any) => sum + parseFloat(item.total),0);
   })
 
   if(this.user){
     this.cartService.listCart().subscribe((resp:any) => {
-      console.log(resp);
+       
       resp.forEach((Cart:any) => {
         this.cartService.addCart(Cart);
       });
@@ -58,7 +58,14 @@ ngOnInit(): void {
    
   }, 50);
 }
-logout(){this.authservices.logout();}
+logout(){
+ 
+  this.authservices.logoutweb(this.user.email).subscribe((resp:any) => {
+    // this.toaste
+    this.authservices.logout();
+  })
+  
+}
 removeItem(CART:any){
   this.cartService.deleteCart(CART.id).subscribe((resp:any) => {
     // this.toaste
@@ -71,13 +78,13 @@ ngAfterViewInit(): void {
   //Add 'implements AfterViewInit' to the class.
   this.source = fromEvent(this.filter?.nativeElement,"keyup");
   this.source.pipe(debounceTime(500)).subscribe((resp:any) => {
-    console.log(resp);
+     
     let data = {
       search: this.search
     }
     if(this.search.length > 0){
       this.tiendaGuestService.searchCourse(data).subscribe((resp:any) => {
-        console.log(resp);
+     
         this.listCourses = resp;
       })
     }

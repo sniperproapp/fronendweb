@@ -5,12 +5,12 @@ import { ValidarpagoComponent } from 'src/app/shared/validarpago/validarpago.com
 import { BiografiaComponent } from 'src/app/shared/biografia/biografia.component';
 
 @Component({
-  selector: 'app-instructor',
-  templateUrl: './instructor.component.html',
-  styleUrls: ['./instructor.component.css']
+  selector: 'app-instructor-curso',
+  templateUrl: './instructor-curso.component.html',
+  styleUrls: ['./instructor-curso.component.css']
 })
 
-export class InstructorComponent {
+export class InstructoCursoComponent {
   INSTRUCTORES:any = [];
 constructor(
     public tiendaGuestService: TiendaGuestService,private readonly _modalService:ModalService
@@ -24,7 +24,7 @@ constructor(
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
     this.tiendaGuestService.getinstructores().subscribe((resp:any) => {
-  
+    
       
       this.INSTRUCTORES = resp;
       
@@ -35,7 +35,7 @@ constructor(
 
 
  openbio(url:any):void{
- 
+   
     this._modalService.show<any>(  BiografiaComponent,{title:"RESEÑA",model:{url:url},size:3}).result().subscribe((resp:any)=>{ })
    
   }

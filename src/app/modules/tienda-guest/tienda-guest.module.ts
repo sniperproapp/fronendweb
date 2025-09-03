@@ -16,6 +16,9 @@ import { ContactosComponent } from './contactos/contactos.component';
 import { CartsMensualComponent } from './carts/cartsmensual.component';
 import { LandingMensualidadComponent } from './landing-mensualidad/landing-mensualidad.component';
 import { UpdatepassComponent } from './updatepass/updatepass.component';
+import { EliminarcuentaComponent } from './eliminarcuenta/eliminarcuenta.component';
+import { PoliticasComponent } from './politicas/politicas.component';
+import { InstructoCursoComponent } from './instructor-curso/instructor-curso.component';
 
 
 @NgModule({
@@ -25,8 +28,13 @@ import { UpdatepassComponent } from './updatepass/updatepass.component';
     FiltersCoursesComponent
     ,ContactosComponent, 
     InstructorComponent,
+    InstructoCursoComponent,
      QuienessomosComponent
-     ,CartsMensualComponent,LandingMensualidadComponent, UpdatepassComponent
+     ,CartsMensualComponent
+     ,LandingMensualidadComponent
+     , UpdatepassComponent,
+     EliminarcuentaComponent,
+     PoliticasComponent
   ],
   imports: [
     CommonModule,

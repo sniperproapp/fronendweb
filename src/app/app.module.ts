@@ -7,8 +7,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastNotificationsModule } from 'ngx-toast-notifications';
 import { RouterModule } from '@angular/router';
-import { YouTubePlayerModule } from '@angular/youtube-player';
  
+import { YouTubePlayerModule } from "@angular/youtube-player";
 
 
 @NgModule({
@@ -16,7 +16,7 @@ import { YouTubePlayerModule } from '@angular/youtube-player';
     AppComponent
   ],
   imports: [
-    YouTubePlayerModule,
+ 
     BrowserModule,
     RouterModule,
     ToastNotificationsModule.forRoot({duration:6000,type:'primary',position:'top-right'}),

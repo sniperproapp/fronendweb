@@ -27,7 +27,7 @@ export class ValidarpagoComponent {
     }
 
     this.tiendaGuestService.getstatuspay(this.orden).subscribe((resp:any) => {
-      console.log(resp);
+       
       if(resp.statusCode==200)
      { this.toaster.open({text: resp.message,caption: 'VALIDACIÓN',type: 'primary'});
       this.respmsj=resp.message;

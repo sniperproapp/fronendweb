@@ -21,7 +21,7 @@ constructor(   public tiendaGuestService: TiendaGuestService,public activedRoute
     //Add 'implements OnInit' to the class.
     this.activedRouter.params.subscribe((resp:any) => {
       this.tokenpass = resp.id;
-      console.log(resp.id)
+       
     })
     
    
@@ -47,7 +47,7 @@ constructor(   public tiendaGuestService: TiendaGuestService,public activedRoute
 
 
     this.tiendaGuestService.updatepass(data).subscribe((resp:any)=>{
-       console.log(resp)
+       
 
       if(resp.statusCode == 200){ 
       this.toaster.open({text: resp.message,caption: 'VALIDACIÓN',type: 'primary'});

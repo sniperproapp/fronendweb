@@ -33,13 +33,12 @@ export class HomeComponent {
 
     this.user = this.cartService.authService.user;
     this.homeservice.homecursoscategoridescuetoflash().subscribe((resp:any)=>{
-      console.log(resp )
+      
 
       this.CURSOSFLASHS=resp.courses;
       this.DESCUENTOFLASH=resp;
       
-      console.log("this.DESCUENTOFLASH")
-      console.log(this.DESCUENTOFLASH)
+      
       setTimeout(() => {
       
         HOMEINIT($)
@@ -56,7 +55,7 @@ export class HomeComponent {
       this.CURSOSBANERS=resp.courses;
       this.DESCUENTOBANERS=resp;
       
-      console.log(this.DESCUENTOBANERS)
+      
     })
 
 
@@ -66,25 +65,23 @@ export class HomeComponent {
       this.REVIEWS=resp;
       
       
-      console.log(this.REVIEWS)
+      
     })
 
     this.homeservice.homecursoscategori().subscribe((resp:any)=>{
 
       this.CURSOSCATEGORIS=resp;
-      console.log(this.CURSOSCATEGORIS)
+     
     })
     this.homeservice.homecategoria('allcategorie').subscribe((resp:any)=>{
 
       this.CATEGORIES=resp;
-      console.log(this.CATEGORIES)
+      
     })
     // this.homeservice.homecursos('allcatego').subscribe((resp:any)=>{
 
     //   this.CURSOS=resp;
-    //   console.log("this.CURSOS")
-    //   console.log(this.CURSOS)
-    //   console.log("this.CURSOS")
+     
     
 
     // })
@@ -133,8 +130,7 @@ getTotalPriceCourse(COURSE:any){
     this.cartService.authService.router.navigateByUrl("auth/login");
     return;
   }
-  console.log(COURSE)
-  console.log(CAMPAIGN)
+  
   if(CAMPAIGN){
     COURSE.discount_g = CAMPAIGN;
   }
@@ -151,7 +147,7 @@ getTotalPriceCourse(COURSE:any){
   }
 
   this.cartService.registerCart(data).subscribe((resp:any) => {
-    console.log(resp);
+     
     if(resp.statusCode == 200){
       this.toaster.open({text: resp.message  ,caption: 'VALIDACIÓN',type: 'danger'});
     }else{

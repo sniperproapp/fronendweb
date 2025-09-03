@@ -136,7 +136,7 @@
 
                                                         <ng-container *ngFor="let CLASE of SECTION.clases"> 
                                                             <li>
-                                                                <a href="#">
+                                                                <a href="#" onclick="return false;" (click)="subirscroll()">
                                                                     <div class="course-content-left">
                                                                         <i class="feather-play-circle"></i> <span
                                                                             class="text">{{ CLASE.title }}</span>

@@ -10,6 +10,9 @@ import { ContactosComponent } from './contactos/contactos.component';
 import { CartsMensualComponent } from './carts/cartsmensual.component';
 import { LandingMensualidadComponent } from './landing-mensualidad/landing-mensualidad.component';
 import { UpdatepassComponent } from './updatepass/updatepass.component';
+import { EliminarcuentaComponent } from './eliminarcuenta/eliminarcuenta.component';
+import { PoliticasComponent } from './politicas/politicas.component';
+import { InstructoCursoComponent } from './instructor-curso/instructor-curso.component';
 
 const routes: Routes = [
   {
@@ -30,6 +33,10 @@ const routes: Routes = [
       },
       {
         path: 'filtros-de-cursos',
+        component: InstructoCursoComponent,
+      },
+      {
+        path: 'filtros-de-cursos/filtroprofesor/:id',
         component: FiltersCoursesComponent,
       },
       {
@@ -49,6 +56,15 @@ const routes: Routes = [
       {
         path: 'somos',
         component: QuienessomosComponent,
+      }
+      ,
+      {
+        path: 'eliminarcuenta',
+        component: EliminarcuentaComponent,
+      },
+      {
+        path: 'politicas',
+        component: PoliticasComponent,
       }
     ]
   }

@@ -32,7 +32,7 @@ export class LoginAndRegisterComponent {
   }
 
   ngOnInit(): void{
-     console.log(this.authServices.user)
+    
      if(this.authServices.user){
          this.router.navigateByUrl('/')
      }
@@ -44,8 +44,8 @@ export class LoginAndRegisterComponent {
       return;
     }
     this.authServices.login(this.email_login,this.password_login).subscribe((resp:any)=>{
-      console.log(resp)
-      if(resp.status==403||resp.status==500){
+     
+      if(resp.status==403||resp.status==404||resp.status==500){
         this.toaster.open({text: resp.error.message, caption: 'VALIDACION',type: 'warning'});
        
        return;
@@ -57,11 +57,11 @@ export class LoginAndRegisterComponent {
   }
 
   validarpago():void{
-    this._modalService.show<any>(  ValidarpagoComponent,{title:"pagar",size:1}).result().subscribe((resp:any)=>{console.log(resp)})
+    this._modalService.show<any>(  ValidarpagoComponent,{title:"pagar",size:1}).result().subscribe((resp:any)=>{})
 }
 
 recuperarpass():void{
-  this._modalService.show<any>(  RecuperarpassComponent,{title:"Recuperar password",size:1}).result().subscribe((resp:any)=>{console.log(resp)})
+  this._modalService.show<any>(  RecuperarpassComponent,{title:"Recuperar password",size:1}).result().subscribe((resp:any)=>{})
 }
   register(){
     if(!this.email_register ||!this.password_register ||!this.name_register ||!this.surname_register  || !this.password_confir_register ){

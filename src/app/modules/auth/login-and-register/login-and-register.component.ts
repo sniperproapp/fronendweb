@@ -46,6 +46,7 @@ export class LoginAndRegisterComponent {
     this.authServices.login(this.email_login,this.password_login).subscribe((resp:any)=>{
      
       if(resp.status==403||resp.status==404||resp.status==500){
+        console.log(resp)
         this.toaster.open({text: resp.error.message, caption: 'VALIDACION',type: 'warning'});
        
        return;

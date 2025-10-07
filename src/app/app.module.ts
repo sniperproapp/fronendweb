@@ -5,11 +5,12 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ToastNotificationsModule } from 'ngx-toast-notifications';
+ 
 import { RouterModule } from '@angular/router';
  
 import { YouTubePlayerModule } from "@angular/youtube-player";
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { ToastrModule } from 'ngx-toastr';
 //import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 
 //const config: SocketIoConfig = { url: 'http://localhost:4000', options: {} };
@@ -21,7 +22,11 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
   //  SocketIoModule.forRoot(config),
     BrowserModule,
     RouterModule,
-    ToastNotificationsModule.forRoot({duration:6000,type:'primary',position:'top-right'}),
+   ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+    }),
     AppRoutingModule,
     HttpClientModule,
 BrowserAnimationsModule,
@@ -34,6 +39,6 @@ BrowserAnimationsModule,
       multi: true // Es importante usar multi: true ya que puede haber varios interceptores
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],exports:[RouterModule]
 })
 export class AppModule { }

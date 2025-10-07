@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { TiendaGuestService } from '../service/tienda-guest.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CartService } from '../../home/service/cart.service';
-import { Toaster } from 'ngx-toast-notifications';
+import { ToastrService  } from 'ngx-toastr';
 
 declare function HOMEINIT([]):any;
 declare var $:any;
@@ -36,7 +36,7 @@ export class LandingMensualidadComponent {
     public TiendaGuestService: TiendaGuestService,
     public activedRouter: ActivatedRoute,
     public cartService: CartService,
-    public toaster: Toaster,public router:Router
+    public ToastrService : ToastrService ,public router:Router
   ) {
     
   }
@@ -102,7 +102,7 @@ export class LandingMensualidadComponent {
     //console.log(this.user)
      if(!this.user)
      {
-      this.toaster.open({text: "Registrate para pagar ",caption: 'VALIDACIÓN',type: 'danger'});
+      this.ToastrService .success(  "Registrate para pagar ",  'danger' );
           this.router.navigateByUrl("/auth/login")
      }
     let data = {
@@ -123,10 +123,10 @@ export class LandingMensualidadComponent {
     this.cartService.registerCartmensualidad(data).subscribe((resp:any) => {
       
       if(resp.statusCode == 200){
-        this.toaster.open({text: resp.message,caption: 'VALIDACIÓN',type: 'danger'});
+        this.ToastrService .success(  resp.message, 'danger' );
       }else{
         this.cartService.addCart(resp);
-        this.toaster.open({text: 'GENERA EL LINK DE PAGO',caption: 'VALIDACIÓN',type: 'primary'});
+        this.ToastrService .success(  'GENERA EL LINK DE PAGO', 'primary' );
          this.router.navigateByUrl("/carrito-de-compra")
       }
     });

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { TiendaGuestService } from '../service/tienda-guest.service';
 import { ActivatedRoute } from '@angular/router';
 import { CartService } from '../../home/service/cart.service';
-import { Toaster } from 'ngx-toast-notifications';
+import { ToastrService  } from 'ngx-toastr';
 
 declare function HOMEINIT([]):any;
 declare var $:any;
@@ -34,7 +34,7 @@ export class LandingCourseComponent {
     public TiendaGuestService: TiendaGuestService,
     public activedRouter: ActivatedRoute,
     public cartService: CartService,
-    public toaster: Toaster,
+    public ToastrService : ToastrService ,
   ) {
     
   }
@@ -99,7 +99,7 @@ export class LandingCourseComponent {
   }
   inscribir(){
     if(!this.user){
-      this.toaster.open({text: 'NECESITAS INGRESAR CON TU CUENTA AL SISTEMA',caption: 'VALIDACIÓN',type: 'warning'});
+      this.ToastrService .success(  'NECESITAS INGRESAR CON TU CUENTA AL SISTEMA', 'warning' );
       this.cartService.authService.router.navigateByUrl("auth/login");
       return;
     }
@@ -111,18 +111,18 @@ export class LandingCourseComponent {
     this.cartService.inscribir(this.COURSE_LANDING.id).subscribe((resp:any) => {
      
       if(resp.statusCode == 200){
-        this.toaster.open({text: resp.message,caption: 'VALIDACIÓN',type: 'primary'});
+        this.ToastrService .success(  resp.message,   'primary'  );
         this.cursostuden_have_course=true
       }else{
          
-        this.toaster.open({text: resp.message,caption: 'VALIDACIÓN',type: 'danger'});
+        this.ToastrService .success( resp.message,  'danger' );
       }
     });
   }
 
   addCart(){
     if(!this.user){
-      this.toaster.open({text: 'NECESITAS INGRESAR CON TU CUENTA AL SISTEMA',caption: 'VALIDACIÓN',type: 'warning'});
+      this.ToastrService .success( 'NECESITAS INGRESAR CON TU CUENTA AL SISTEMA', 'warning' );
       this.cartService.authService.router.navigateByUrl("auth/login");
       return;
     }
@@ -146,10 +146,10 @@ export class LandingCourseComponent {
     this.cartService.registerCart(data).subscribe((resp:any) => {
       
       if(resp.statusCode == 200){
-        this.toaster.open({text: resp.message,caption: 'VALIDACIÓN',type: 'danger'});
+        this.ToastrService .success( resp.message, 'danger' );
       }else{
         this.cartService.addCart(resp);
-        this.toaster.open({text: 'agregado al carrito',caption: 'VALIDACIÓN',type: 'primary'});
+        this.ToastrService .success( 'agregado al carrito',  'primary' );
       }
     });
   }

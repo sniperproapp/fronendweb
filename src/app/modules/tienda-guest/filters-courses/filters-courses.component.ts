@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { TiendaGuestService } from '../service/tienda-guest.service';
-import { Toaster } from 'ngx-toast-notifications';
+import { ToastrService  } from 'ngx-toastr';
 import { CartService } from '../../home/service/cart.service';
 import { AuthService } from '../../auth/service/auth.service';
 import { ActivatedRoute } from '@angular/router';
@@ -34,7 +34,7 @@ export class FiltersCoursesComponent {
   constructor(
     public tiendaGuestService: TiendaGuestService,
     public activedRouter: ActivatedRoute,
-    public toaster: Toaster,
+    public ToastrService : ToastrService ,
     public cartService: CartService,
     
   ) {
@@ -103,7 +103,7 @@ export class FiltersCoursesComponent {
   }
   addCart(COURSE:any,CAMPAIGN:any = null){
     if(!this.user){
-      this.toaster.open({text: 'NECESITAS INGRESAR CON TU CUENTA AL SISTEMA',caption: 'VALIDACIÓN',type: 'warning'});
+      this.ToastrService .success(  'NECESITAS INGRESAR CON TU CUENTA AL SISTEMA', 'warning' );
       this.cartService.authService.router.navigateByUrl("auth/login");
       return;
     }
@@ -125,10 +125,10 @@ export class FiltersCoursesComponent {
     this.cartService.registerCart(data).subscribe((resp:any) => {
       
       if(resp.message == 403){
-        this.toaster.open({text: resp.message_text,caption: 'VALIDACIÓN',type: 'danger'});
+        this.ToastrService .success( resp.message_text, 'danger'  );
       }else{
         this.cartService.addCart(resp.cart);
-        this.toaster.open({text: resp.message_text,caption: 'VALIDACIÓN',type: 'primary'});
+        this.ToastrService .success(  resp.message_text, 'primary');
       }
     });
   }

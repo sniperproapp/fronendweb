@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { Toaster } from 'ngx-toast-notifications';
+ 
 import { HomeService } from './service/home.service';
 import { CartService } from './service/cart.service';
 import { ReferralService } from './service/referral.service';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 declare function HOMEINIT([]):any;
 declare function countdownT(): any
 declare var $:any;
@@ -22,7 +23,7 @@ export class HomeComponent {
   DESCUENTOFLASH:any=[];
   CURSOSCATEGORIS:any=[];
   REVIEWS:any=[];
-  constructor(private toaster: Toaster,
+  constructor(public ToastrService : ToastrService,
     public homeservice:HomeService,
     public cartService: CartService,
     public referralService: ReferralService,private route: ActivatedRoute,
@@ -30,7 +31,7 @@ export class HomeComponent {
     this.user = this.cartService.authService.user;
   }
   showToast() {
-    this.toaster.open('Hello world!');
+    this.ToastrService .success('Hello world!');
   }
   ngOnInit(): void{
     //console.log('this.user')
@@ -135,7 +136,7 @@ getTotalPriceCourse(COURSE:any){
 
  addCart(COURSE:any,CAMPAIGN:any = null){
   if(!this.user){
-    this.toaster.open({text: 'NECESITAS INGRESAR CON TU CUENTA AL SISTEMA',caption: 'VALIDACIÓN',type: 'warning'});
+    this.ToastrService .success( 'NECESITAS INGRESAR CON TU CUENTA AL SISTEMA' ,  'warning' );
     this.cartService.authService.router.navigateByUrl("auth/login");
     return;
   }
@@ -158,10 +159,10 @@ getTotalPriceCourse(COURSE:any){
   this.cartService.registerCart(data).subscribe((resp:any) => {
      
     if(resp.statusCode == 200){
-      this.toaster.open({text: resp.message  ,caption: 'VALIDACIÓN',type: 'danger'});
+      this.ToastrService .success(  resp.message  ,   'danger' );
     }else{
       this.cartService.addCart(resp);
-      this.toaster.open({text:'Agregado al carrito',caption: 'VALIDACIÓN',type: 'primary'});
+      this.ToastrService .success( 'Agregado al carrito' ,   'primary' );
     }
   });
 }

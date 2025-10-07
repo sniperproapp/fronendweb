@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ModalReference, ModalService } from '@developer-partners/ngx-modal-dialog';
-import { Toaster } from 'ngx-toast-notifications';
+import { ToastrService  } from 'ngx-toastr';
 import { TiendaGuestService } from 'src/app/modules/tienda-guest/service/tienda-guest.service';
 
 @Component({

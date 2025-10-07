@@ -5,7 +5,7 @@ import { ValidarpagoComponent } from 'src/app/shared/validarpago/validarpago.com
 import { ModalService } from '@developer-partners/ngx-modal-dialog';
  import { ActivatedRoute } from '@angular/router';
 import { RecuperarpassComponent } from 'src/app/shared/recuperarpass/recuperarpass.component';
-import { Toaster } from 'ngx-toast-notifications';
+import { ToastrService  } from 'ngx-toastr';
 import { ReferralService } from '../../home/service/referral.service';
  
 
@@ -29,7 +29,7 @@ export class LoginAndRegisterComponent {
    
 
 
-  constructor( public referralService: ReferralService, public toaster: Toaster,public authServices: AuthService,public router:Router,private readonly _modalService:ModalService){
+  constructor( public referralService: ReferralService, public ToastrService : ToastrService ,public authServices: AuthService,public router:Router,private readonly _modalService:ModalService){
 
   }
 
@@ -44,7 +44,7 @@ export class LoginAndRegisterComponent {
 
   login(){
     if(!this.email_login || !this.password_login){
-      this.toaster.open({text: "faltan datos del usuario", caption: 'VALIDACION',type: 'warning'});
+      this.ToastrService .success(  "faltan datos del usuario",  'warning');
       return;
     }
     this.authServices.login(this.email_login,this.password_login).subscribe((resp:any)=>{
@@ -57,12 +57,12 @@ export class LoginAndRegisterComponent {
                
                          this.authServices.pago(this.email_login).subscribe((resp:any)=>{
                           //console.log(resp);
-                           window.open(resp.message, '_blank');
+                          // window.open(message, '_blank');
                            })
               }
            }
             
-        this.toaster.open({text: resp.error.message, caption: 'VALIDACION',type: 'warning'});
+        this.ToastrService .success( resp.error.message,  'warning');
        
        return;
         }
@@ -84,7 +84,7 @@ recuperarpass():void{
   register(){
     if(!this.email_register ||!this.password_register ||!this.name_register ||!this.surname_register  || !this.password_confir_register ){
  
-      this.toaster.open({text: "faltan datos del usuario", caption: 'VALIDACION',type: 'warning'});
+      this.ToastrService .success( "faltan datos del usuario",  'warning');
       
       return;
     }
@@ -103,10 +103,10 @@ recuperarpass():void{
      
 
       if(resp.status==403||resp.status==500){
-        this.toaster.open({text: resp.error.message, caption: 'VALIDACION',type: 'warning'});
+        this.ToastrService .success( resp.error.message,  'warning');
       
       }else{
-        this.toaster.open({text:"registro exitoso", caption: 'VALIDACION',type: 'primary'});
+        this.ToastrService .success("registro exitoso",  'primary');
 
    
         this.clean()

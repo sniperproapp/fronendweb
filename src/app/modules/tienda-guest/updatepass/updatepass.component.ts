@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { TiendaGuestService } from '../service/tienda-guest.service';
 import { ActivatedRoute } from '@angular/router';
-import { Toaster } from 'ngx-toast-notifications';
+import { ToastrService  } from 'ngx-toastr';
 
 @Component({
   selector: 'app-updatepass',
@@ -12,7 +12,7 @@ export class UpdatepassComponent {
   password_register:string=''; 
   password_confir_register:string='';
   tokenpass:string='';
-constructor(   public tiendaGuestService: TiendaGuestService,public activedRouter: ActivatedRoute,public toaster: Toaster,){
+constructor(   public tiendaGuestService: TiendaGuestService,public activedRouter: ActivatedRoute,public ToastrService : ToastrService ,){
 
 }
 
@@ -29,12 +29,12 @@ constructor(   public tiendaGuestService: TiendaGuestService,public activedRoute
 
   register(){
     if( !this.password_register   || !this.password_confir_register ){
-      this.toaster.open({text: 'faltan datos del usuario',caption: 'VALIDACIÓN',type: 'danger'});
+      this.ToastrService .success(  'faltan datos del usuario' , 'danger' );
      
       return;
     }
     if( this.password_register!=this.password_confir_register ){
-      this.toaster.open({text: 'las claves no son iguales',caption: 'VALIDACIÓN',type: 'danger'});
+      this.ToastrService .success(  'las claves no son iguales',  'danger' );
      
       return;
     }
@@ -50,7 +50,7 @@ constructor(   public tiendaGuestService: TiendaGuestService,public activedRoute
        
 
       if(resp.statusCode == 200){ 
-      this.toaster.open({text: resp.message,caption: 'VALIDACIÓN',type: 'primary'});
+      this.ToastrService .success(  resp.message, 'primary' );
       
       } 
     })

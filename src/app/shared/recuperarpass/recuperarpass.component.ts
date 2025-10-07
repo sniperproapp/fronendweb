@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { Toaster } from 'ngx-toast-notifications';
+import { ToastrService } from 'ngx-toastr';
+ 
 import { TiendaGuestService } from 'src/app/modules/tienda-guest/service/tienda-guest.service';
 
 @Component({
@@ -12,7 +13,7 @@ export class RecuperarpassComponent {
   respmsj:string='';
   constructor( 
    
-    public tiendaGuestService: TiendaGuestService,    public toaster: Toaster
+    public tiendaGuestService: TiendaGuestService,   public ToastrService : ToastrService,
   ){ 
   }
 
@@ -20,14 +21,14 @@ export class RecuperarpassComponent {
   
   enviarmail():void{
     if( !this.email ){
-      this.toaster.open({text: 'faltan datos del usuario',caption: 'VALIDACIÓN',type: 'danger'});
+      this.ToastrService .success(  'faltan datos del usuario',  'danger' );
      
       return;
     }
     this.tiendaGuestService.enviarmail(this.email).subscribe((resp:any) => {
       
       if(resp.statusCode == 200) 
-     { this.toaster.open({text:resp.message,caption: 'VALIDACIÓN',type: 'primary'});}
+     { this.ToastrService .success(  resp.message,  'primary' );}
        
        
     })

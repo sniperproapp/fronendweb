@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { TiendaAuthService } from '../service/tienda-auth.service';
-import { Toaster } from 'ngx-toast-notifications';
+ 
 import { CartService } from '../../home/service/cart.service';
 import { Router } from '@angular/router';
 import { AlertaService } from '../../home/service/alerta.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-student-dashboard',
@@ -69,7 +70,7 @@ export class StudentDashboardComponent {
   rating:number = 0;
   constructor(private alertaService: AlertaService,
     public tiendaAuthService: TiendaAuthService,
-    public toaster: Toaster,
+   public ToastrService : ToastrService,
      public cartService: CartService,public router:Router
   ) {
     
@@ -80,7 +81,7 @@ export class StudentDashboardComponent {
       //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
       //Add 'implements OnInit' to the class.
       this.tiendaAuthService.profileStudent().subscribe((resp:any) => {
-      console.log(resp)
+     // console.log(resp)
       this.saldo=Number(resp.comisionesSuma.totalPrice)
       this.saldototal=Number(resp.comisionesSumatotal.totalPrice)
       this.referrals=resp.referral
@@ -92,8 +93,7 @@ export class StudentDashboardComponent {
       this.iduser=this.profile_student.id;
       this.name = this.profile_student.name;
       this.rol=this.profile_student.rol.findIndex( (rol: { id: string; })  => rol.id === 'PROF')
-      console.log('this.rol')
-      console.log(this.rol)
+      
       this.wallet = this.profile_student.wallet;
       this.surname = this.profile_student.surname;
       this.email = this.profile_student.email;
@@ -168,8 +168,8 @@ codigo2af(){
   }
 
   processFile($event:any){
-    if($event.target.files[0].type.indexOf("image") < 0){
-      this.toaster.open({text: 'NECESITAS SUBIR UN ARCHIVO DE TIPO IMAGEN',caption: 'VALIDACIÓN',type: 'warning'});
+    if($event.target.files[0].indexOf("image") < 0){
+      this.ToastrService .success(  'NECESITAS SUBIR UN ARCHIVO DE TIPO IMAGEN'  ,'warning' );
       return;
     }
     this.avatar = $event.target.files[0];
@@ -182,7 +182,7 @@ codigo2af(){
   updatedStudentpass(){
     if(this.password || this.password_confirmation){
       if(this.password != this.password_confirmation){
-        this.toaster.open({text: 'LAS CONTRASEÑAS TIENE QUE SER IGUALES',caption: 'VALIDACIÓN',type: 'warning'});
+        this.ToastrService .success(  'LAS CONTRASEÑAS TIENE QUE SER IGUALES' , 'warning' );
         return;
       }
     }
@@ -201,11 +201,11 @@ codigo2af(){
  this.tiendaAuthService.updateStudentpass(data).subscribe((resp:any) => {
     
    if(resp){
-     this.toaster.open({text: "clave editada correctamente",caption: 'VALIDACIÓN',type: 'primary'});
+     this.ToastrService .success( "clave editada correctamente" , 'primary' );
      this.password=''
      this.password_confirmation=''
    }else{
-     this.toaster.open({text: "ocurrio un error" ,caption: 'PROCESO CORRECTO',type: 'warning'});
+     this.ToastrService .success( "ocurrio un error"  , 'warning' );
        
    }
  })
@@ -226,7 +226,7 @@ codigo2af(){
 
   updatedStudent(){
     if(!this.name  || !this.surname || !this.email){
-      this.toaster.open({text: 'NECESITAS COMPLETAR LOS CAMPOS OBLIGATORIOS',caption: 'VALIDACIÓN',type: 'warning'});
+      this.ToastrService .success( 'NECESITAS COMPLETAR LOS CAMPOS OBLIGATORIOS',   'warning' );
       return;
     }
     
@@ -254,9 +254,9 @@ codigo2af(){
         this.tiendaAuthService.updateStudentwihtimagen(this.iduser,formData).subscribe((resp:any) => {
            
           if(resp.message == 200){
-            this.toaster.open({text: resp.message_text,caption: 'VALIDACIÓN',type: 'warning'});
+            this.ToastrService .success( resp.message_text,   'warning' );
           }else{
-            this.toaster.open({text: resp.message_text,caption: 'PROCESO CORRECTO',type: 'primary'});
+            this.ToastrService .success( resp.message_text,  'primary' );
             localStorage.setItem("user",JSON.stringify({
               name: resp.user.name,
               email: resp.user.email,
@@ -281,10 +281,10 @@ codigo2af(){
   
   this.tiendaAuthService.updateStudent(this.iduser,data).subscribe((resp:any) => {
      
-    if(resp.typecode == 200){
-      this.toaster.open({text: resp.message,caption: 'VALIDACIÓN',type: 'warning'});
+    if(resp.ode == 200){
+      this.ToastrService .success( resp.message,   'warning' );
     }else{
-      this.toaster.open({text: "Editado correctamente",caption: 'PROCESO CORRECTO',type: 'primary'});
+      this.ToastrService .success( "Editado correctamente", 'primary' );
        localStorage.setItem("user",JSON.stringify({
          name: resp.name,
          email: resp.email,
@@ -316,11 +316,11 @@ codigo2af(){
   }
   saveReview(){
     if(this.rating == 0){
-      this.toaster.open({text: 'NECESITAS SELECCIONAR UNA CALIFICACIÓN',caption: 'VALIDACIÓN',type: 'warning'});
+      this.ToastrService .success( 'NECESITAS SELECCIONAR UNA CALIFICACIÓN',  'warning' );
       return;
     }
     if(!this.description_review){
-      this.toaster.open({text: 'NECESITAS DIGITAR UNA DESCRIPCIÓN',caption: 'VALIDACIÓN',type: 'warning'});
+      this.ToastrService .success( 'NECESITAS DIGITAR UNA DESCRIPCIÓN',   'warning' );
       return;
     }
     let data = {
@@ -333,7 +333,7 @@ codigo2af(){
     this.tiendaAuthService.registerReview(data).subscribe((resp:any) => {
        
 
-      this.toaster.open({text: "creado correctamente",caption: 'VALIDACIÓN',type: 'primary'});
+      this.ToastrService .success( "creado correctamente",   'primary' );
 
       let index = this.sales_details.findIndex((item:any) => item.id == this.sale_detail_selected.id);
       if(index != -1){
@@ -346,11 +346,11 @@ codigo2af(){
   }
   updateReview(){
     if(this.rating == 0){
-      this.toaster.open({text: 'NECESITAS SELECCIONAR UNA CALIFICACIÓN',caption: 'VALIDACIÓN',type: 'warning'});
+      this.ToastrService .success( 'NECESITAS SELECCIONAR UNA CALIFICACIÓN',  'warning' );
       return;
     }
     if(!this.description_review){
-      this.toaster.open({text: 'NECESITAS DIGITAR UNA DESCRIPCIÓN',caption: 'VALIDACIÓN',type: 'warning'});
+      this.ToastrService .success( 'NECESITAS DIGITAR UNA DESCRIPCIÓN',  'warning');
       return;
     }
     let data = {
@@ -364,7 +364,7 @@ codigo2af(){
     this.tiendaAuthService.updateReview(data).subscribe((resp:any) => {
       
 
-      this.toaster.open({text: "Editado correctamente",caption: 'VALIDACIÓN',type: 'primary'});
+      this.ToastrService .success( "Editado correctamente",   'primary' );
 
       let index = this.sales_details.findIndex((item:any) => item.id == this.sale_detail_selected.id);
       if(index != -1){
@@ -376,12 +376,12 @@ codigo2af(){
 
   createpay(id:number){
      
-    this.toaster.open({text:"Retirando.....",caption: 'VALIDACIÓN',type: 'primary'});
+    this.ToastrService .success("Retirando.....",  'primary' );
 this.tiendaAuthService.createpay(id).subscribe((resp:any) => {
  
    if(resp.statusCode==200)
   {
-    this.toaster.open({text: resp.message,caption: 'VALIDACIÓN',type: 'primary'});
+    this.ToastrService .success( resp.message,   'primary' );
     this.tiendaAuthService.profileStudent().subscribe((resp:any) => {
      // console.log(resp)
       this.saldo=Number(resp.comisionesSuma.totalPrice)
@@ -415,7 +415,7 @@ this.tiendaAuthService.createpay(id).subscribe((resp:any) => {
   }
   if(resp.statusCode==400)
   {
-    this.toaster.open({text: resp.message,caption: 'VALIDACIÓN',type: 'primary'});
+    this.ToastrService .success( resp.message,   'primary' );
   }
 })
 
@@ -427,8 +427,8 @@ this.tiendaAuthService.createpay(id).subscribe((resp:any) => {
     let data = {
       id_user:this.iduser,
       id_curso: 59,
-      type_discount:   null,
       discount:   null,
+    
       campaign_discount:   null,
       code_cupon: null,
       code_discount:   null,
@@ -442,10 +442,10 @@ this.tiendaAuthService.createpay(id).subscribe((resp:any) => {
     this.cartService.registerCartmensualidad(data).subscribe((resp:any) => {
      // console.log(resp)
       if(resp.statusCode == 200){
-        this.toaster.open({text: resp.message,caption: 'VALIDACIÓN',type: 'danger'});
+        this.ToastrService .success( resp.message,  'danger' );
       }else{
         this.cartService.addCart(resp);
-        this.toaster.open({text: 'Genera el link de pago',caption: 'VALIDACIÓN',type: 'primary'});
+        this.ToastrService .success( 'Genera el link de pago',   'primary' );
          this.router.navigateByUrl("/carrito-de-compra")
       }
       

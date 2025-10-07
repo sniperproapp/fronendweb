@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Toaster } from 'ngx-toast-notifications';
+import { Toast, ToastrService } from 'ngx-toastr';
 import { TiendaGuestService } from 'src/app/modules/tienda-guest/service/tienda-guest.service';
 
 @Component({
@@ -12,7 +12,7 @@ export class ValidarpagoComponent {
   respmsj:string='';
   constructor( 
    
-    public tiendaGuestService: TiendaGuestService,    public toaster: Toaster,
+    public tiendaGuestService: TiendaGuestService,    public ToastrService : ToastrService,
   ){ 
   }
 
@@ -21,7 +21,7 @@ export class ValidarpagoComponent {
 
   getestadodelpago():void{
     if( !this.orden ){
-      this.toaster.open({text: 'faltan numero de orden ',caption: 'VALIDACIÓN',type: 'danger'});
+      this.ToastrService .success( 'faltan numero de orden ' ,'danger');
      
       return;
     }
@@ -29,7 +29,7 @@ export class ValidarpagoComponent {
     this.tiendaGuestService.getstatuspay(this.orden).subscribe((resp:any) => {
        
       if(resp.statusCode==200)
-     { this.toaster.open({text: resp.message,caption: 'VALIDACIÓN',type: 'primary'});
+     { this.ToastrService .success(  resp.message, 'primary');
       this.respmsj=resp.message;
        }
     })

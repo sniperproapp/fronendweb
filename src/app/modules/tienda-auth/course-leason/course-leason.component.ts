@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { TiendaAuthService } from '../service/tienda-auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Toaster } from 'ngx-toast-notifications';
+import { ToastrService  } from 'ngx-toastr';
 import { DomSanitizer } from '@angular/platform-browser';
 import { YouTubePlayer } from '@angular/youtube-player';
  
@@ -41,7 +41,7 @@ valor=0;
     public tiendaAuth: TiendaAuthService,
     public activedRouter: ActivatedRoute,
     public router: Router,
-    public toaster: Toaster,
+    public ToastrService : ToastrService ,
     public Sanitizer: DomSanitizer,
   ) {
      
@@ -59,7 +59,7 @@ valor=0;
       if(resp.statusCode == 200){
             alert( resp.message)
             
-            this.toaster.open({text: resp.message, caption: 'VALIDACION',type: 'warning'});
+            this.ToastrService .success(  resp.message,  'warning' );
               this.router.navigateByUrl("/"); 
       }else{
         this.COURSE_SELECTED = resp;

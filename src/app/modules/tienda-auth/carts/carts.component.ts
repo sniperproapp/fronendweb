@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { CartService } from '../../home/service/cart.service';
-import { Toaster } from 'ngx-toast-notifications';
+import { ToastrService  } from 'ngx-toastr';
 import { TiendaAuthService } from '../service/tienda-auth.service';
 
  
@@ -26,7 +26,7 @@ export class CartsComponent {
   constructor(
     public cartService: CartService,
     public tiendaAuthService: TiendaAuthService,
-    public toaster: Toaster,
+    public ToastrService : ToastrService ,
     private readonly _modalService:ModalService
   ) {
     
@@ -60,10 +60,10 @@ generarorden(){
     // console.log(resp)
     if(resp.statusCode==200){
       this.link_pay=resp.message
-      this.toaster.open({text: resp.message,caption: 'VALIDACIÓN',type: 'primary'});
+      this.ToastrService .success( resp.message,  'primary');
       this.cartService.resetCart();
     }else{
-      this.toaster.open({text: resp.message,caption: 'VALIDACIÓN',type: 'warning'});
+      this.ToastrService .success( resp.message,  'warning');
     }
   })
 }
@@ -89,7 +89,7 @@ generarorden(){
 
   applyCupon(){
     if(!this.code){
-      this.toaster.open({text: 'DEBES INGRESAR UN CODIGO DE CUPON', caption: 'VALIDACION',type: 'danger'});
+      this.ToastrService .success( 'DEBES INGRESAR UN CODIGO DE CUPON',  'danger');
       return ;
     }
     let data = {
@@ -98,7 +98,7 @@ generarorden(){
     this.cartService.applyCupon(data).subscribe((resp:any) => {
     
       if(resp.statusCode == 200){
-        this.toaster.open({text: resp.message, caption: 'VALIDACION',type: 'danger'});
+        this.ToastrService .success( resp.message,  'danger');
       }else{
         
         this.cartService.resetCart();
@@ -108,7 +108,7 @@ generarorden(){
             this.cartService.addCart(cart);
           });
         }, 50);
-        this.toaster.open({text: 'cupon aplicado correctamente ', caption: 'VALIDACION',type: 'success'});
+        this.ToastrService .success( 'cupon aplicado correctamente ',  'success');
       }
     })
   }

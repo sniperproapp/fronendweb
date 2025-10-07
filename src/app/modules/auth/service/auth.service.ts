@@ -49,6 +49,20 @@ token:any=null;
     )
   }
 
+  pago(email:string)
+  {
+    let URL =URL_SERVICIOS+"sale";
+    return this.http.post(URL,{email:email}).pipe(
+      map((auth:any)=>{
+     return auth;
+      }),
+      catchError((err:any)=>{
+         
+        return of(err);
+      })
+    )
+  }
+
   regisster(data:any)
   {
     let URL =URL_SERVICIOS+"auth/register";
@@ -72,6 +86,10 @@ token:any=null;
       this.token=localStorage.getItem("token");
     }
 
+  }
+
+  getToken(){
+    return this.token
   }
 
   savelocalStorage(auth:any){

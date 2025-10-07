@@ -2,3 +2,62 @@
     color: black !important;
     margin-right: 0px;
 }
+
+.boton-azul {
+  /* Fondo y colores principales */
+  background-color: #007bff; /* Azul primario de Bootstrap */
+  color: white; /* Texto blanco para contraste */
+  
+  /* Borde y esquinas */
+  border: none; /* Sin borde por defecto */
+  border-radius: 8px; /* Esquinas ligeramente redondeadas */
+  
+  /* Espaciado y tamaño */
+  padding: 12px 25px; /* Relleno interno */
+  font-size: 1.1em; /* Tamaño de fuente */
+  font-weight: bold; /* Texto en negrita */
+  
+  /* Comportamiento del cursor */
+  cursor: pointer; /* Cambia el cursor a una mano */
+  
+  /* Transiciones para animaciones suaves */
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  
+  /* Sombra sutil para profundidad */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.boton-azul:hover {
+  /* Efecto al pasar el ratón */
+  background-color: #0056b3; /* Un azul un poco más oscuro */
+  transform: translateY(-2px); /* Un ligero levantamiento */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25); /* Sombra más pronunciada */
+}
+
+.boton-azul:active {
+  /* Efecto al hacer clic */
+  background-color: #004085; /* Un azul aún más oscuro */
+  transform: translateY(0); /* Vuelve a su posición original */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra reducida */
+}
+
+.progress-container {
+    width: 80%;
+    background-color: #f3f3f3;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 50px auto;
+    overflow: hidden; /* Asegura que la barra interior no desborde */
+}
+
+.progress-bar {
+    /* La propiedad width se establece por TypeScript */
+    height: 30px;
+    background-color: blue; /* Verde */
+    text-align: center;
+    line-height: 30px;
+    color: white;
+    font-weight: bold;
+    /* Transición de Angular: suaviza el movimiento */
+    transition: width 0.1s linear; 
+}

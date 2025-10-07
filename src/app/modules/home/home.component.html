@@ -134,8 +134,8 @@
           </div>
       </div>
 
-      <div class="rbt-counterup-area "  style="background-image: url('assets/images/material/fpromomes.jpg');  background-repeat: no-repeat;background-size: cover; " *ngIf="DESCUENTOFLASH && !user "  >
-          <div class="conter-style-2">
+      <div  class="rbt-counterup-area "  style="background-image: url('assets/images/material/fpromomes.jpg');  background-repeat: no-repeat;background-size: cover; " *ngIf="  !user || this.user.estadomensualidad==0 "  >
+          <div class="conter-style-2"  >
               <div class="container">
                   <div class="row g-5 align-items-center">
                       <div class="col-lg-6 order-2 order-lg-1">

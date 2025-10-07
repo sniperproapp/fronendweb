@@ -20,8 +20,9 @@ export class CartsComponent {
   CARTS:any = [];
   TOTAL_SUM:number = 0;
   code:any = null;
+  link_pay= null;
 
-  @ViewChild('paypal',{static: true}) paypalElement?: ElementRef;
+ 
   constructor(
     public cartService: CartService,
     public tiendaAuthService: TiendaAuthService,
@@ -35,91 +36,30 @@ export class CartsComponent {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
     this.cartService.currentData$.subscribe((resp:any) => {
-      
+     // console.log(this.CARTS)
       this.CARTS = resp;
       this.TOTAL_SUM = this.CARTS.reduce((sum:number,item:any) => sum + parseFloat(item.total),0);
     })
 
     
 
-    paypal.Buttons({
-      // optional styling for buttons
-      // https://developer.paypal.com/docs/checkout/standard/customize/buttons-style-guide/
-      style: {
-        color: "gold",
-        shape: "rect",
-        layout: "vertical"
-      },
-
-      // set up the transaction
-      createOrder: (data:any, actions:any) => {
-          // pass in any options from the v2 orders create call:
-          // https://developer.paypal.com/api/orders/v2/#orders-create-request-body
-          if(this.TOTAL_SUM == 0){
-            this.toaster.open({text: 'PARA PROCESAR EL PAGO EL MONTO TIENE QUE SER MAYOR A 0',caption: 'VALIDACION',type: 'warning'});
-            return false;
-          }
-          if(this.CARTS.length == 0){
-            this.toaster.open({text: 'PARA PROCESAR EL PAGO EL CARRITO TIENE QUE TENER AL MENOS 1 ITEM',caption: 'VALIDACION',type: 'warning'});
-            return false;
-          }
-          const createOrderPayload = {
-            purchase_units: [
-              {
-                amount: {
-                    description: "COMPRAR POR EL LMS",
-                    value: this.TOTAL_SUM
-                }
-              }
-            ]
-          };
-
-          return actions.order.create(createOrderPayload);
-      },
-
-      // finalize the transaction
-      onApprove: async (data:any, actions:any) => {
-         
-          let Order = await actions.order.capture();
-            // Order.purchase_units[0].payments.captures[0].id
-          let dataOrder = {
-            method_payment: "PAYPAL",
-            currency_total: "USD",
-            currency_payment: "USD",
-            total: this.TOTAL_SUM,
-            n_transaccion:  Order.purchase_units[0].payments.captures[0].id,
-          };
-          this.tiendaAuthService.registerOrder(dataOrder).subscribe((resp:any) => {
-           
-            if(resp.statusCode==200){
-              this.toaster.open({text: resp.message,caption: 'VALIDACIÓN',type: 'primary'});
-              this.cartService.resetCart();
-            }else{
-              this.toaster.open({text: resp.message,caption: 'VALIDACIÓN',type: 'warning'});
-            }
-          })
-          // return actions.order.capture().then(captureOrderHandler);
-      },
-
-      // handle unrecoverable errors
-      onError: (err:any) => {
-          console.error('An error prevented the buyer from checking out with PayPal');
-      }
-  }).render(this.paypalElement?.nativeElement);
+    
   }
 
 
 generarorden(){
   let dataOrder = {
-    method_payment: "PAYPAL",
+    method_payment: "usdt",
     currency_total: "USD",
     currency_payment: "USD",
     total: this.TOTAL_SUM,
-    n_transaccion:  "123456789",
+    n_transaccion:  "",
+    
   };
   this.tiendaAuthService.registerOrder(dataOrder).subscribe((resp:any) => {
-     
+    // console.log(resp)
     if(resp.statusCode==200){
+      this.link_pay=resp.message
       this.toaster.open({text: resp.message,caption: 'VALIDACIÓN',type: 'primary'});
       this.cartService.resetCart();
     }else{

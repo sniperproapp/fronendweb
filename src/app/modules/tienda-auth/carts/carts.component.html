@@ -133,10 +133,14 @@
                                 <div class="cart-submit-btn-group">
                                     <div class="single-button w-100">
                                          <button class="rbt-btn btn-gradient rbt-switch-btn rbt-switch-y w-100" (click)="generarorden()">
-                                            <span data-text="INSCRIBIR">INSCRIBIR</span>
+                                            <span data-text="GENERAR LINK DE PAGO">GENERAR LINK DE PAGO</span>
+                                           
                                         </button>  
 
                                         <!-- <div #paypal ></div> -->
+                                          <a *ngIf="link_pay" [href]="link_pay" target="_blank" rel="noopener noreferrer">
+                                           LINK DE PAGO {{link_pay}}
+                                           </a>
                                           
                                     </div>
                                     <!-- <div class="single-button w-50">

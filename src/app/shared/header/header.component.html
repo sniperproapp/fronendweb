@@ -10,7 +10,7 @@
                         <div class="rbt-header-content">
                             <!-- Start Header Information List  -->
                             <div class="header-info">
-                                <ul class="rbt-information-list">
+                                <ul class="rbt-information-list" *ngIf="diasrestantes >= 6 || !user ">
                                     <li>
                                         <a href="https://www.instagram.com/miguelmonsalve_fx_lamaquina?igsh=MTFranhpZHFtbjdpcQ=="><i class="fab fa-instagram"></i>78k <span class="d-none d-xxl-block">Followers</span></a>
                                     </li>
@@ -18,8 +18,20 @@
                                         <a href="https://www.facebook.com/share/17wMUT8U9C/?mibextid=wwXIfr"><i class="fab fa-facebook-square"></i>1k <span class="d-none d-xxl-block">Followers</span></a>
                                     </li>
                                     <li>
-                                        <a href="#"><i class="feather-phone"></i>+57-321-417-6779</a>
+                                        <a href="#"><i class="feather-phone"></i>+57-(311)469-3379</a>
                                     </li>
+                                    </ul>   
+                                   <ul class="rbt-information-list" *ngIf="diasrestantes < 6 && user "> 
+                                    <li>
+                                        <div class="contenedor">
+                                        <a href="#">  <p class="texto-movil color-danger">Te restan  {{diasrestantes | number:'1.0-0'}} dias para vencer la mensualidad Preciona aqui para pagar tu mensualidad</p></a>
+                                           
+                                        
+                                        </div>
+                    
+                                    </li>
+                                  
+                                       
                                 </ul>
                             </div>
                             <!-- End Header Information List  -->
@@ -259,6 +271,11 @@
                                 <a href="contactos"class="color-white">Contáctanos </a>
                                 
                             </li>
+                            <li class="with-megamenu has-menu-child-item position-static" *ngIf="user">
+                               <a href="#"class="color-white"  (click)="copyMessage('https://sniperproacademy.com/?ref=')">Copiar mi Link</a> 
+                             
+                            </li>
+                             
   
                             <!-- <li class="with-megamenu has-menu-child-item position-static" *ngIf=" !user " >
                                 <a href="mensualidad">Pagar Menbresia
@@ -403,8 +420,13 @@
   
                     <div class="rbt-btn-wrapper d-none d-xl-block">
                         <a class="rbt-btn rbt-marquee-btn marquee-auto btn-border-gradient radius-round btn-sm hover-transform-none" href="/auth/login">
-                            <span data-text="BIENVENIDO" *ngIf="user">BIENVENIDO</span>
-                            <span data-text="REGISTRATE" *ngIf="!user">REGISTRATE</span>
+                            <span data-text="BIENVENIDO" *ngIf="user && !mostrarLeyenda$ | async">BIENVENIDO</span>
+                            <span data-text="OPERATIVA EN VIVO" *ngIf="user && mostrarLeyenda$ | async">OPERATIVA EN VIVO</span>
+                            
+                            
+
+                            <span data-text="REGISTRATE" *ngIf="!user ">REGISTRATE</span>
+                            <span data-text="REGISTRATE" *ngIf="!user ">REGISTRATE</span>
                             
                         </a>
                     </div>
@@ -642,6 +664,11 @@
                     <a href="contactos">Contáctanos  </a>
                     
                 </li>
+                   <li class="  position-static" *ngIf="user">
+                   <a href="#"  (click)="copyMessage('https://sniperproacademy.com/?ref=')">Copiar mi Link</a> 
+                    
+                </li>
+                 
   
                 <!-- <li class="  position-static">
                     <a href="#">Blog 
@@ -693,7 +720,9 @@
         <div class="mobile-menu-bottom">
             <div class="rbt-btn-wrapper mb--20">
                 <a class="rbt-btn btn-border-gradient radius-round btn-sm hover-transform-none w-100 justify-content-center text-center" href="/auth/login">
-                    <span data-text="BIENVENIDO" *ngIf="user">BIENVENIDO</span>
+                     <span data-text="BIENVENIDO" *ngIf="user && !mostrarLeyenda$ | async">BIENVENIDO</span>
+                     <!-- <app-leyenda></app-leyenda> -->
+                      <span data-text="OPERATIVA EN VIVO" *ngIf="user && mostrarLeyenda$ | async">OPERATIVA EN VIVO</span>
                     <span data-text="REGISTRATE" *ngIf="!user">REGISTRATE</span>
                 </a>
             </div>

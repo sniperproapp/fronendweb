@@ -3,9 +3,11 @@ import { AuthService } from '../service/auth.service';
 import { Router } from '@angular/router';
 import { ValidarpagoComponent } from 'src/app/shared/validarpago/validarpago.component';
 import { ModalService } from '@developer-partners/ngx-modal-dialog';
-import { UpdatepassComponent } from '../../tienda-guest/updatepass/updatepass.component';
+ import { ActivatedRoute } from '@angular/router';
 import { RecuperarpassComponent } from 'src/app/shared/recuperarpass/recuperarpass.component';
 import { Toaster } from 'ngx-toast-notifications';
+import { ReferralService } from '../../home/service/referral.service';
+ 
 
 @Component({
   selector: 'app-login-and-register',
@@ -27,15 +29,17 @@ export class LoginAndRegisterComponent {
    
 
 
-  constructor(public toaster: Toaster,public authServices: AuthService,public router:Router,private readonly _modalService:ModalService){
+  constructor( public referralService: ReferralService, public toaster: Toaster,public authServices: AuthService,public router:Router,private readonly _modalService:ModalService){
 
   }
 
   ngOnInit(): void{
-    
+   
+     
      if(this.authServices.user){
          this.router.navigateByUrl('/')
      }
+     
   }
 
   login(){
@@ -46,7 +50,18 @@ export class LoginAndRegisterComponent {
     this.authServices.login(this.email_login,this.password_login).subscribe((resp:any)=>{
      
       if(resp.status==403||resp.status==404||resp.status==500){
-        console.log(resp)
+        //console.log(resp)
+        if(resp.error.message=="Comuníquese con Administración para ser Activado" )
+           {
+                if(confirm("Tienes la mensualidad vencida deseas pagar")) {
+               
+                         this.authServices.pago(this.email_login).subscribe((resp:any)=>{
+                          //console.log(resp);
+                           window.open(resp.message, '_blank');
+                           })
+              }
+           }
+            
         this.toaster.open({text: resp.error.message, caption: 'VALIDACION',type: 'warning'});
        
        return;
@@ -58,10 +73,12 @@ export class LoginAndRegisterComponent {
   }
 
   validarpago():void{
-    this._modalService.show<any>(  ValidarpagoComponent,{title:"pagar",size:1}).result().subscribe((resp:any)=>{})
+    
+    //this._modalService.show<any>(  ValidarpagoComponent,{title:"pagar",size:1}).result().subscribe((resp:any)=>{})
 }
 
 recuperarpass():void{
+  
   this._modalService.show<any>(  RecuperarpassComponent,{title:"Recuperar password",size:1}).result().subscribe((resp:any)=>{})
 }
   register(){
@@ -75,7 +92,8 @@ recuperarpass():void{
      email:this.email_register,
      password:this.password_register,
      name:this.name_register,
-     lastname:this.surname_register
+     lastname:this.surname_register,
+     codigo_refernecia:this.referralService.getReferralId()
 
 
     }

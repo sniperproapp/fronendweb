@@ -42,6 +42,7 @@ export class CartService {
 
   // SE VAN A DEFINIR LOS ENDPOINTS DEL BACKEND
   listCart(){
+    
     let headers = new HttpHeaders({"Authorization": this.authService.token});
     let URL = URL_SERVICIOS+"carrito";
     return this.http.get(URL,{headers: headers});

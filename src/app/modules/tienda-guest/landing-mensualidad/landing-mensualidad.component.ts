@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { TiendaGuestService } from '../service/tienda-guest.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CartService } from '../../home/service/cart.service';
 import { Toaster } from 'ngx-toast-notifications';
 
@@ -25,7 +25,7 @@ export class LandingMensualidadComponent {
   COURSE_CATEGORIES:any = []; 
   REVIEWS:any = [];
   nameuser:any='';
-  nameuserencontrado:any=null;
+ 
   requirements:any = [];
   who_is_it_for:any = [];
   cursostuden_have_course:boolean=false
@@ -36,13 +36,14 @@ export class LandingMensualidadComponent {
     public TiendaGuestService: TiendaGuestService,
     public activedRouter: ActivatedRoute,
     public cartService: CartService,
-    public toaster: Toaster,
+    public toaster: Toaster,public router:Router
   ) {
     
   }
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
+  
     this.activedRouter.params.subscribe((resp:any) => {
       this.SLUG = resp.slug;
     })
@@ -98,9 +99,14 @@ export class LandingMensualidadComponent {
   }
 
   addCart(){
-    
+    //console.log(this.user)
+     if(!this.user)
+     {
+      this.toaster.open({text: "Registrate para pagar ",caption: 'VALIDACIÓN',type: 'danger'});
+          this.router.navigateByUrl("/auth/login")
+     }
     let data = {
-      id_user:this.nameuserencontrado.id,
+      id_user:this.user.id,
       id_curso: this.COURSE_LANDING.id,
       type_discount: this.COURSE_LANDING.discount_g ? this.COURSE_LANDING.discount_g.type_discount : null,
       discount: this.COURSE_LANDING.discount_g ? this.COURSE_LANDING.discount_g.discount : null,
@@ -120,24 +126,11 @@ export class LandingMensualidadComponent {
         this.toaster.open({text: resp.message,caption: 'VALIDACIÓN',type: 'danger'});
       }else{
         this.cartService.addCart(resp);
-        this.toaster.open({text: 'verifica tu correo con el link de pago',caption: 'VALIDACIÓN',type: 'primary'});
+        this.toaster.open({text: 'GENERA EL LINK DE PAGO',caption: 'VALIDACIÓN',type: 'primary'});
+         this.router.navigateByUrl("/carrito-de-compra")
       }
     });
   }
 
-  buscaruser(){
-   
-     
-
-    this.TiendaGuestService.getuser(this.nameuser).subscribe((resp:any) => {
-    
-        this.nameuserencontrado=resp
-       if(resp.statusCode == 200){
-          this.toaster.open({text: "Usuario no Encontrado",caption: 'VALIDACIÓN',type: 'danger'});
-       }else{
-          
-          this.toaster.open({text: 'Usuario Encontrado',caption: 'VALIDACIÓN',type: 'primary'});
-        }
-      });
-  }
+  
 }

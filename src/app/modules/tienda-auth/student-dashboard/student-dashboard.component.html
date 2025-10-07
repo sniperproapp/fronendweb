@@ -59,6 +59,9 @@
                                                     Reseñas</span></a></li>
                                                 <!-- <li><a href="student-my-quiz-attempts.html"><i class="feather-help-circle"></i><span>My Quiz Attempts</span></a></li> -->
                                                 <li><a href="#" onclick="return false;" [ngClass]="{'active': nav_option == 5}" (click)="navOption(5)"><i class="feather-shopping-bag"></i><span>Historial de pedidos</span></a></li>
+                                                <li><a href="#" onclick="return false;" [ngClass]="{'active': nav_option == 7}" (click)="navOption(7)"><i class="feather-shopping-bag"></i><span>Referidos</span></a></li>
+                                                <li><a href="#" onclick="return false;" [ngClass]="{'active': nav_option == 8}" (click)="navOption(8)"><i class="feather-shopping-bag"></i><span>Ganacias Referidos</span></a></li>
+                                                <li *ngIf=" email=='monsalve2812@gmail.com' "><a href="#" onclick="return false;" [ngClass]="{'active': nav_option == 9}" (click)="navOption(9)"><i class="feather-shopping-bag"></i><span>CODIGO 2AF</span></a></li>
                                             </ul>
                                         </nav>
 
@@ -85,10 +88,40 @@
                     <div class="col-lg-9">
                         <div class="rbt-dashboard-content bg-color-white rbt-shadow-box mb--60" *ngIf="nav_option == 1">
                             <div class="content">
-                                <div class="section-title">
-                                    <h4 class="rbt-title-style-3">
-                                        Panel</h4>
+                                <h2>Control de Alerta Global</h2>
+
+                                        <button class="btn-primary" (click)="activarLeyenda()" *ngIf="rol>0">
+                                            ACTIVAR EN VIVO
+                                        </button>
+
+                                        <button class="btn-secondary" (click)="desactivarLeyenda()" *ngIf="rol>0">
+                                            DESACTIVAR EN VIVO
+                                        </button>
+                                
+                                   <div class="rbt-dashboard-table table-responsive mobile-table-750">
+                                    <table class="rbt-table table table-borderless">
+                                        <thead>
+                                     <tr>
+                                                <th>   <div class="section-title">
+                                                            <h4 class="rbt-title-style-3">
+                                                                Panel</h4>
+                                                        </div>
+                                              </th>
+                                                <th>  
+                                                       <div class="tutor-btn" *ngIf="estadomensualidad==1">
+                                                        <a class="rbt-btn btn-sm btn-border bg-violet-opacity radius-round-10"onclick="return false;" (click)="addCart()" href="#">PAGAR MENSUALIDAD</a>
+                                                    </div>
+                                                </th>
+                                                
+                                              
+                                                
+                                            </tr>
+                                  </thead>
+                                    </table>
                                 </div>
+
+
+
                                 <div class="row g-5">
 
                                     <!-- Start Single Card  -->
@@ -554,7 +587,8 @@
                                                 <th>Method Payment</th>
                                                 <th>Date</th>
                                                 <th>Total</th>
-                                                <th>Detail</th>
+                                                <th>status</th>
+                                                
                                             </tr>
                                         </thead>
 
@@ -565,28 +599,10 @@
                                                     <td>{{ sale.method_payment }}</td>
                                                     <td>{{ sale.created_at }}</td>
                                                     <td>{{ sale.total }} USD</td>
-                                                    <td>
-                                                        <button class="btn btn-sm btn-danger" (click)="showDetails(sale)"> + </button>
-                                                    </td>
-                                                </tr>
-                                                <ng-container *ngIf="sale.is_detail">
-                                                    <ng-container *ngFor="let sale_detail of sale.sales_details">
-                                                        <tr>
-                                                            <td></td>
-                                                            <td>
-                                                                <img [src]="sale_detail.course.imagen" style="width: 100px;object-fit: contain;" alt="">
-                                                            </td>
-                                                            <td>
-                                                                {{ sale_detail.course.title }}
-                                                            </td>
-                                                            <td>{{ sale_detail.total }} USD</td>
-                                                            <td>
-                                                                {{ sale_detail.course.categorie.title }}
-                                                            </td>
-                                                        </tr>
-                                                    </ng-container>
+                                                    <td>{{ sale.status }}</td>
                                                     
-                                                </ng-container>
+                                                </tr>
+                                                
                                                 
                                             </ng-container>
                                             
@@ -672,6 +688,12 @@
                                                 <div class="rbt-form-group">
                                                     <label for="phonenumber">Phone Number</label>
                                                     <input id="phonenumber" type="tel" name="phone" [(ngModel)]="phone">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+                                                <div class="rbt-form-group">
+                                                    <label for="wallet">wallet</label>
+                                                    <input id="wallet" type="sting" name="wallet" [(ngModel)]="wallet">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-6 col-12">
@@ -780,6 +802,190 @@
                                 </div>
                             </div>
                         </div>
+                         <div class="rbt-dashboard-content bg-color-white rbt-shadow-box" *ngIf="nav_option == 7">
+                            <div class="content">
+                               
+                                   <div class="section-title">
+                                    <h4 class="rbt-title-style-3">NIVEL 1</h4>
+                                </div>
+
+                                <div class="rbt-dashboard-table table-responsive mobile-table-750">
+                                    <table class="rbt-table table table-borderless">
+                                        <thead>
+                                            <tr>
+                                                <th>imagen</th>
+                                                <th>nombre</th>
+                                                
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <ng-container *ngFor="let referral of referrals">
+                                                <tr>
+                                                    <td *ngIf="referral.level==2"><img [src]="referral.imagen" style="width: 70px;object-fit: contain;"  alt="Card image"></td>
+                                                    <td *ngIf="referral.level==2"> {{ referral.name }}</td>
+                                                    
+                                                </tr>
+                                                
+                                                
+                                            </ng-container>
+                                            
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                                    
+                                
+                                <div class="content">
+                                <div class="section-title">
+                                    <h4 class="rbt-title-style-3">NIVEL 2</h4>
+                                </div>
+
+
+                               <div class="rbt-dashboard-table table-responsive mobile-table-750">
+                                    <table class="rbt-table table table-borderless">
+                                        <thead>
+                                            <tr>
+                                                <th>imagen</th>
+                                                <th>nombre</th>
+                                                
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <ng-container *ngFor="let referral of referrals">
+                                                <tr>
+                                                    <td *ngIf="referral.level==3"><img [src]="referral.imagen" style="width: 70px;object-fit: contain;"  alt="Card image"></td>
+                                                    <td *ngIf="referral.level==3"> {{ referral.name }}</td>
+                                                    
+                                                </tr>
+                                                
+                                                
+                                            </ng-container>
+                                            
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+    
+
+                              
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+                <div class="rbt-dashboard-content bg-color-white rbt-shadow-box" *ngIf="nav_option == 8">
+                            <div class="content">
+                               
+                                   <div class="section-title">
+                                     <div class="rbt-dashboard-table table-responsive mobile-table-750">
+                                    <table class="rbt-table table table-borderless">
+                                        <thead>
+                                     <tr>
+                                                <th>   <h4 class="rbt-title-style-3">Ganacias por referidos</h4></th>
+                                                <th>Saldo</th>
+                                                <th>{{saldototal }} USDT</th>
+                                              
+                                                
+                                            </tr>
+                                  </thead>
+                                    </table>
+                                </div>
+                                <div class="rbt-tutor-information-right" *ngIf="saldototal>0">
+                                                    <div class="tutor-btn">
+                                                        <a class="rbt-btn btn-sm btn-border bg-violet-opacity radius-round-10"onclick="return false;" (click)="createpay(profile_student.id)" href="#">Retirar</a>
+                                                    </div>
+                                                </div>
+
+                                <div class="rbt-dashboard-table table-responsive mobile-table-750">
+                                    <table class="rbt-table table table-borderless">
+                                        <thead>
+                                            <tr>
+                                                <th>imagen</th>
+                                                <th>nombre</th>
+                                                <th>monto</th>
+                                                <th>status</th>
+                                                <th>estado</th>
+                                                
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <ng-container *ngFor="let comisiones of comisiones">
+                                                <tr>
+                                                    <td ><img [src]="comisiones.imagen" style="width: 70px;object-fit: contain;"  alt="Card image"></td>
+                                                    <td > {{ comisiones.referredUser.name }}</td>
+                                                    <td > {{ comisiones.monto }}usdt</td>
+                                                    <td > {{ comisiones.status }}</td>
+                                                    <td *ngIf="comisiones.estado==0">NO PAGADO</td>
+                                                    <td *ngIf="comisiones.estado==1"> PAGADO</td>
+                                                    
+                                                </tr>
+                                              
+                                                
+                                                
+                                            </ng-container>
+                                            
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                                    
+                                
+                                 
+
+
+
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+
+
+
+
+                  <div class="rbt-dashboard-content bg-color-white rbt-shadow-box" *ngIf="nav_option == 9 && email=='monsalve2812@gmail.com' "  >
+                           <div class="content">
+    <div class="section-title">
+        <div class="rbt-dashboard-table table-responsive mobile-table-750">
+            <table class="rbt-table table table-borderless">
+                <thead>
+                    <tr>
+                        <th>
+                            <button class="boton-azul" (click)="codigo2af()">
+                                GENERAR CÓDIGO
+                            </button>
+                            
+                        </th>
+
+                        <th>  {{ codigo2afdata }}</th>
+
+                        <th >
+                           
+                           
+                                <div 
+                                    id="progress-bar-id" 
+                                    class="progress-bar" 
+                                    [style.width]="progressWidth">
+                                    
+                                    {{ progressText }}
+                                </div>
+                            
+                        </th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+
+
                     </div>
                 </div>
             </div>

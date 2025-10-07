@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Toaster } from 'ngx-toast-notifications';
 import { HomeService } from './service/home.service';
 import { CartService } from './service/cart.service';
+import { ReferralService } from './service/referral.service';
+import { ActivatedRoute } from '@angular/router';
 declare function HOMEINIT([]):any;
 declare function countdownT(): any
 declare var $:any;
@@ -23,15 +25,22 @@ export class HomeComponent {
   constructor(private toaster: Toaster,
     public homeservice:HomeService,
     public cartService: CartService,
+    public referralService: ReferralService,private route: ActivatedRoute,
   ){
-    
+    this.user = this.cartService.authService.user;
   }
   showToast() {
     this.toaster.open('Hello world!');
   }
   ngOnInit(): void{
-
-    this.user = this.cartService.authService.user;
+    //console.log('this.user')
+    //console.log(this.user)
+     this.route.queryParams.subscribe(params => {
+      const referralId = params['ref'];
+      this.referralService.saveReferralId(referralId);
+    
+    });
+    
     this.homeservice.homecursoscategoridescuetoflash().subscribe((resp:any)=>{
       
 
@@ -51,7 +60,7 @@ export class HomeComponent {
 
 
     this.homeservice.homecursoscategoridescuetobaner().subscribe((resp:any)=>{
-
+   //  console.log(resp)
       this.CURSOSBANERS=resp.courses;
       this.DESCUENTOBANERS=resp;
       

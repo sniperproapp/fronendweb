@@ -51,13 +51,16 @@ valor=0;
     //Add 'implements OnInit' to the class.
     this.activedRouter.params.subscribe((resp:any) => {
       this.slug_course = resp.slug;
+     
     })
     this.tiendaAuth.courseLeason(this.slug_course).subscribe((resp:any) => {
-      
-
+           
+   // console.log(resp)
       if(resp.statusCode == 200){
-        this.toaster.open({text: resp.message_text, caption: 'VALIDACION',type: 'warning'});
-        this.router.navigateByUrl("/");
+            alert( resp.message)
+            
+            this.toaster.open({text: resp.message, caption: 'VALIDACION',type: 'warning'});
+              this.router.navigateByUrl("/"); 
       }else{
         this.COURSE_SELECTED = resp;
       // console.log(this.COURSE_SELECTED)

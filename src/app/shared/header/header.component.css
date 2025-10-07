@@ -1,0 +1,20 @@
+.contenedor {
+    width: 100%; /* Ancho del área donde se mueve el texto */
+    overflow: hidden; /* Oculta el texto que sale del área */
+    white-space: nowrap; /* Evita que el texto salte de línea */
+}
+
+.texto-movil {
+    display: inline-block; /* Permite aplicar transformaciones al texto */
+    animation: moverTexto 15s linear infinite; /* Nombre, duración, función y repetición */
+    transform: translateX(100%); /* Inicia fuera de la pantalla a la derecha */
+}
+
+@keyframes moverTexto {
+    from {
+        transform: translateX(100%); /* Comienza a la derecha */
+    }
+    to {
+        transform: translateX(-100%); /* Termina a la izquierda */
+    }
+}   

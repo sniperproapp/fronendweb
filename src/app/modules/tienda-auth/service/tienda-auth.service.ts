@@ -35,6 +35,16 @@ export class TiendaAuthService {
     let URL = URL_SERVICIOS+"users/"+id;
     return this.http.put(URL,formData,{headers: headers});
   }
+
+
+
+   createpay(id:number){
+    let headers = new HttpHeaders({'Authorization'  : this.authService.token});
+    let URL = URL_SERVICIOS+"valid_pay/create/"+id;
+    return this.http.post(URL, {headers: headers});
+  }
+
+
   updateStudentpass(formData:any){
     let headers = new HttpHeaders({'Authorization'  : this.authService.token});
     let URL = URL_SERVICIOS+"auth/updatepass"
@@ -55,6 +65,13 @@ export class TiendaAuthService {
   courseLeason(slug:string){
     let headers = new HttpHeaders({'Authorization': this.authService.token});
     let URL = URL_SERVICIOS+"courses/vercurso/"+slug;
+    return this.http.get(URL,{headers: headers});
+  }
+
+
+   codigo2af(){
+    let headers = new HttpHeaders({'Authorization': this.authService.token});
+    let URL = URL_SERVICIOS+"pagos/2af/";
     return this.http.get(URL,{headers: headers});
   }
 

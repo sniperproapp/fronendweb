@@ -7,14 +7,15 @@ import { FormsModule } from '@angular/forms';
 import { ValidarpagoComponent } from './validarpago/validarpago.component';
 import { RecuperarpassComponent } from './recuperarpass/recuperarpass.component';
 import { BiografiaComponent } from './biografia/biografia.component';
-//import { LeyendaComponent } from './leyenda/leyenda.component';
+import { LeyendaComponent } from './leyenda/leyenda.component';
+ 
 
 
 
 @NgModule({
   declarations: [
     HeaderComponent,
-    //LeyendaComponent,
+     LeyendaComponent,
     FooterComponent,
     ValidarpagoComponent,
     BiografiaComponent,

@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/modules/auth/service/auth.service';
 import { AlertaService } from 'src/app/modules/home/service/alerta.service';
 import { CartService } from 'src/app/modules/home/service/cart.service';
 import { TiendaGuestService } from 'src/app/modules/tienda-guest/service/tienda-guest.service';
+
 declare function cartSidenav():any;
 declare function HOMEINIT([]):any;
  
@@ -20,7 +21,7 @@ export class HeaderComponent {
   source:any;
   listCourses:any = [];
   search:any= null;
-  mostrarLeyenda$: Observable<boolean>;
+  
 
  
   fechaFin = new Date();   // Fecha de fin (o final)
@@ -34,8 +35,7 @@ constructor(private alertaService: AlertaService,public authservices:AuthService
   public tiendaGuestService: TiendaGuestService,
 ){
 this.user=authservices.user;
- this.mostrarLeyenda$ = this.alertaService.mostrarAlerta$;
- console.log(this.mostrarLeyenda$)
+  
 }
 
 ngOnInit(): void {

@@ -215,7 +215,10 @@ codigo2af(){
 
     activarLeyenda() {
     // Llama al servicio para propagar el estado 'true' a toda la aplicación
-    this.alertaService.activarLeyendaGlobal();
+    
+      this.alertaService.activarLeyendaGlobal().subscribe((resp:any) => {
+       // console.log(resp)
+      })
   }
 
   desactivarLeyenda() {

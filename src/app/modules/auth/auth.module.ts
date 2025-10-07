@@ -4,25 +4,19 @@ import { CommonModule } from '@angular/common';
 import { AuthRoutingModule } from './auth-routing.module';
 import { AuthComponent } from './auth.component';
 import { LoginAndRegisterComponent } from './login-and-register/login-and-register.component';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 
-@NgModule({
-  declarations: [
-    AuthComponent,
-    LoginAndRegisterComponent
-  ],
-  imports: [
-    CommonModule,
-    AuthRoutingModule,
-    FormsModule,
-ReactiveFormsModule,
-HttpClientModule,
-RouterModule,
-SharedModule
-  ]
-})
+@NgModule({ declarations: [
+        AuthComponent,
+        LoginAndRegisterComponent
+    ], imports: [CommonModule,
+        AuthRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
+        RouterModule,
+        SharedModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class AuthModule { }

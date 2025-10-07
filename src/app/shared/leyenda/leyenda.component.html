@@ -1,4 +1,10 @@
-<div *ngIf="visible" class="leyenda-banner">
-  <p>📢 **{{ mensaje }}**</p>
+ 
+
+<div *ngIf="visible " class="leyenda-banner">
+  
+  <div class="scrolling-content">
+    <p>📢 {{mensaje}} </p>
+  </div>
+  
   <button (click)="cerrar()" class="close-btn" aria-label="Cerrar">&times;</button>
 </div>

@@ -420,13 +420,14 @@
   
                     <div class="rbt-btn-wrapper d-none d-xl-block">
                         <a class="rbt-btn rbt-marquee-btn marquee-auto btn-border-gradient radius-round btn-sm hover-transform-none" href="/auth/login">
-                            <span data-text="BIENVENIDO" *ngIf="user && !mostrarLeyenda$ | async">BIENVENIDO</span>
-                            <span data-text="OPERATIVA EN VIVO" *ngIf="user && mostrarLeyenda$ | async">OPERATIVA EN VIVO</span>
+                            <!-- <span data-text="BIENVENIDO" *ngIf="user   ">BIENVENIDO</span> -->
+                            
+                            <!-- <span data-text="OPERATIVA EN VIVO" *ngIf="user  ">OPERATIVA EN VIVO</span> -->
                             
                             
 
-                            <span data-text="REGISTRATE" *ngIf="!user ">REGISTRATE</span>
-                            <span data-text="REGISTRATE" *ngIf="!user ">REGISTRATE</span>
+                            <!-- <span data-text="REGISTRATE" *ngIf="!user ">REGISTRATE</span>
+                            <span data-text="REGISTRATE" *ngIf="!user ">REGISTRATE</span> -->
                             
                         </a>
                     </div>
@@ -611,9 +612,11 @@
             </div>
         </div>
     </div>
+    
     <!-- End Side Vav -->
     <a class="rbt-close_side_menu" href="javascript:void(0);"></a>
   </header>
+   <app-leyenda></app-leyenda>
   <!-- Mobile Menu Section -->
   <div class="popup-mobile-menu">
     <div class="inner-wrapper">
@@ -716,14 +719,15 @@
                 <!-- </li> -->
             </ul>
         </nav>
-  
+   
         <div class="mobile-menu-bottom">
             <div class="rbt-btn-wrapper mb--20">
                 <a class="rbt-btn btn-border-gradient radius-round btn-sm hover-transform-none w-100 justify-content-center text-center" href="/auth/login">
-                     <span data-text="BIENVENIDO" *ngIf="user && !mostrarLeyenda$ | async">BIENVENIDO</span>
-                     <!-- <app-leyenda></app-leyenda> -->
-                      <span data-text="OPERATIVA EN VIVO" *ngIf="user && mostrarLeyenda$ | async">OPERATIVA EN VIVO</span>
-                    <span data-text="REGISTRATE" *ngIf="!user">REGISTRATE</span>
+                     <!-- <span data-text="BIENVENIDO" *ngIf="user  ">BIENVENIDO</span> -->
+
+                       
+                      <!-- <span data-text="OPERATIVA EN VIVO" *ngIf="user   ">OPERATIVA EN VIVO</span>
+                    <span data-text="REGISTRATE" *ngIf="!user">REGISTRATE</span> -->
                 </a>
             </div>
   

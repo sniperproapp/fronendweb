@@ -1,0 +1,41 @@
+.leyenda-banner {
+    /* POSICIONAMIENTO BASE */
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    
+    /* ESTILOS VISUALES */
+    background-color: #333;
+    color: white;
+    padding: 10px 15px;
+    
+    /* PROPIEDADES CLAVE PARA CENTRADO */
+    display: flex; 
+    align-items: center; /* Alineación vertical (centra el texto con el botón) */
+    
+    /* Usamos space-between para separar el contenido y el botón */
+    justify-content: space-between; 
+}
+
+.leyenda-banner p {
+    /* Hace que el texto se centre dentro del espacio disponible */
+    text-align: center; 
+    
+    /* Permite que el párrafo crezca para centrarse */
+    flex-grow: 1; 
+    margin: 0; 
+}
+
+/* Opcional: Estilo del botón de cierre */
+.close-btn {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    line-height: 1; 
+    /* Asegura que el botón no interfiera con el centrado del texto */
+    flex-shrink: 0; 
+}

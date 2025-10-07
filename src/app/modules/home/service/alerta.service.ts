@@ -26,8 +26,8 @@ export class AlertaService {
   // Método llamado por el componente Administrador (el botón)
   activarLeyendaGlobal() {
   //  let headers = new HttpHeaders({'Authorization': this.authService.token});
-      let URL = URL_SERVICIOS+"zomm/mostrar-leyenda/";
-      return this.http.get(URL);
+      let URL = URL_SERVICIOS+"zoom/mostrar-leyenda";
+      return this.http.post(URL,{});
   }
 
 

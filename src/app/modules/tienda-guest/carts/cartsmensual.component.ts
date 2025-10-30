@@ -12,9 +12,10 @@ import { TiendaGuestService } from '../service/tienda-guest.service';
 declare var paypal:any;
 
 @Component({
-  selector: 'app-carts-mensual',
-  templateUrl: './cartsmensual.component.html',
-  styleUrls: ['./cartsmensual.component.css']
+    selector: 'app-carts-mensual',
+    templateUrl: './cartsmensual.component.html',
+    styleUrls: ['./cartsmensual.component.css'],
+    standalone: false
 })
 export class CartsMensualComponent {
 

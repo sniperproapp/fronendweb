@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-tienda-guest',
-  templateUrl: './tienda-guest.component.html',
-  styleUrls: ['./tienda-guest.component.css']
+    selector: 'app-tienda-guest',
+    templateUrl: './tienda-guest.component.html',
+    styleUrls: ['./tienda-guest.component.css'],
+    standalone: false
 })
 export class TiendaGuestComponent {
 

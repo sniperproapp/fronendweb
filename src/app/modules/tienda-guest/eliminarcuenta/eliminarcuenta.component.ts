@@ -3,9 +3,10 @@ import { ToastrService  } from 'ngx-toastr';
 import { TiendaGuestService } from 'src/app/modules/tienda-guest/service/tienda-guest.service';
 
 @Component({
-  selector: 'app-eliminarcuenta',
-  templateUrl: './eliminarcuenta.component.html',
-  styleUrls: ['./eliminarcuenta.component.css']
+    selector: 'app-eliminarcuenta',
+    templateUrl: './eliminarcuenta.component.html',
+    styleUrls: ['./eliminarcuenta.component.css'],
+    standalone: false
 })
 export class EliminarcuentaComponent {
   email:string='';

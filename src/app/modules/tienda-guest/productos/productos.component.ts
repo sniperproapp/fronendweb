@@ -8,9 +8,10 @@ import { ToastrService } from 'ngx-toastr';
 import { CartService } from '../../home/service/cart.service';
 
 @Component({
-  selector: 'app-productos',
-  templateUrl: './productos.component.html',
-  styleUrls: ['./productos.component.css']
+    selector: 'app-productos',
+    templateUrl: './productos.component.html',
+    styleUrls: ['./productos.component.css'],
+    standalone: false
 })
 
 export class productosComponent {

@@ -3,9 +3,10 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-leyenda',
-  templateUrl: './leyenda.component.html',
-  styleUrls: ['./leyenda.component.css']
+    selector: 'app-leyenda',
+    templateUrl: './leyenda.component.html',
+    styleUrls: ['./leyenda.component.css'],
+    standalone: false
 })
 export class LeyendaComponent implements OnInit, OnDestroy {
   visible = false;

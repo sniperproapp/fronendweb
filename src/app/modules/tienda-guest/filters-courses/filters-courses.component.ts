@@ -7,9 +7,10 @@ import { ActivatedRoute } from '@angular/router';
 
 declare var $:any;
 @Component({
-  selector: 'app-filters-courses',
-  templateUrl: './filters-courses.component.html',
-  styleUrls: ['./filters-courses.component.css']
+    selector: 'app-filters-courses',
+    templateUrl: './filters-courses.component.html',
+    styleUrls: ['./filters-courses.component.css'],
+    standalone: false
 })
 export class FiltersCoursesComponent {
 

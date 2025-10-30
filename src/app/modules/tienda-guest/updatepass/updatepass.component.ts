@@ -4,9 +4,10 @@ import { ActivatedRoute } from '@angular/router';
 import { ToastrService  } from 'ngx-toastr';
 
 @Component({
-  selector: 'app-updatepass',
-  templateUrl: './updatepass.component.html',
-  styleUrls: ['./updatepass.component.css']
+    selector: 'app-updatepass',
+    templateUrl: './updatepass.component.html',
+    styleUrls: ['./updatepass.component.css'],
+    standalone: false
 })
 export class UpdatepassComponent {
   password_register:string=''; 

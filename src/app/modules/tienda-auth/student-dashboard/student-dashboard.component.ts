@@ -7,9 +7,10 @@ import { AlertaService } from '../../home/service/alerta.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'app-student-dashboard',
-  templateUrl: './student-dashboard.component.html',
-  styleUrls: ['./student-dashboard.component.css']
+    selector: 'app-student-dashboard',
+    templateUrl: './student-dashboard.component.html',
+    styleUrls: ['./student-dashboard.component.css'],
+    standalone: false
 })
 export class StudentDashboardComponent {
 

@@ -11,9 +11,10 @@ import { map, Observable } from 'rxjs';
  
 
 @Component({
-  selector: 'app-login-and-register',
-  templateUrl: './login-and-register.component.html',
-  styleUrls: ['./login-and-register.component.css']
+    selector: 'app-login-and-register',
+    templateUrl: './login-and-register.component.html',
+    styleUrls: ['./login-and-register.component.css'],
+    standalone: false
 })
 export class LoginAndRegisterComponent {
 

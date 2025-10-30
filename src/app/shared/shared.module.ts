@@ -25,6 +25,7 @@ import { LeyendaComponent } from './leyenda/leyenda.component';
     RouterModule,
     CommonModule,
     FormsModule
+   
   ],
   exports:[
     HeaderComponent,

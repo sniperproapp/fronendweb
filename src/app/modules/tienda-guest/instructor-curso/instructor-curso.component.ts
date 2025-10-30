@@ -1,19 +1,26 @@
 import { Component } from '@angular/core';
 import { TiendaGuestService } from '../service/tienda-guest.service';
-import { ModalService } from '@developer-partners/ngx-modal-dialog';
-import { ValidarpagoComponent } from 'src/app/shared/validarpago/validarpago.component';
-import { BiografiaComponent } from 'src/app/shared/biografia/biografia.component';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+ 
 
 @Component({
+  standalone:true,
   selector: 'app-instructor-curso',
   templateUrl: './instructor-curso.component.html',
-  styleUrls: ['./instructor-curso.component.css']
+  styleUrls: ['./instructor-curso.component.css'],
+  imports: [
+    CommonModule, // ¡AÑADIDO! Contiene *ngIf, *ngFor, ngClass, ngStyle, etc.
+    FormsModule, 
+    RouterModule, // ¡AÑADIDO! Contiene ngModel
+  ],
 })
 
 export class InstructoCursoComponent {
   INSTRUCTORES:any = [];
 constructor(
-    public tiendaGuestService: TiendaGuestService,private readonly _modalService:ModalService
+    public tiendaGuestService: TiendaGuestService 
    
    
     

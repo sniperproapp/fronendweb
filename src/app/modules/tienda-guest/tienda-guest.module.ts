@@ -32,7 +32,7 @@ import { productosComponent } from './productos/productos.component';
         equipoComponent,
         productosComponent,
 
-        InstructoCursoComponent,
+       
         QuienessomosComponent,
         CartsMensualComponent,
         LandingMensualidadComponent,
@@ -44,5 +44,5 @@ import { productosComponent } from './productos/productos.component';
         SharedModule,
         FormsModule,
         ReactiveFormsModule,
-        RouterModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
+        RouterModule, InstructoCursoComponent,], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class TiendaGuestModule { }

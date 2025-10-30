@@ -10,23 +10,26 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { StudentDashboardComponent } from './student-dashboard/student-dashboard.component';
 import { CourseLeasonComponent } from './course-leason/course-leason.component';
-import { ModalModule } from '@developer-partners/ngx-modal-dialog';
+ 
 import { BinancepayComponent } from './binancepay/binancepay.component';
-import { YouTubePlayerModule } from '@angular/youtube-player';
+//import { YouTubePlayerModule } from '@angular/youtube-player';
 
 
 @NgModule({ declarations: [
-        CartsComponent,
+       
         TiendaAuthComponent,
         StudentDashboardComponent,
         CourseLeasonComponent,
         BinancepayComponent
-    ], imports: [CommonModule,
+    ], imports: [
+        CommonModule,
         TiendaAuthRoutingModule,
         SharedModule,
-        YouTubePlayerModule,
-        FormsModule,
+       // YouTubePlayerModule,
+        FormsModule, CartsComponent,
+       
+   
         ReactiveFormsModule,
         RouterModule,
-        ModalModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
+         ], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class TiendaAuthModule { }

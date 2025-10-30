@@ -13,9 +13,10 @@ declare function cartSidenav():any;
 declare function magnigyPopup([]):any;
 declare function showMoreBtn([]):any;
 @Component({
-  selector: 'app-landing-mensualidad',
-  templateUrl: './landing-mensualidad.component.html',
-  styleUrls: ['./landing-mensualidad.component.css']
+    selector: 'app-landing-mensualidad',
+    templateUrl: './landing-mensualidad.component.html',
+    styleUrls: ['./landing-mensualidad.component.css'],
+    standalone: false
 })
 export class LandingMensualidadComponent {
 

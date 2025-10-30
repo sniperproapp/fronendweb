@@ -3,7 +3,7 @@ import { TiendaAuthService } from '../service/tienda-auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService  } from 'ngx-toastr';
 import { DomSanitizer } from '@angular/platform-browser';
-import { YouTubePlayer } from '@angular/youtube-player';
+//import { YouTubePlayer } from '@angular/youtube-player';
 import { AuthService } from '../../auth/service/auth.service';
 import { CartService } from '../../home/service/cart.service';
  
@@ -16,12 +16,10 @@ declare var $:any;
 declare function magnigyPopup([]):any;
 declare function showMoreBtn([]):any;
 @Component({
-  
- 
-  selector: 'app-course-leason',
-  templateUrl: './course-leason.component.html',
-  styleUrls: ['./course-leason.component.css'],
-  
+    selector: 'app-course-leason',
+    templateUrl: './course-leason.component.html',
+    styleUrls: ['./course-leason.component.css'],
+    standalone: false
 })
 export class CourseLeasonComponent {
 

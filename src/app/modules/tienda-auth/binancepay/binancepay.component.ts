@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
-  selector: 'app-binancepay',
-  templateUrl: './binancepay.component.html',
-  styleUrls: ['./binancepay.component.css']
+    selector: 'app-binancepay',
+    templateUrl: './binancepay.component.html',
+    styleUrls: ['./binancepay.component.css'],
+    standalone: false
 })
 export class BinancepayComponent {
   constructor(

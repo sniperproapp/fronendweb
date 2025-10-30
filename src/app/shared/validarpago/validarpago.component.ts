@@ -3,9 +3,10 @@ import { Toast, ToastrService } from 'ngx-toastr';
 import { TiendaGuestService } from 'src/app/modules/tienda-guest/service/tienda-guest.service';
 
 @Component({
-  selector: 'app-validarpago',
-  templateUrl: './validarpago.component.html',
-  styleUrls: ['./validarpago.component.css']
+    selector: 'app-validarpago',
+    templateUrl: './validarpago.component.html',
+    styleUrls: ['./validarpago.component.css'],
+    standalone: false
 })
 export class ValidarpagoComponent {
   orden:string='';

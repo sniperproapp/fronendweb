@@ -5,9 +5,10 @@ import { ValidarpagoComponent } from 'src/app/shared/validarpago/validarpago.com
 import { BiografiaComponent } from 'src/app/shared/biografia/biografia.component';
 
 @Component({
-  selector: 'app-equipo',
-  templateUrl: './equipo.component.html',
-  styleUrls: ['./equipo.component.css']
+    selector: 'app-equipo',
+    templateUrl: './equipo.component.html',
+    styleUrls: ['./equipo.component.css'],
+    standalone: false
 })
 
 export class equipoComponent {

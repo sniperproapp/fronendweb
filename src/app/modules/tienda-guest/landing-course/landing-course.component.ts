@@ -13,9 +13,10 @@ declare function cartSidenav():any;
 declare function magnigyPopup([]):any;
 declare function showMoreBtn([]):any;
 @Component({
-  selector: 'app-landing-course',
-  templateUrl: './landing-course.component.html',
-  styleUrls: ['./landing-course.component.css']
+    selector: 'app-landing-course',
+    templateUrl: './landing-course.component.html',
+    styleUrls: ['./landing-course.component.css'],
+    standalone: false
 })
 export class LandingCourseComponent {
 

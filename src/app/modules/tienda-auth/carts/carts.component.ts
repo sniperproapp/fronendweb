@@ -2,18 +2,28 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { CartService } from '../../home/service/cart.service';
 import { ToastrService  } from 'ngx-toastr';
 import { TiendaAuthService } from '../service/tienda-auth.service';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+ 
+ 
+ 
+ 
 
- 
-import { ModalService } from '@developer-partners/ngx-modal-dialog';
- 
+
 
 
 declare var paypal:any;
 
 @Component({
+  standalone:true,
   selector: 'app-carts',
   templateUrl: './carts.component.html',
-  styleUrls: ['./carts.component.css']
+  styleUrls: ['./carts.component.css'],
+  imports: [
+    CommonModule, // ¡AÑADIDO! Contiene *ngIf, *ngFor, ngClass, ngStyle, etc.
+ FormsModule
+  ],
+
 })
 export class CartsComponent {
 
@@ -27,7 +37,7 @@ export class CartsComponent {
     public cartService: CartService,
     public tiendaAuthService: TiendaAuthService,
     public ToastrService : ToastrService ,
-    private readonly _modalService:ModalService
+    
   ) {
     
   }

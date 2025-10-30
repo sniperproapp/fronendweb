@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../service/auth.service';
-import { Router } from '@angular/router';
+import { ParamMap, Router } from '@angular/router';
 import { ValidarpagoComponent } from 'src/app/shared/validarpago/validarpago.component';
 import { ModalService } from '@developer-partners/ngx-modal-dialog';
  import { ActivatedRoute } from '@angular/router';
 import { RecuperarpassComponent } from 'src/app/shared/recuperarpass/recuperarpass.component';
 import { ToastrService  } from 'ngx-toastr';
 import { ReferralService } from '../../home/service/referral.service';
+import { map, Observable } from 'rxjs';
  
 
 @Component({
@@ -20,22 +21,38 @@ export class LoginAndRegisterComponent {
   email_login:string='';
   password_login:string='';
 
-
+ ref:string=''
+ 
   email_register:string='';
   password_register:string=''; 
   password_confir_register:string='';
   name_register:string='';
   surname_register:string='';
    
+idreferente$!: Observable<string | null>;
 
-
-  constructor( public referralService: ReferralService, public ToastrService : ToastrService ,public authServices: AuthService,public router:Router,private readonly _modalService:ModalService){
+  constructor( private route: ActivatedRoute,public referralService: ReferralService, public ToastrService : ToastrService ,public authServices: AuthService,public router:Router,private readonly _modalService:ModalService){
 
   }
 
   ngOnInit(): void{
    
      
+
+
+      this.idreferente$ = this.route.queryParamMap.pipe(
+      // Mapea el mapa de parámetros para obtener el valor de 'idreferente'
+      map((params: ParamMap) => params.get('ref'))
+    );
+        
+    this.idreferente$.subscribe(codigo => {
+      if (codigo) {
+        this.ref=codigo
+       // console.log('idreferente de URL extraído:', idreferente);
+        // Aquí llamas a tu servicio para validar el idreferente y agregar al grupo
+      }
+    });
+    
      if(this.authServices.user){
          this.router.navigateByUrl('/')
      }
@@ -44,7 +61,7 @@ export class LoginAndRegisterComponent {
 
   login(){
     if(!this.email_login || !this.password_login){
-      this.ToastrService .success(  "faltan datos del usuario",  'warning');
+      this.ToastrService .error(  "faltan datos del usuario",  'warning');
       return;
     }
     this.authServices.login(this.email_login,this.password_login).subscribe((resp:any)=>{
@@ -62,7 +79,7 @@ export class LoginAndRegisterComponent {
               }
            }
             
-        this.ToastrService .success( resp.error.message,  'warning');
+        this.ToastrService .error( resp.error.message,  'warning');
        
        return;
         }
@@ -84,7 +101,7 @@ recuperarpass():void{
   register(){
     if(!this.email_register ||!this.password_register ||!this.name_register ||!this.surname_register  || !this.password_confir_register ){
  
-      this.ToastrService .success( "faltan datos del usuario",  'warning');
+      this.ToastrService .error( "faltan datos del usuario",  'warning');
       
       return;
     }
@@ -93,7 +110,7 @@ recuperarpass():void{
      password:this.password_register,
      name:this.name_register,
      lastname:this.surname_register,
-     codigo_refernecia:this.referralService.getReferralId()
+     codigo_refernecia: this.ref
 
 
     }
@@ -101,12 +118,12 @@ recuperarpass():void{
 
     this.authServices.regisster(data).subscribe((resp:any)=>{
      
-
-      if(resp.status==403||resp.status==500){
-        this.ToastrService .success( resp.error.message,  'warning');
+        console.log(resp)
+      if(resp.status==403||resp.status==500 ||resp.status==400 ){
+        this.ToastrService .error( resp.error.message,  'warning');
       
       }else{
-        this.ToastrService .success("registro exitoso",  'primary');
+        this.ToastrService .success("registro exitoso",  'Exito');
 
    
         this.clean()

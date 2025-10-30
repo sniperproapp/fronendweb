@@ -19,6 +19,8 @@ import { UpdatepassComponent } from './updatepass/updatepass.component';
 import { EliminarcuentaComponent } from './eliminarcuenta/eliminarcuenta.component';
 import { PoliticasComponent } from './politicas/politicas.component';
 import { InstructoCursoComponent } from './instructor-curso/instructor-curso.component';
+import { equipoComponent } from './equipo/equipo.component';
+import { productosComponent } from './productos/productos.component';
 
 
 @NgModule({ declarations: [
@@ -27,6 +29,9 @@ import { InstructoCursoComponent } from './instructor-curso/instructor-curso.com
         FiltersCoursesComponent,
         ContactosComponent,
         InstructorComponent,
+        equipoComponent,
+        productosComponent,
+
         InstructoCursoComponent,
         QuienessomosComponent,
         CartsMensualComponent,

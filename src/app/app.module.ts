@@ -27,7 +27,9 @@ import { ToastrModule } from 'ngx-toastr';
             preventDuplicates: true,
         }),
         AppRoutingModule,
-        BrowserAnimationsModule], providers: [
+        BrowserAnimationsModule
+      
+    ], providers: [
         {
             // Provee tu interceptor a Angular
             provide: HTTP_INTERCEPTORS,

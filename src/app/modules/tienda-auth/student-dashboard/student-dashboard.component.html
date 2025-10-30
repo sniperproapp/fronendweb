@@ -61,7 +61,9 @@
                                                 <li><a href="#" onclick="return false;" [ngClass]="{'active': nav_option == 5}" (click)="navOption(5)"><i class="feather-shopping-bag"></i><span>Historial de pedidos</span></a></li>
                                                 <li><a href="#" onclick="return false;" [ngClass]="{'active': nav_option == 7}" (click)="navOption(7)"><i class="feather-shopping-bag"></i><span>Referidos</span></a></li>
                                                 <li><a href="#" onclick="return false;" [ngClass]="{'active': nav_option == 8}" (click)="navOption(8)"><i class="feather-shopping-bag"></i><span>Ganacias Referidos</span></a></li>
-                                                <li *ngIf=" email=='monsalve2812@gmail.com' "><a href="#" onclick="return false;" [ngClass]="{'active': nav_option == 9}" (click)="navOption(9)"><i class="feather-shopping-bag"></i><span>CODIGO 2AF</span></a></li>
+                                                <li *ngIf=" email=='monsalve2812@gmail.com' || email=='danitzabuendiag@gmail.com' || email=='gercelluciano@gmail.com'  "><a href="#" onclick="return false;" [ngClass]="{'active': nav_option == 9}" (click)="navOption(9)"><i class="feather-shopping-bag"></i><span>CODIGO 2AF</span></a></li>
+                                                <li *ngIf=" email=='monsalve2812@gmail.com' || email=='danitzabuendiag@gmail.com' || email=='gercelluciano@gmail.com'  "><a href="#" onclick="return false;" [ngClass]="{'active': nav_option == 10}" (click)="navOption(10)"><i class="feather-shopping-bag"></i><span>RELACION DE COMISION</span></a></li>
+                                                <li *ngIf=" email=='monsalve2812@gmail.com' || email=='danitzabuendiag@gmail.com' || email=='gercelluciano@gmail.com'  "><a href="#" onclick="return false;" [ngClass]="{'active': nav_option == 11}" (click)="navOption(11)"><i class="feather-shopping-bag"></i><span>Reporte</span></a></li>
                                             </ul>
                                         </nav>
 
@@ -108,6 +110,7 @@
                                                         </div>
                                               </th>
                                                 <th>  
+                                                    
                                                        <div class="tutor-btn" *ngIf="estadomensualidad==1">
                                                         <a class="rbt-btn btn-sm btn-border bg-violet-opacity radius-round-10"onclick="return false;" (click)="addCart()" href="#">PAGAR MENSUALIDAD</a>
                                                     </div>
@@ -118,6 +121,11 @@
                                             </tr>
                                   </thead>
                                     </table>
+                                    <div class="contenedor">
+                                        <a href="#">  <p class="texto-movil color-danger">Recuerda que si transcurren 3 meses sin pagar tu mensualidad deberás inscribirte nuevamente, ponte al día para no perder tu beneficio mensual </p></a>
+                                           
+                                        
+                                        </div>
                                 </div>
 
 
@@ -950,7 +958,7 @@
 
 
 
-                  <div class="rbt-dashboard-content bg-color-white rbt-shadow-box" *ngIf="nav_option == 9 && email=='monsalve2812@gmail.com' "  >
+                  <div class="rbt-dashboard-content bg-color-white rbt-shadow-box" *ngIf="nav_option == 9 &&  (email=='monsalve2812@gmail.com'|| email=='danitzabuendiag@gmail.com' || email=='gercelluciano@gmail.com') "  >
                            <div class="content">
     <div class="section-title">
         <div class="rbt-dashboard-table table-responsive mobile-table-750">
@@ -987,6 +995,124 @@
 
 
                     </div>
+
+
+
+                     <div class="rbt-dashboard-content bg-color-white rbt-shadow-box" *ngIf="nav_option == 10">
+                            <div class="content">
+                                <div class="section-title">
+                                    <h4 class="rbt-title-style-3">balances en now pay</h4>
+                                </div>
+
+                                <div class="rbt-dashboard-table table-responsive mobile-table-750">
+                                    <table class="rbt-table table table-borderless">
+                                        <thead>
+                                            <tr>
+                                                <th>moneda</th>
+                                                <th>cantidad</th>
+                                                 
+                                                
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                           
+                                                <tr>
+                                                    <td>#DISPONIBLE EN USDTBSC</td>
+                                                    <td>{{ balance.usdtbsc.amount }}</td>
+                                                    
+                                                    
+                                                </tr>
+                                                
+                                                
+                                            
+                                          
+                                                <tr>
+                                                    <td>#DISPONIBLE EN USDTTRC20</td>
+                                                    <td>{{ balance.usdttrc20.amount }}</td>
+                                                    
+                                                    
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td>#comisiones por pagar</td>
+                                                    <td>{{ comisionestotal.totalPrice }}</td>
+                                                    
+                                                    
+                                                </tr>
+
+                                                <tr>
+                                                    <td>#Total Disponible</td>
+                                                    <td>{{ balance.usdtbsc.amount+ balance.usdttrc20.amount-comisionestotal.totalPrice}}</td>
+                                                    
+                                                    
+                                                </tr>
+                                         
+                                            
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        <div class="rbt-dashboard-content bg-color-white rbt-shadow-box" *ngIf="nav_option == 11">
+                            <div class="content">
+                                <div class="section-title">
+                                    <h4 class="rbt-title-style-3">Order History</h4>
+                                </div>
+
+                                <div class="rbt-dashboard-table table-responsive mobile-table-750">
+                                    <table class="rbt-table table table-borderless">
+                                        <thead>
+                                            <tr>
+                                                <th>Order ID</th>
+                                                <th>fecha</th>
+                                                <th>status</th>
+                                                <th>Total</th>
+                                                <th>usuario</th>
+                                                <th>email</th>
+                                                <th>telefono</th>
+                                                <th>referido por</th>
+                                                <th>email referido por</th>
+                                                
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <ng-container *ngFor="let data of listsales">
+                                                <tr>
+                                                    <td>#{{ data.n_transaccion }}</td>
+                                                    <td>{{data.created_at | date}}</td>
+                                                    <td>{{ data.status }}</td>
+                                                    <td>{{ data.total }}</td>
+                                                    <td>{{ data.user.name }}</td>
+                                                    <td>{{ data.user.email }}</td>
+                                                    <td>{{ data.user.email }}</td>
+                                                    <td>{{ data.user.referrer.name }}</td>
+                                                    <td>{{ data.user.referrer.email }}</td>
+                                                   
+                                                    
+                                                </tr>
+                                                
+                                                
+                                            </ng-container>
+                                            
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+
+
+
+
                 </div>
             </div>
         </div>

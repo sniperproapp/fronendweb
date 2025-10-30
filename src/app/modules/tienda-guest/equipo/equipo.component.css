@@ -1,0 +1,39 @@
+/* Puedes añadir esto en tu archivo .css global o en el componente si usas un framework como Angular */
+.breadcrumb-imagen-fondo {
+    /* 1. Define la imagen de fondo y un color de respaldo */
+    background: url('../../../../assets/images/material/FONDOPAGINAEDUCADORES.png') no-repeat;
+    background-color: #3498db; /* Color de respaldo por si la imagen no carga */
+
+    /* 2. Ajusta la imagen para cubrir todo el elemento */
+    background-size: cover;
+
+    /* 3. Centra la imagen */
+    background-position: center center;
+
+    /* 4. Opcional: Para evitar que la imagen se mueva al hacer scroll */
+    background-attachment: fixed; 
+
+    /* Opcional: Añade un pequeño overlay para mejorar la lectura del texto blanco 
+       Puedes ajustar el color y la transparencia (el 0.6 es 60% de opacidad) */
+    position: relative; /* Necesario para que el pseudo-elemento funcione */
+    z-index: 1; /* Necesario para que el pseudo-elemento esté detrás del contenido */
+}
+
+/* Pseudo-elemento para el overlay */
+.breadcrumb-imagen-fondo::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* Overlay negro con 40% de opacidad */
+    z-index: -1; /* Lo coloca detrás del texto */
+}
+
+/* Opcional: Asegúrate de que el texto se vea bien sobre el fondo oscuro */
+.breadcrumb-imagen-fondo .breadcrumb-inner .title,
+.breadcrumb-imagen-fondo .breadcrumb-inner .page-list a,
+.breadcrumb-imagen-fondo .breadcrumb-inner .page-list .active {
+    color: white !important;
+}

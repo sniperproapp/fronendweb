@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService  } from 'ngx-toastr';
 import { DomSanitizer } from '@angular/platform-browser';
 import { YouTubePlayer } from '@angular/youtube-player';
+import { AuthService } from '../../auth/service/auth.service';
+import { CartService } from '../../home/service/cart.service';
  
  
 
@@ -33,18 +35,19 @@ valor=0;
   COURSE_STUDENT:any;
   requirements:any = [];
   clases_checked:any = [];
-  
+  user:any=null;
   who_is_it_fors:any = [];
 
   CLASES_SELECTEDS:any = [];
-  constructor( 
+  constructor( public authservices:AuthService,
     public tiendaAuth: TiendaAuthService,
     public activedRouter: ActivatedRoute,
     public router: Router,
     public ToastrService : ToastrService ,
     public Sanitizer: DomSanitizer,
+     public cartService: CartService,
   ) {
-     
+     this.user=authservices.user;
   }
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
@@ -58,9 +61,9 @@ valor=0;
    // console.log(resp)
       if(resp.statusCode == 200){
             alert( resp.message)
-            
-            this.ToastrService .success(  resp.message,  'warning' );
-              this.router.navigateByUrl("/"); 
+             this.addCart()
+           
+          
       }else{
         this.COURSE_SELECTED = resp;
       // console.log(this.COURSE_SELECTED)
@@ -120,6 +123,75 @@ valor=0;
    
     
     
+    
+  }
+
+
+   addCart(){
+    console.log(this.user)
+    if(this.user.estadomensualidad==1){
+
+      let data = {
+      id_user:this.user.id,
+      id_curso: 59,
+      discount:   null,
+    
+      campaign_discount:   null,
+      code_cupon: null,
+      code_discount:   null,
+      price_unit:50,
+    
+       subtotal:50,
+      total:50
+    
+    }
+
+    this.cartService.registerCartmensualidad(data).subscribe((resp:any) => {
+     // console.log(resp)
+      if(resp.statusCode == 200){
+        this.ToastrService .error( resp.message,  'danger' );
+      }else{
+        this.cartService.addCart(resp);
+        this.ToastrService .success( 'Genera el link de pago',   'Exito' );
+         this.router.navigateByUrl("/carrito-de-compra")
+      }
+      
+    
+    });
+
+    }
+    if(this.user.estadomensualidad==0){
+
+ let data = {
+      id_user:this.user.id,
+      id_curso: 15,
+      discount:   null,
+    
+      campaign_discount:   null,
+      code_cupon: null,
+      code_discount:   null,
+      price_unit:499,
+    
+       subtotal:499,
+      total:499
+    
+    }
+
+    this.cartService.registerCartmensualidad(data).subscribe((resp:any) => {
+     // console.log(resp)
+      if(resp.statusCode == 200){
+        this.ToastrService .error( resp.message,  'danger' );
+      }else{
+        this.cartService.addCart(resp);
+        this.ToastrService .success( 'Genera el link de pago',   'Exito' );
+         this.router.navigateByUrl("/carrito-de-compra")
+      }
+      
+    
+    });
+
+    }
+     
     
   }
 

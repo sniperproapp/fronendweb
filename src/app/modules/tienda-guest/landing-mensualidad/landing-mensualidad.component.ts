@@ -45,6 +45,7 @@ export class LandingMensualidadComponent {
     //Add 'implements OnInit' to the class.
   
     this.activedRouter.params.subscribe((resp:any) => {
+      
       this.SLUG = resp.slug;
     })
     this.activedRouter.queryParams.subscribe((resp:any) => {
@@ -102,7 +103,7 @@ export class LandingMensualidadComponent {
     //console.log(this.user)
      if(!this.user)
      {
-      this.ToastrService .success(  "Registrate para pagar ",  'danger' );
+      this.ToastrService .error(  "Registrate para pagar ",  'danger' );
           this.router.navigateByUrl("/auth/login")
      }
     let data = {
@@ -123,10 +124,10 @@ export class LandingMensualidadComponent {
     this.cartService.registerCartmensualidad(data).subscribe((resp:any) => {
       
       if(resp.statusCode == 200){
-        this.ToastrService .success(  resp.message, 'danger' );
+        this.ToastrService .error(  resp.message, 'danger' );
       }else{
         this.cartService.addCart(resp);
-        this.ToastrService .success(  'GENERA EL LINK DE PAGO', 'primary' );
+        this.ToastrService .success(  'GENERA EL LINK DE PAGO', 'Exito' );
          this.router.navigateByUrl("/carrito-de-compra")
       }
     });

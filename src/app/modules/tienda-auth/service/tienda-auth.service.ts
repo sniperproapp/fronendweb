@@ -24,6 +24,19 @@ export class TiendaAuthService {
     return this.http.get(URL,{headers: headers});
   }
 
+  getbalace(){
+    let headers = new HttpHeaders({'Authorization': this.authService.token});
+    let URL = URL_SERVICIOS+"referral/comisionesall";
+    return this.http.get(URL,{headers: headers});
+  }
+
+   getallsales(){
+    let headers = new HttpHeaders({'Authorization': this.authService.token});
+    let URL = URL_SERVICIOS+"auth/getallreferral";
+    return this.http.get(URL,{headers: headers});
+  }
+
+
   updateStudentwihtimagen(id:string,formData:any){
     let headers = new HttpHeaders({'Authorization'  : this.authService.token});
     let URL = URL_SERVICIOS+"users/update/"+id;

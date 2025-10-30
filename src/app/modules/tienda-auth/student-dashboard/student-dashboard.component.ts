@@ -20,7 +20,7 @@ export class StudentDashboardComponent {
   termined_course_count:number = 0;
   
   profile_student: any;
- 
+   listsales:any
   enrolled_course_news:any = [];
   actived_course_news:any = [];
   termined_course_news:any = [];
@@ -45,6 +45,8 @@ export class StudentDashboardComponent {
   description:string = '';
   phone:string = '';
   birthday:string = '';
+  balance:any
+  comisionestotal:any
   estadomensualidad:number=0
   rol:number=0
 
@@ -80,8 +82,26 @@ export class StudentDashboardComponent {
     
       //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
       //Add 'implements OnInit' to the class.
+     
+       this.tiendaAuthService.getbalace().subscribe((resp:any) => {
+      
+       this.balance= resp[0].balances
+       this.comisionestotal=resp[0].comisiones 
+    
+           
+          
+          
+
+       })
+
+       this.tiendaAuthService.getallsales().subscribe((resp:any) => {
+      console.log(resp)
+      this.listsales=resp
+         
+
+       })
       this.tiendaAuthService.profileStudent().subscribe((resp:any) => {
-     // console.log(resp)
+     // console.log(resp) 
       this.saldo=Number(resp.comisionesSuma.totalPrice)
       this.saldototal=Number(resp.comisionesSumatotal.totalPrice)
       this.referrals=resp.referral
@@ -169,7 +189,7 @@ codigo2af(){
 
   processFile($event:any){
     if($event.target.files[0].indexOf("image") < 0){
-      this.ToastrService .success(  'NECESITAS SUBIR UN ARCHIVO DE TIPO IMAGEN'  ,'warning' );
+      this.ToastrService .error(  'NECESITAS SUBIR UN ARCHIVO DE TIPO IMAGEN'  ,'warning' );
       return;
     }
     this.avatar = $event.target.files[0];
@@ -182,7 +202,7 @@ codigo2af(){
   updatedStudentpass(){
     if(this.password || this.password_confirmation){
       if(this.password != this.password_confirmation){
-        this.ToastrService .success(  'LAS CONTRASEÑAS TIENE QUE SER IGUALES' , 'warning' );
+        this.ToastrService .error(  'LAS CONTRASEÑAS TIENE QUE SER IGUALES' , 'warning' );
         return;
       }
     }
@@ -201,11 +221,11 @@ codigo2af(){
  this.tiendaAuthService.updateStudentpass(data).subscribe((resp:any) => {
     
    if(resp){
-     this.ToastrService .success( "clave editada correctamente" , 'primary' );
+     this.ToastrService .success( "clave editada correctamente" , 'Exito' );
      this.password=''
      this.password_confirmation=''
    }else{
-     this.ToastrService .success( "ocurrio un error"  , 'warning' );
+     this.ToastrService .error( "ocurrio un error"  , 'warning' );
        
    }
  })
@@ -229,7 +249,7 @@ codigo2af(){
 
   updatedStudent(){
     if(!this.name  || !this.surname || !this.email){
-      this.ToastrService .success( 'NECESITAS COMPLETAR LOS CAMPOS OBLIGATORIOS',   'warning' );
+      this.ToastrService .error( 'NECESITAS COMPLETAR LOS CAMPOS OBLIGATORIOS',   'warning' );
       return;
     }
     
@@ -257,9 +277,9 @@ codigo2af(){
         this.tiendaAuthService.updateStudentwihtimagen(this.iduser,formData).subscribe((resp:any) => {
            
           if(resp.message == 200){
-            this.ToastrService .success( resp.message_text,   'warning' );
+            this.ToastrService .error( resp.message_text,   'warning' );
           }else{
-            this.ToastrService .success( resp.message_text,  'primary' );
+            this.ToastrService .success( resp.message_text,  'exito' );
             localStorage.setItem("user",JSON.stringify({
               name: resp.user.name,
               email: resp.user.email,
@@ -285,9 +305,11 @@ codigo2af(){
   this.tiendaAuthService.updateStudent(this.iduser,data).subscribe((resp:any) => {
      
     if(resp.ode == 200){
-      this.ToastrService .success( resp.message,   'warning' );
+      this.ToastrService .success( resp.message,   'Éxito' );
     }else{
-      this.ToastrService .success( "Editado correctamente", 'primary' );
+      console.log('listo')
+      this.ToastrService .success( "Editado correctamente",
+      );
        localStorage.setItem("user",JSON.stringify({
          name: resp.name,
          email: resp.email,
@@ -319,11 +341,11 @@ codigo2af(){
   }
   saveReview(){
     if(this.rating == 0){
-      this.ToastrService .success( 'NECESITAS SELECCIONAR UNA CALIFICACIÓN',  'warning' );
+      this.ToastrService .error( 'NECESITAS SELECCIONAR UNA CALIFICACIÓN',  'warning' );
       return;
     }
     if(!this.description_review){
-      this.ToastrService .success( 'NECESITAS DIGITAR UNA DESCRIPCIÓN',   'warning' );
+      this.ToastrService .error( 'NECESITAS DIGITAR UNA DESCRIPCIÓN',   'warning' );
       return;
     }
     let data = {
@@ -336,7 +358,7 @@ codigo2af(){
     this.tiendaAuthService.registerReview(data).subscribe((resp:any) => {
        
 
-      this.ToastrService .success( "creado correctamente",   'primary' );
+      this.ToastrService .success( "creado correctamente",   'Exito' );
 
       let index = this.sales_details.findIndex((item:any) => item.id == this.sale_detail_selected.id);
       if(index != -1){
@@ -349,11 +371,11 @@ codigo2af(){
   }
   updateReview(){
     if(this.rating == 0){
-      this.ToastrService .success( 'NECESITAS SELECCIONAR UNA CALIFICACIÓN',  'warning' );
+      this.ToastrService .error( 'NECESITAS SELECCIONAR UNA CALIFICACIÓN',  'warning' );
       return;
     }
     if(!this.description_review){
-      this.ToastrService .success( 'NECESITAS DIGITAR UNA DESCRIPCIÓN',  'warning');
+      this.ToastrService .error( 'NECESITAS DIGITAR UNA DESCRIPCIÓN',  'warning');
       return;
     }
     let data = {
@@ -367,7 +389,7 @@ codigo2af(){
     this.tiendaAuthService.updateReview(data).subscribe((resp:any) => {
       
 
-      this.ToastrService .success( "Editado correctamente",   'primary' );
+      this.ToastrService .success( "Editado correctamente",   'Exito' );
 
       let index = this.sales_details.findIndex((item:any) => item.id == this.sale_detail_selected.id);
       if(index != -1){
@@ -379,12 +401,14 @@ codigo2af(){
 
   createpay(id:number){
      
-    this.ToastrService .success("Retirando.....",  'primary' );
+    this.ToastrService .success("Retirando.....",  'Exito' );
 this.tiendaAuthService.createpay(id).subscribe((resp:any) => {
  
    if(resp.statusCode==200)
   {
-    this.ToastrService .success( resp.message,   'primary' );
+    this.ToastrService .success( resp.message,   'Exito' );
+
+      
     this.tiendaAuthService.profileStudent().subscribe((resp:any) => {
      // console.log(resp)
       this.saldo=Number(resp.comisionesSuma.totalPrice)
@@ -418,7 +442,7 @@ this.tiendaAuthService.createpay(id).subscribe((resp:any) => {
   }
   if(resp.statusCode==400)
   {
-    this.ToastrService .success( resp.message,   'primary' );
+    this.ToastrService .success( resp.message,   'Exito' );
   }
 })
 
@@ -435,20 +459,20 @@ this.tiendaAuthService.createpay(id).subscribe((resp:any) => {
       campaign_discount:   null,
       code_cupon: null,
       code_discount:   null,
-      price_unit: 15,
+      price_unit:50,
     
-       subtotal:15,
-      total:15
+       subtotal:50,
+      total:50
     
     }
 
     this.cartService.registerCartmensualidad(data).subscribe((resp:any) => {
      // console.log(resp)
       if(resp.statusCode == 200){
-        this.ToastrService .success( resp.message,  'danger' );
+        this.ToastrService .error( resp.message,  'danger' );
       }else{
         this.cartService.addCart(resp);
-        this.ToastrService .success( 'Genera el link de pago',   'primary' );
+        this.ToastrService .success( 'Genera el link de pago',   'Exito' );
          this.router.navigateByUrl("/carrito-de-compra")
       }
       

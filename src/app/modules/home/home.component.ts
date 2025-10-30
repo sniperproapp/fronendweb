@@ -30,9 +30,7 @@ export class HomeComponent {
   ){
     this.user = this.cartService.authService.user;
   }
-  showToast() {
-    this.ToastrService .success('Hello world!');
-  }
+  
   ngOnInit(): void{
     //console.log('this.user')
     //console.log(this.user)
@@ -136,7 +134,7 @@ getTotalPriceCourse(COURSE:any){
 
  addCart(COURSE:any,CAMPAIGN:any = null){
   if(!this.user){
-    this.ToastrService .success( 'NECESITAS INGRESAR CON TU CUENTA AL SISTEMA' ,  'warning' );
+    this.ToastrService .error( 'NECESITAS INGRESAR CON TU CUENTA AL SISTEMA' ,  'warning' );
     this.cartService.authService.router.navigateByUrl("auth/login");
     return;
   }
@@ -159,10 +157,10 @@ getTotalPriceCourse(COURSE:any){
   this.cartService.registerCart(data).subscribe((resp:any) => {
      
     if(resp.statusCode == 200){
-      this.ToastrService .success(  resp.message  ,   'danger' );
+      this.ToastrService .error(  resp.message  ,   'error' );
     }else{
       this.cartService.addCart(resp);
-      this.ToastrService .success( 'Agregado al carrito' ,   'primary' );
+      this.ToastrService .success( 'Agregado al carrito' ,   'Exito' );
     }
   });
 }

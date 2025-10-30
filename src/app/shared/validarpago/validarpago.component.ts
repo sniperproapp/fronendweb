@@ -21,7 +21,7 @@ export class ValidarpagoComponent {
 
   getestadodelpago():void{
     if( !this.orden ){
-      this.ToastrService .success( 'faltan numero de orden ' ,'danger');
+      this.ToastrService .error( 'faltan numero de orden ' ,'danger');
      
       return;
     }
@@ -29,7 +29,7 @@ export class ValidarpagoComponent {
     this.tiendaGuestService.getstatuspay(this.orden).subscribe((resp:any) => {
        
       if(resp.statusCode==200)
-     { this.ToastrService .success(  resp.message, 'primary');
+     { this.ToastrService .success(  resp.message, 'Exito');
       this.respmsj=resp.message;
        }
     })

@@ -56,14 +56,22 @@ generarorden(){
     n_transaccion:  "",
     
   };
+  if(dataOrder.total==0  ){
+     this.ToastrService .error  ( "Al menos debes tener un paquete seleccionado",  'warning');
+     return
+  }
+  if(this.link_pay){
+     this.ToastrService .error  ( "Ya él link fue generado puedes verlo debajo del botón de pago o en tu correo",  'warning');
+     return
+  }
   this.tiendaAuthService.registerOrder(dataOrder).subscribe((resp:any) => {
     // console.log(resp)
     if(resp.statusCode==200){
       this.link_pay=resp.message
-      this.ToastrService .success( resp.message,  'primary');
+      this.ToastrService .success( resp.message,  'Exito');
       this.cartService.resetCart();
     }else{
-      this.ToastrService .success( resp.message,  'warning');
+      this.ToastrService .error( resp.message,  'warning');
     }
   })
 }
@@ -89,7 +97,7 @@ generarorden(){
 
   applyCupon(){
     if(!this.code){
-      this.ToastrService .success( 'DEBES INGRESAR UN CODIGO DE CUPON',  'danger');
+      this.ToastrService .error( 'DEBES INGRESAR UN CODIGO DE CUPON',  'danger');
       return ;
     }
     let data = {
@@ -98,7 +106,7 @@ generarorden(){
     this.cartService.applyCupon(data).subscribe((resp:any) => {
     
       if(resp.statusCode == 200){
-        this.ToastrService .success( resp.message,  'danger');
+        this.ToastrService .error( resp.message,  'danger');
       }else{
         
         this.cartService.resetCart();

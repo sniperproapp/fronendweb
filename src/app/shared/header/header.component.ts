@@ -44,17 +44,20 @@ ngOnInit(): void {
 
 //  console.log(this.user)
 //console.log(this.fechaFin)
-   let fechaInicio = new Date(this.user.time_limit_web); 
-//  console.log(fechaInicio  )
+if(this.user){
+   let fechaInicio = new Date(this.user.time_limit_web);
   const diferenciaEnMilisegundos = fechaInicio.getTime()-this.fechaFin.getTime()  ;
+const milisegundosPorDia = 1000 * 60 * 60 * 24;
+ this.diasrestantes = diferenciaEnMilisegundos / milisegundosPorDia;
+ }
+//  console.log(fechaInicio  )
+  
 
 // Calcula la diferencia en días
 // 1000 milisegundos en 1 segundo
 // 60 segundos en 1 minuto
 // 60 minutos en 1 hora
 // 24 horas en 1 día
-const milisegundosPorDia = 1000 * 60 * 60 * 24;
- this.diasrestantes = diferenciaEnMilisegundos / milisegundosPorDia;
 
 //console.log(`Los días restantes son: ${this.diasrestantes}`);
 

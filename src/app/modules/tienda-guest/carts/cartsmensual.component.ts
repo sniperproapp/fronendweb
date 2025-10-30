@@ -70,7 +70,7 @@ export class CartsMensualComponent {
 
   applyCupon(){
     if(!this.code){
-      this.ToastrService .success( 'DEBES INGRESAR UN CODIGO DE CUPON',  'danger');
+      this.ToastrService .error( 'DEBES INGRESAR UN CODIGO DE CUPON',  'danger');
       return ;
     }
     let data = {
@@ -79,7 +79,7 @@ export class CartsMensualComponent {
     this.cartService.applyCupon(data).subscribe((resp:any) => {
     
       if(resp.statusCode == 200){
-        this.ToastrService .success( resp.message,  'danger');
+        this.ToastrService .error( resp.message,  'danger');
       }else{
         
         this.cartService.resetCart();

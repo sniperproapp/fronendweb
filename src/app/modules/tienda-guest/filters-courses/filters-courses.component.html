@@ -299,7 +299,7 @@
 
                     <ng-container *ngFor="let COURSE of COURSES">
                         <!-- Start Single Card  -->
-                        <div class="course-grid-3" *ngIf="COURSE.title!='MENSUALIDAD'">
+                        <div class="course-grid-3" *ngIf="  !COURSE.title.includes('MENSUALIDAD') && !COURSE.title.includes('MASTER ELITE') &&  !COURSE.title.includes('INFINITY SNIPER')  &&  !COURSE.title.includes('FULL SNIPER')      ">
                             <div class="rbt-card variation-01 rbt-hover">
                                 <div class="rbt-card-img">
                                     <a [href]="['landing-curso/'+COURSE.id]">

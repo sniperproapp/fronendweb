@@ -29,12 +29,12 @@ constructor(   public tiendaGuestService: TiendaGuestService,public activedRoute
 
   register(){
     if( !this.password_register   || !this.password_confir_register ){
-      this.ToastrService .success(  'faltan datos del usuario' , 'danger' );
+      this.ToastrService .error(  'faltan datos del usuario' , 'danger' );
      
       return;
     }
     if( this.password_register!=this.password_confir_register ){
-      this.ToastrService .success(  'las claves no son iguales',  'danger' );
+      this.ToastrService .error(  'las claves no son iguales',  'danger' );
      
       return;
     }
@@ -50,7 +50,7 @@ constructor(   public tiendaGuestService: TiendaGuestService,public activedRoute
        
 
       if(resp.statusCode == 200){ 
-      this.ToastrService .success(  resp.message, 'primary' );
+      this.ToastrService .success(  resp.message, 'Exito' );
       
       } 
     })

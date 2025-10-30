@@ -20,14 +20,14 @@ export class EliminarcuentaComponent {
   
   enviarmail():void{
     if( !this.email ){
-      this.ToastrService .success( 'faltan datos del usuario', 'danger' );
+      this.ToastrService .error( 'faltan datos del usuario', 'danger' );
      
       return;
     }
     this.tiendaGuestService.enviarmail(this.email).subscribe((resp:any) => {
    
       if(resp.statusCode == 200) 
-     { this.ToastrService .success( resp.message,  'primary' );}
+     { this.ToastrService .success( resp.message,  'Exito' );}
        
        
     })

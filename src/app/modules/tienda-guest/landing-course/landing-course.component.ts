@@ -111,18 +111,18 @@ export class LandingCourseComponent {
     this.cartService.inscribir(this.COURSE_LANDING.id).subscribe((resp:any) => {
      
       if(resp.statusCode == 200){
-        this.ToastrService .success(  resp.message,   'primary'  );
+        this.ToastrService .success(  resp.message,   'Exito'  );
         this.cursostuden_have_course=true
       }else{
          
-        this.ToastrService .success( resp.message,  'danger' );
+        this.ToastrService .error( resp.message,  'danger' );
       }
     });
   }
 
   addCart(){
     if(!this.user){
-      this.ToastrService .success( 'NECESITAS INGRESAR CON TU CUENTA AL SISTEMA', 'warning' );
+      this.ToastrService .error( 'NECESITAS INGRESAR CON TU CUENTA AL SISTEMA', 'warning' );
       this.cartService.authService.router.navigateByUrl("auth/login");
       return;
     }
@@ -146,10 +146,10 @@ export class LandingCourseComponent {
     this.cartService.registerCart(data).subscribe((resp:any) => {
       
       if(resp.statusCode == 200){
-        this.ToastrService .success( resp.message, 'danger' );
+        this.ToastrService .error( resp.message, 'danger' );
       }else{
         this.cartService.addCart(resp);
-        this.ToastrService .success( 'agregado al carrito',  'primary' );
+        this.ToastrService .success( 'agregado al carrito',  'Exito' );
       }
     });
   }

@@ -13,6 +13,8 @@ import { UpdatepassComponent } from './updatepass/updatepass.component';
 import { EliminarcuentaComponent } from './eliminarcuenta/eliminarcuenta.component';
 import { PoliticasComponent } from './politicas/politicas.component';
 import { InstructoCursoComponent } from './instructor-curso/instructor-curso.component';
+import { equipoComponent } from './equipo/equipo.component';
+import { productosComponent } from './productos/productos.component';
 
 const routes: Routes = [
   {
@@ -25,6 +27,10 @@ const routes: Routes = [
       },
       {
         path: 'landing-mensualidad/:slug',
+        component: LandingMensualidadComponent,
+      },
+        {
+        path: 'productos/landing-mensualidad/:slug',
         component: LandingMensualidadComponent,
       },
       {
@@ -46,6 +52,16 @@ const routes: Routes = [
       {
         path: 'team',
         component: InstructorComponent,
+      }
+      ,
+      {
+        path: 'equipo',
+        component: equipoComponent,
+      }
+      ,
+        {
+        path: 'productos',
+        component: productosComponent,
       }
       ,
       {

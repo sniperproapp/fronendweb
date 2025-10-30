@@ -103,7 +103,7 @@ export class FiltersCoursesComponent {
   }
   addCart(COURSE:any,CAMPAIGN:any = null){
     if(!this.user){
-      this.ToastrService .success(  'NECESITAS INGRESAR CON TU CUENTA AL SISTEMA', 'warning' );
+      this.ToastrService .error(  'NECESITAS INGRESAR CON TU CUENTA AL SISTEMA', 'warning' );
       this.cartService.authService.router.navigateByUrl("auth/login");
       return;
     }
@@ -125,10 +125,10 @@ export class FiltersCoursesComponent {
     this.cartService.registerCart(data).subscribe((resp:any) => {
       
       if(resp.message == 403){
-        this.ToastrService .success( resp.message_text, 'danger'  );
+        this.ToastrService .error( resp.message_text, 'danger'  );
       }else{
         this.cartService.addCart(resp.cart);
-        this.ToastrService .success(  resp.message_text, 'primary');
+        this.ToastrService .success(  resp.message_text, 'Exito');
       }
     });
   }
@@ -192,7 +192,7 @@ export class FiltersCoursesComponent {
     };
 
     this.tiendaGuestService.searchCourse(data).subscribe((resp:any) => {
-     
+     console.log(resp)
       this.COURSES = resp;
     })
   }

@@ -8,7 +8,7 @@ import { RecuperarpassComponent } from 'src/app/shared/recuperarpass/recuperarpa
 import { ToastrService  } from 'ngx-toastr';
 import { ReferralService } from '../../home/service/referral.service';
 import { map, Observable } from 'rxjs';
- 
+ import { MatDialog } from '@angular/material/dialog';
 
 @Component({
     selector: 'app-login-and-register',
@@ -32,14 +32,14 @@ export class LoginAndRegisterComponent {
    
 idreferente$!: Observable<string | null>;
 
-  constructor( private route: ActivatedRoute,public referralService: ReferralService, public ToastrService : ToastrService ,public authServices: AuthService,public router:Router){
+  constructor( private dialog: MatDialog, private route: ActivatedRoute,public referralService: ReferralService, public ToastrService : ToastrService ,public authServices: AuthService,public router:Router){
 
   }
 
   ngOnInit(): void{
    
      
-
+ 
 
       this.idreferente$ = this.route.queryParamMap.pipe(
       // Mapea el mapa de parámetros para obtener el valor de 'idreferente'
@@ -60,6 +60,8 @@ idreferente$!: Observable<string | null>;
      
   }
 
+
+  
   login(){
     if(!this.email_login || !this.password_login){
       this.ToastrService .error(  "faltan datos del usuario",  'warning');
@@ -96,7 +98,9 @@ idreferente$!: Observable<string | null>;
 }
 
 recuperarpass():void{
-  
+    this.dialog.open(RecuperarpassComponent, {
+      width: '500px', // Opciones de configuración
+    });
  // this._modalService.show<any>(  RecuperarpassComponent,{title:"Recuperar password",size:1}).result().subscribe((resp:any)=>{})
 }
   register(){

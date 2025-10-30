@@ -6,6 +6,7 @@ import { BiografiaComponent } from 'src/app/shared/biografia/biografia.component
 import { HomeService } from '../../home/service/home.service';
 import { ToastrService } from 'ngx-toastr';
 import { CartService } from '../../home/service/cart.service';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
     selector: 'app-productos',
@@ -25,7 +26,7 @@ export class productosComponent {
   DESCUENTOFLASH:any=[];
   CURSOSCATEGORIS:any=[];
   REVIEWS:any=[];
-constructor(
+constructor(private dialog: MatDialog,
      public ToastrService : ToastrService,
     public tiendaGuestService: TiendaGuestService,
   
@@ -117,7 +118,9 @@ getTotalPriceCourse(COURSE:any){
     return COURSE.price_usd;
   }
  openbio(url:any):void{
- 
+ this.dialog.open(BiografiaComponent, {  data: {url:url} , 
+      width: '1000px', // Opciones de configuración
+    });
   //  this._modalService.show<any>(  BiografiaComponent,{title:"RESEÑA",model:{url:url},size:3}).result().subscribe((resp:any)=>{ })
    
   }

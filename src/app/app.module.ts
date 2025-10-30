@@ -18,6 +18,7 @@ import { ToastrModule } from 'ngx-toastr';
         AppComponent
     ],
     bootstrap: [AppComponent], exports: [RouterModule], imports: [
+        
          // SocketIoModule.forRoot(config),
         BrowserModule,
         RouterModule,

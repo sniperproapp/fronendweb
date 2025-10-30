@@ -3,6 +3,7 @@ import { TiendaGuestService } from '../service/tienda-guest.service';
  
 import { ValidarpagoComponent } from 'src/app/shared/validarpago/validarpago.component';
 import { BiografiaComponent } from 'src/app/shared/biografia/biografia.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
     selector: 'app-equipo',
@@ -13,7 +14,7 @@ import { BiografiaComponent } from 'src/app/shared/biografia/biografia.component
 
 export class equipoComponent {
   INSTRUCTORES:any = [];
-constructor(
+constructor(private dialog: MatDialog,
     public tiendaGuestService: TiendaGuestService, 
    
    
@@ -36,7 +37,9 @@ constructor(
 
 
  openbio(url:any):void{
- 
+ this.dialog.open(BiografiaComponent, {  data: {url:url} , 
+      width: '1000px', // Opciones de configuración
+    });
   //  this._modalService.show<any>(  BiografiaComponent,{title:"RESEÑA",model:{url:url},size:3}).result().subscribe((resp:any)=>{ })
    
   }

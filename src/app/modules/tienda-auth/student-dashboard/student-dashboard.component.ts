@@ -5,6 +5,7 @@ import { CartService } from '../../home/service/cart.service';
 import { Router } from '@angular/router';
 import { AlertaService } from '../../home/service/alerta.service';
 import { ToastrService } from 'ngx-toastr';
+import { ExcelService } from 'src/app/shared/reportesexcel/excel.service';
 
 @Component({
     selector: 'app-student-dashboard',
@@ -71,7 +72,7 @@ export class StudentDashboardComponent {
   sale_detail_selected:any = null;
   description_review:any = null;
   rating:number = 0;
-  constructor(private alertaService: AlertaService,
+  constructor(private excelService: ExcelService,private alertaService: AlertaService,
     public tiendaAuthService: TiendaAuthService,
    public ToastrService : ToastrService,
      public cartService: CartService,public router:Router
@@ -95,12 +96,16 @@ export class StudentDashboardComponent {
 
        })
 
+
+
        this.tiendaAuthService.getallsales().subscribe((resp:any) => {
       console.log(resp)
       this.listsales=resp
-         
+       
 
        })
+
+     
       this.tiendaAuthService.profileStudent().subscribe((resp:any) => {
      // console.log(resp) 
       this.saldo=Number(resp.comisionesSuma.totalPrice)
@@ -137,6 +142,16 @@ export class StudentDashboardComponent {
 
   navOption(val:number) {
     this.nav_option = val;
+  }
+
+
+  descargarexcel(){
+      
+      
+      const nombreArchivo = 'Reporte_Transacciones_Referidos';
+         this.excelService.exportAsExcelFile( this.listsales as any, nombreArchivo)
+
+       
   }
 
 codigo2af(){

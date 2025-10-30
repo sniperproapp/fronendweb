@@ -8,17 +8,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
  
 import { RouterModule } from '@angular/router';
  import { URL_SERVICIOS } from 'src/app/config/config';
-import { YouTubePlayerModule } from "@angular/youtube-player";
+//import { YouTubePlayerModule } from "@angular/youtube-player";
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { ToastrModule } from 'ngx-toastr';
- import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
+// import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 
- const config: SocketIoConfig = { url: URL_SERVICIOS, options: {} };
+//const config: SocketIoConfig = { url: URL_SERVICIOS, options: {} };
 @NgModule({ declarations: [
         AppComponent
     ],
     bootstrap: [AppComponent], exports: [RouterModule], imports: [
-          SocketIoModule.forRoot(config),
+         // SocketIoModule.forRoot(config),
         BrowserModule,
         RouterModule,
         ToastrModule.forRoot({

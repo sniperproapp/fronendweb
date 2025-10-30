@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AuthService } from '../service/auth.service';
 import { ParamMap, Router } from '@angular/router';
 import { ValidarpagoComponent } from 'src/app/shared/validarpago/validarpago.component';
-import { ModalService } from '@developer-partners/ngx-modal-dialog';
+ 
  import { ActivatedRoute } from '@angular/router';
 import { RecuperarpassComponent } from 'src/app/shared/recuperarpass/recuperarpass.component';
 import { ToastrService  } from 'ngx-toastr';
@@ -31,7 +31,7 @@ export class LoginAndRegisterComponent {
    
 idreferente$!: Observable<string | null>;
 
-  constructor( private route: ActivatedRoute,public referralService: ReferralService, public ToastrService : ToastrService ,public authServices: AuthService,public router:Router,private readonly _modalService:ModalService){
+  constructor( private route: ActivatedRoute,public referralService: ReferralService, public ToastrService : ToastrService ,public authServices: AuthService,public router:Router){
 
   }
 
@@ -96,7 +96,7 @@ idreferente$!: Observable<string | null>;
 
 recuperarpass():void{
   
-  this._modalService.show<any>(  RecuperarpassComponent,{title:"Recuperar password",size:1}).result().subscribe((resp:any)=>{})
+ // this._modalService.show<any>(  RecuperarpassComponent,{title:"Recuperar password",size:1}).result().subscribe((resp:any)=>{})
 }
   register(){
     if(!this.email_register ||!this.password_register ||!this.name_register ||!this.surname_register  || !this.password_confir_register ){

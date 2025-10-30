@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ModalReference, ModalService } from '@developer-partners/ngx-modal-dialog';
+ 
 import { ToastrService  } from 'ngx-toastr';
 import { TiendaGuestService } from 'src/app/modules/tienda-guest/service/tienda-guest.service';
 
@@ -15,16 +15,16 @@ export class BiografiaComponent {
   constructor( 
    
     
- public tiendaGuestService: TiendaGuestService,private readonly _modalReference:ModalReference<any>
+ public tiendaGuestService: TiendaGuestService, 
      ) {
-    if(this._modalReference.config.model)
-    {
-      let copy ={...this._modalReference.config.model}
-     this.url=copy
+    // if(this._modalReference.config.model)
+    // {
+    //   let copy ={...this._modalReference.config.model}
+    //  this.url=copy
  
    
 
-    }
+    // }
   }
 
 

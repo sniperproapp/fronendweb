@@ -52,9 +52,6 @@
   "@angular/router": "^18.2.14",
   
     
-  "@developer-partners/ngx-modal-dialog": "^1.0.5",
-  
-    
   "ngx-socket-io": "^4.9.3",
   
     

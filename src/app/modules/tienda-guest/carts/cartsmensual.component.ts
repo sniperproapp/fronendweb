@@ -3,7 +3,7 @@ import { CartService } from '../../home/service/cart.service';
 import { ToastrService  } from 'ngx-toastr';
  
  
-import { ModalService } from '@developer-partners/ngx-modal-dialog';
+ 
 import { TiendaGuestService } from '../service/tienda-guest.service';
 
  
@@ -27,7 +27,7 @@ export class CartsMensualComponent {
     public cartService: CartService,
     public tiendaGuestService: TiendaGuestService,
     public ToastrService : ToastrService ,
-    private readonly _modalService:ModalService
+    
   ) {
     
   }

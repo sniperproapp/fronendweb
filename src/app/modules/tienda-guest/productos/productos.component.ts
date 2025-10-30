@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { TiendaGuestService } from '../service/tienda-guest.service';
-import { ModalService } from '@developer-partners/ngx-modal-dialog';
+ 
 import { ValidarpagoComponent } from 'src/app/shared/validarpago/validarpago.component';
 import { BiografiaComponent } from 'src/app/shared/biografia/biografia.component';
 import { HomeService } from '../../home/service/home.service';
@@ -27,7 +27,7 @@ export class productosComponent {
 constructor(
      public ToastrService : ToastrService,
     public tiendaGuestService: TiendaGuestService,
-    private readonly _modalService:ModalService,
+  
        public homeservice:HomeService, 
         public cartService: CartService,
    
@@ -117,7 +117,7 @@ getTotalPriceCourse(COURSE:any){
   }
  openbio(url:any):void{
  
-    this._modalService.show<any>(  BiografiaComponent,{title:"RESEÑA",model:{url:url},size:3}).result().subscribe((resp:any)=>{ })
+  //  this._modalService.show<any>(  BiografiaComponent,{title:"RESEÑA",model:{url:url},size:3}).result().subscribe((resp:any)=>{ })
    
   }
 

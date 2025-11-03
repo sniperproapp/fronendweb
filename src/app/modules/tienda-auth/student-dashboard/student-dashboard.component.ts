@@ -99,7 +99,7 @@ export class StudentDashboardComponent {
 
 
        this.tiendaAuthService.getallsales().subscribe((resp:any) => {
-      console.log(resp)
+       console.log(resp)
       this.listsales=resp
        
 
@@ -494,6 +494,25 @@ this.tiendaAuthService.createpay(id).subscribe((resp:any) => {
       
     
     });
+  }
+
+  searchcomision(data:any){
+   
+   const Buscado = data.user.referrer.referrals.find((p:any) => p.referredUserId ===data.user.id);
+    
+   return Buscado.monto
+  }
+
+  searchestado(data:any){
+   
+   const Buscado = data.user.referrer.referrals.find((p:any) => p.referredUserId ===data.user.id);
+   if(Buscado.estado==1)
+    {
+      return "Pagado"
+    }else{
+     return "No Pagado"
+    }
+    
   }
 
 }

@@ -10,13 +10,21 @@ const EXCEL_EXTENSION = '.xlsx';
 interface Referrer {
   name: string;
   email: string;
+ referrals:Referrals[]
+}
+
+interface Referrals{
+  estado:number
+  monto:number
 }
 
 interface User {
   name: string;
   email: string;
+  id:number
   referrerId: number;
   referrer: Referrer;
+  phone:string
 }
 
 interface Transaccion {
@@ -24,6 +32,7 @@ interface Transaccion {
   n_transaccion: string;
   status: string;
   created_at: string;
+
   user: User;
 }
 
@@ -57,6 +66,9 @@ export class ExcelService {
   
   // Función de mapeo y aplanamiento
   private mapJsonToExportableArray(data: Transaccion[]): any[] {
+
+
+    console.log(data)
     return data.map(t => ({
       'Total': t.total,
       'Nro. Transacción': t.n_transaccion,
@@ -66,9 +78,11 @@ export class ExcelService {
       'Usuario Comprador': t.user.name,
       'Email Comprador': t.user.email,
       // Datos del Referente
-      'ID Referente': t.user.referrerId,
+      'telefono': t.user.phone,
       'Nombre Referente': t.user.referrer.name,
       'Email Referente': t.user.referrer.email,
+      'comision': t.user.referrer.referrals.find((p:any) => p.referredUserId ===t.user.id)?.monto,
+       'estado': t.user.referrer.referrals.find((p:any) => p.referredUserId ===t.user.id)?.estado==1?"pagado":"no pagado",
     }));
   }
 

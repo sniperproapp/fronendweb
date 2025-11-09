@@ -48,10 +48,13 @@ idreferente$!: Observable<string | null>;
         
     this.idreferente$.subscribe(codigo => {
       if (codigo) {
-        this.ref=codigo
+      
+        localStorage.setItem('codigoReferido', codigo);
        // console.log('idreferente de URL extraído:', idreferente);
         // Aquí llamas a tu servicio para validar el idreferente y agregar al grupo
-      }
+      }else{ localStorage.setItem('codigoReferido', "1");
+}
+
     });
     
      if(this.authServices.user){
@@ -110,17 +113,19 @@ recuperarpass():void{
       
       return;
     }
+ 
+    
     let  data ={
      email:this.email_register,
      password:this.password_register,
      name:this.name_register,
      lastname:this.surname_register,
-     codigo_refernecia: this.ref
+     codigo_refernecia:localStorage.getItem('codigoReferido')
 
 
     }
 
-
+ 
     this.authServices.regisster(data).subscribe((resp:any)=>{
      
         console.log(resp)

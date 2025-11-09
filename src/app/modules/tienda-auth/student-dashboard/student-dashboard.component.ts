@@ -86,7 +86,7 @@ export class StudentDashboardComponent {
       //Add 'implements OnInit' to the class.
      
        this.tiendaAuthService.getbalace().subscribe((resp:any) => {
-      
+       
        this.balance= resp[0].balances
        this.comisionestotal=resp[0].comisiones 
     

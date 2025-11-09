@@ -28,7 +28,7 @@ declare var paypal:any;
 export class CartsComponent {
 
   CARTS:any = [];
-  TOTAL_SUM:number = 0;
+  sumatotal = 0;
   code:any = null;
   link_pay= null;
 
@@ -46,9 +46,12 @@ export class CartsComponent {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
     this.cartService.currentData$.subscribe((resp:any) => {
-     // console.log(this.CARTS)
+     
       this.CARTS = resp;
-      this.TOTAL_SUM = this.CARTS.reduce((sum:number,item:any) => sum + parseFloat(item.total),0);
+   //   console.log(this.CARTS)
+      this.sumatotal = this.CARTS.reduce((sum:number,item:any) => sum + parseFloat(item.total),0);
+    //  console.log(this.sumatotal)
+
     })
 
     
@@ -62,7 +65,8 @@ generarorden(){
     method_payment: "usdt",
     currency_total: "USD",
     currency_payment: "USD",
-    total: this.TOTAL_SUM,
+    id_curso:this.CARTS[0].id_curso,
+    total: this.sumatotal,
     n_transaccion:  "",
     
   };
@@ -75,7 +79,7 @@ generarorden(){
      return
   }
   this.tiendaAuthService.registerOrder(dataOrder).subscribe((resp:any) => {
-    // console.log(resp)
+   // console.log(resp)
     if(resp.statusCode==200){
       this.link_pay=resp.message
       this.ToastrService .success( resp.message,  'Exito');

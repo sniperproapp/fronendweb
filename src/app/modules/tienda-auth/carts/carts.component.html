@@ -123,11 +123,11 @@
                             <div class="cart-summary">
                                 <div class="cart-summary-wrap">
                                     <div class="section-title text-start">
-                                        <h4 class="title mb--30">Cart Summary</h4>
+                                        <h4 class="title mb--30">Resumen</h4>
                                     </div>
-                                    <p>Sub Total <span>${{ TOTAL_SUM }}</span></p>
-                                    <p>Shipping Cost <span>$00.00</span></p>
-                                    <h2>Grand Total <span>${{ TOTAL_SUM }}</span></h2>
+                                    <p>Sub Total <span>${{ sumatotal }}</span></p>
+                                  
+                                    <h2>Grand Total <span>${{ sumatotal }}</span></h2>
                                 </div>
 
                                 <div class="cart-submit-btn-group">
@@ -139,7 +139,7 @@
 
                                         <!-- <div #paypal ></div> -->
                                           <a *ngIf="link_pay" [href]="link_pay" target="_blank" rel="noopener noreferrer">
-                                           LINK DE PAGO {{link_pay}}
+                                          <h3>LINK DE PAGO {{link_pay}}</h3> 
                                            </a>
                                           
                                     </div>

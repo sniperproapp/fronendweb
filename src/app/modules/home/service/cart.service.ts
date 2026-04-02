@@ -19,7 +19,7 @@ export class CartService {
 
   addCart(DATA:any){
     let listCart = this.cart.getValue();
-    let Index = listCart.findIndex(item => item.id_curso == DATA.id_curso);
+    let Index = listCart.findIndex(item => item.id_producto == DATA.id_producto);
     if(Index == -1){
       listCart.unshift(DATA);
     }
@@ -33,7 +33,7 @@ export class CartService {
 
   removeItemCart(DATA:any){
     let listCart = this.cart.getValue();
-    let Index = listCart.findIndex(item => item.id_curso == DATA.id_curso);
+    let Index = listCart.findIndex(item => item.id_producto == DATA.id_producto);
     if(Index != -1){
       listCart.splice(Index,1);
     }

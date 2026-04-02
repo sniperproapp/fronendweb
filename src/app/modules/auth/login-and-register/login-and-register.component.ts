@@ -128,7 +128,7 @@ recuperarpass():void{
  
     this.authServices.regisster(data).subscribe((resp:any)=>{
      
-        console.log(resp)
+     //   console.log(resp)
       if(resp.status==403||resp.status==500 ||resp.status==400 ){
         this.ToastrService .error( resp.error.message,  'warning');
       

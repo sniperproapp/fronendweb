@@ -21,6 +21,7 @@ declare function showMoreBtn([]):any;
 export class LandingCourseComponent {
 
   SLUG:any = null;
+
   COURSE_LANDING:any = null;
   COURSE_INSTRUCTOR:any = [];
   COURSE_CATEGORIES:any = []; 
@@ -44,6 +45,7 @@ export class LandingCourseComponent {
     //Add 'implements OnInit' to the class.
     this.activedRouter.params.subscribe((resp:any) => {
       this.SLUG = resp.slug;
+     
     })
     this.activedRouter.queryParams.subscribe((resp:any) => {
       this.CAMPAING_SPECIAL = resp.campaing_discount;

@@ -1,0 +1,212 @@
+ 
+
+  
+
+
+   
+
+    <div class="rbt-team-area bg-color-extra2 rbt-section-gap  breadcrumb-imagen-fondo">
+          
+        <!-- <div class="container">
+            
+            <div class="row row--15 mt_dec--30"> 
+
+                <ng-container >
+
+                   
+                    <div    class="col-lg-2  ">
+                      
+                        
+                      
+                  
+                    </div>
+                    <div    class="col-lg-8  ">
+                      
+                        
+                        <div class="team">
+                            <div class="thumbnail"><img  src="../../../../assets/images/team/ESPACIO PERSONALIZADO.png" alt="Blog Images">
+                            </div>
+                            
+                           
+                        </div>
+                  
+                    </div>
+                    <div    class="col-lg-2  ">
+                      
+                       
+                  
+                    </div>
+                   
+
+                </ng-container>
+                
+
+              
+
+            </div>
+        </div> -->
+
+
+
+
+
+
+
+    <!-- <div class="rbt-course-details-area ptb--60" *ngIf="COURSE_LANDING">
+    <div class="container">
+        <div class="row g-5">
+ 
+            <div class="col-lg-12">
+
+
+                 <div class="container">
+            
+            <div class="row row--15 mt_dec--30"> 
+
+                <ng-container >
+
+                     
+                    <div    class="col-lg-2  "> </div>
+                    <div    class="col-lg-8  ">
+                         <div class="team">
+                           <img class="w-100" [src]="COURSE_LANDING.imagen" alt="Card image"> 
+                         
+                        </div>
+                  
+                    </div>
+                    <div    class="col-lg-2  ">   </div>
+                </ng-container>
+                
+
+              
+
+            </div>
+        </div>
+                <div class="course-details-content">
+                   
+                        
+                 
+
+                   
+
+                   
+
+                     
+                    <div class="course-content rbt-shadow-box coursecontent-wrapper mt--30" id="coursecontent">
+                        <div class="rbt-course-feature-inner">
+                            <div class="section-title">
+                               
+
+
+                                <a href="#" onclick="return false;" (click)="addCartall(COURSE_LANDING.id,calcularpreciototal() )">
+                                     
+                                                                    <div class="course-content-left">
+                                                                        <h4 class="rbt-title-style-3">Course Content</h4>
+                                                                        <span class="rbt-badge variation-03 bg-color-danger-opacity"    ><i class="feather-shopping-cart"></i> TODO EL CURSO({{calcularpreciototal() | number:'1.2-2'}})$</span>
+
+                                                                    </div>
+                                                                     
+                                                                         
+                                                                          
+                                                                </a>
+                            </div>
+                            <div class="rbt-accordion-style rbt-accordion-02 accordion">
+                                <div class="accordion" id="accordionExampleb2">
+
+                                    <ng-container *ngFor="let SECTION of COURSE_LANDING.seciones; let i = index">
+
+                                        <div class="accordion-item card">
+                                            <h2 class="accordion-header card-header" id="headingTwo1">
+                                                <button class="accordion-button" [ngClass]="{'collapsed': i != 0}" type="button" data-bs-toggle="collapse" 
+                                                [attr.data-bs-target]="'#collapseTwo'+SECTION.id" aria-expanded="true" 
+                                                [attr.aria-controls]="'collapseTwo'+SECTION.id"
+                                                >
+                                                    {{ SECTION.title }} <span class="rbt-badge-5 ml--10">{{ SECTION.time_parse }}</span>
+                                                                        <span class="rbt-badge variation-03 bg-color-danger-opacity"> <i class="feather-book-open"></i>  </span>
+
+                                                </button>
+                                            </h2>
+                                            <div [attr.id]="'collapseTwo'+SECTION.id" class="accordion-collapse collapse" [ngClass]="{'show': i == 0}" aria-labelledby="headingTwo1" data-bs-parent="#accordionExampleb2">
+                                                <div class="accordion-body card-body pr--0">
+                                                    <ul class="rbt-course-main-content liststyle">
+
+                                                        <ng-container *ngFor="let CLASE of SECTION.clases"> 
+                                                            <li>
+                                                               
+                                                                        
+                                                                       @if (clasespagadas.indexOf(CLASE.id) !== -1) {
+
+                                                                    <a [href]="'/ver-curso-clase/'+ COURSE_LANDING.id+'/'+null+'/'+null" >
+                                                                    <div class="course-content-left">
+                                                                        <i class="feather-play-circle"></i> <span
+                                                                            class="text">{{ CLASE.title }}</span>
+                                                                    </div>
+                                                                    <div class="course-content-right">
+                                                                        <span class="min-lable">{{ CLASE.time }}</span>
+                                                                      <span class="rbt-badge variation-03 bg-primary-opacity" ><i class="feather-eye" ></i> Preview</span>
+                                                                          </div>
+                                                                </a>
+
+                                                                            
+                                                                       } @else {
+                                                                         <a href="#" onclick="return false;" (click)="addclases(CLASE.id)">
+                                                                    <div class="course-content-left">
+                                                                        <i class="feather-play-circle"></i> <span
+                                                                            class="text">{{ CLASE.title }}</span>
+                                                                    </div>
+                                                                    <div class="course-content-right">
+                                                                        <span class="min-lable">{{ CLASE.time }}</span>
+                                                                        <span class="rbt-badge variation-03 bg-color-danger-opacity"  href="#" onclick="return false;" (click)="addCart(CLASE,COURSE_LANDING.price_usd/COURSE_LANDING.num_clases)"><i class="feather-shopping-cart"></i> ADD({{COURSE_LANDING.price_usd/COURSE_LANDING.num_clases| number:'1.2-2'}})$</span>
+                                                                          </div>
+                                                                </a>
+                                                                       } 
+
+                                                                       
+                                                                       
+                                                                    
+                                                            </li>
+                                                        </ng-container>
+    
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </ng-container>
+                                    
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+
+                     
+                     
+ 
+
+                    
+                </div>
+                
+            </div>
+
+
+            
+        </div>
+    </div>
+</div>
+
+
+  -->
+
+    </div>
+
+
+ 
+
+    
+
+
+
+
+

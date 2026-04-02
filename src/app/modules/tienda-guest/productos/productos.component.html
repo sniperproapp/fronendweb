@@ -12,11 +12,11 @@
                     </div>
                 </div>
             </div>
-            <div class="row row--15 mt_dec--30 ">
+            <!-- <div class="row row--15 mt_dec--30 ">
 
                     <ng-container *ngFor="let CURSOSBANER of CURSOSBANERS">
 
-                    <!-- Start Single Team  -->
+                     
                     <div   class="col-lg-4 col-md-6 col-sm-6 col-12 mt--30 ">
                          <a [routerLink]="['landing-mensualidad/',CURSOSBANER.id]">
                         
@@ -32,7 +32,74 @@
                         </div>
                     </a>
                     </div>
+                   
+
+                </ng-container>
+                
+
+              
+
+            </div> -->
+             <p class="description mt--20"></p>
+              <div class="row row--15 mt_dec--30 ">
+
+                    <ng-container *ngFor="let PRODUCTO of PRODUCTOS">
+                  @if (PRODUCTO.tipo_articulo!="Fisico" && PRODUCTO.estad!=3  ) {
+                     <!-- Start Single Team  -->
+                    <div   class="col-lg-4 col-md-6 col-sm-6 col-12 mt--30 ">
+                           <a [routerLink]="['landing-mensualidad/',PRODUCTO.id_producto]">  
+                         
+                        
+                        <div  class="team">
+                            <div class="thumbnail"><img [src]="PRODUCTO.image1" alt="Card image">
+                            </div>
+                            <div class="content">
+                               
+                                <h4 class="title">COMPRAR</h4>
+                                <p class="designation"></p>
+                            </div>
+                             
+                        </div>
+                    </a>
+                    </div>
                     <!-- End Single Team  -->
+
+                  }
+                  
+
+                </ng-container>
+                
+
+              
+
+            </div>
+  <p class="description mt--20"></p>
+             <div class="row row--15 mt_dec--30 ">
+
+                    <ng-container *ngFor="let PRODUCTO of PRODUCTOS">
+
+                   @if (PRODUCTO.tipo_articulo=="Fisico" && PRODUCTO.estad!=3) {
+                     <!-- Start Single Team  -->
+                    <div   class="col-lg-4 col-md-6 col-sm-6 col-12 mt--30 ">
+                           <a >  
+                         
+                        
+                        <div  class="team">
+                            <div class="thumbnail"><img [src]="PRODUCTO.image1" alt="Card image">
+                            </div>
+                            <div class="content">
+                               
+                                <h4 class="title">PRÓXIMAMENTE</h4>
+                                <p class="designation"></p>
+                            </div>
+                             
+                        </div>
+                    </a>
+                    </div>
+                    <!-- End Single Team  -->
+
+                  }
+                  
 
                 </ng-container>
                 

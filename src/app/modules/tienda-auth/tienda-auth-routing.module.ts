@@ -4,6 +4,7 @@ import { TiendaAuthComponent } from './tienda-auth.component';
 import { CartsComponent } from './carts/carts.component';
 import { StudentDashboardComponent } from './student-dashboard/student-dashboard.component';
 import { CourseLeasonComponent } from './course-leason/course-leason.component';
+import { CourseLeasonClaseComponent } from './course-leason-personalizados/course-leason-personalizados.component';
 
 const routes: Routes = [{
   path: '',
@@ -19,8 +20,13 @@ const routes: Routes = [{
     }
     ,
     {
-      path: 'ver-curso/:slug',
+      path: 'ver-curso/:slug/:seccion/:clase',
       component: CourseLeasonComponent,
+    }
+     ,
+    {
+      path: 'ver-curso-clase/:slug/:seccion/:clase',
+      component: CourseLeasonClaseComponent,
     }
   ]
 }];

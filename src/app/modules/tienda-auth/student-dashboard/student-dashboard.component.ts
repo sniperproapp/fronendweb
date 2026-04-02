@@ -99,7 +99,7 @@ export class StudentDashboardComponent {
 
 
        this.tiendaAuthService.getallsales().subscribe((resp:any) => {
-       console.log(resp)
+      // console.log(resp)
       this.listsales=resp
        
 
@@ -161,7 +161,7 @@ codigo2af(){
   // Variables de control
     this.currentWidth   = 0;
    this.tiendaAuthService.codigo2af().subscribe((resp:any) => {
-    console.log(resp)
+    //console.log(resp)
     this.codigo2afdata=resp
     this.intervalId = setInterval(() => this.moveBar(), this.INTERVAL_TIME_MS);
 
@@ -323,7 +323,7 @@ codigo2af(){
     if(resp.ode == 200){
       this.ToastrService .success( resp.message,   'Éxito' );
     }else{
-      console.log('listo')
+     // console.log('listo')
       this.ToastrService .success( "Editado correctamente",
       );
        localStorage.setItem("user",JSON.stringify({
@@ -469,7 +469,7 @@ this.tiendaAuthService.createpay(id).subscribe((resp:any) => {
      
     let data = {
       id_user:this.iduser,
-      id_curso: 59,
+      id_producto: 19,
       discount:   null,
     
       campaign_discount:   null,
@@ -484,10 +484,19 @@ this.tiendaAuthService.createpay(id).subscribe((resp:any) => {
 
     this.cartService.registerCartmensualidad(data).subscribe((resp:any) => {
      // console.log(resp)
+
       if(resp.statusCode == 200){
         this.ToastrService .error( resp.message,  'danger' );
       }else{
-        this.cartService.addCart(resp);
+         this.cartService.resetCart();
+        setTimeout(() => {
+           
+          resp.forEach((cart:any) => {
+            this.cartService.addCart(cart);
+            
+          });
+        }, 50);
+        
         this.ToastrService .success( 'Genera el link de pago',   'Exito' );
          this.router.navigateByUrl("/carrito-de-compra")
       }

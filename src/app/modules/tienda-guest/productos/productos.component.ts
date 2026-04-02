@@ -20,6 +20,7 @@ export class productosComponent {
   INSTRUCTORES:any = [];
    CATEGORIES:any=[];
   CURSOS:any=[];
+  PRODUCTOS:any=[];
   CURSOSBANERS:any=[];
   DESCUENTOBANERS:any=[];
   CURSOSFLASHS:any=[];
@@ -44,15 +45,25 @@ constructor(private dialog: MatDialog,
  
      this.homeservice.homecursoscategoridescuetoflash().subscribe((resp:any)=>{
       
-console.log(resp)
+      //console.log(resp)
       this.CURSOSFLASHS=resp.courses;
       this.DESCUENTOFLASH=resp;
       
       
      
     })
+    
+     this.homeservice.homeproductosfisico().subscribe((resp:any)=>{
+      
+     // console.log(resp)
+      this.PRODUCTOS=resp;
+      // this.DESCUENTOFLASH=resp;
+      
+      
+     
+    })
        this.homeservice.homecursoscategoridescuetobaner().subscribe((resp:any)=>{
-     console.log(resp)
+    // console.log(resp)
       this.CURSOSBANERS=resp.courses;
       this.DESCUENTOBANERS=resp;
       

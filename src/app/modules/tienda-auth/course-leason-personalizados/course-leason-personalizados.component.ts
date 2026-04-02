@@ -17,11 +17,11 @@ declare function magnigyPopup([]):any;
 declare function showMoreBtn([]):any;
 @Component({
     selector: 'app-course-leason',
-    templateUrl: './course-leason.component.html',
-    styleUrls: ['./course-leason.component.css'],
+    templateUrl: './course-leason-personalizados.component.html',
+    styleUrls: ['./course-leason-personalizados.component.css'],
     standalone: false
 })
-export class CourseLeasonComponent {
+export class CourseLeasonClaseComponent {
 
  url:any
    
@@ -35,8 +35,9 @@ valor=0;
   clases_checked:any = [];
   user:any=null;
   who_is_it_fors:any = [];
-    SECCION:any = null;
+  SECCION:any = null;
   CLASE:any = null;
+  clasespagadas: number[] = [];
 
 
   CLASES_SELECTEDS:any = [];
@@ -63,6 +64,17 @@ valor=0;
     
      
     })
+      this.tiendaAuth.personalizadoclases(this.user.id).subscribe((resp1:any) => {
+      
+
+        resp1.forEach((clase:any) => {
+        //   console.log(cart)
+          this.clasespagadas.push(clase.id_clase)
+            
+          });
+          
+
+       })
     this.tiendaAuth.courseLeason(this.slug_course).subscribe((resp:any) => {
            
    // console.log(resp)
@@ -92,12 +104,15 @@ valor=0;
            this.CLASE_SELECTED = this.COURSE_SELECTED.seciones[ seccion ]
             .clases[ clase ];
       }else{
+
+        const clase  = this.COURSE_SELECTED.seciones[0].clases.findIndex((clase:any ) => clase.id ===  Number(this.clasespagadas[0]));
      
-        this.CLASE_SELECTED = this.COURSE_SELECTED.seciones[0].clases[0];
+        this.CLASE_SELECTED = this.COURSE_SELECTED.seciones[0].clases[clase];
+         this.CLASE_SELECTED_titulo = this.COURSE_SELECTED.seciones[0].clases[clase].title;
       }
         
         this.url= this.Sanitizer.bypassSecurityTrustResourceUrl( this.CLASE_SELECTED.vimeo_id); 
-        this.CLASE_SELECTED_titulo = this.COURSE_SELECTED.seciones[0].clases[0].title;
+       
         this.COURSE_STUDENT = resp.coursestudent;
         
     // this. clases_checked =JSON.parse(this.COURSE_STUDENT.clases_checked)

@@ -193,7 +193,7 @@ export class FiltersCoursesComponent {
     };
 
     this.tiendaGuestService.searchCourse(data).subscribe((resp:any) => {
-     console.log(resp)
+    // console.log(resp)
       this.COURSES = resp;
     })
   }

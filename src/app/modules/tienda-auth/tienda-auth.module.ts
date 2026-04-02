@@ -12,6 +12,7 @@ import { StudentDashboardComponent } from './student-dashboard/student-dashboard
 import { CourseLeasonComponent } from './course-leason/course-leason.component';
  
 import { BinancepayComponent } from './binancepay/binancepay.component';
+import { CourseLeasonClaseComponent } from './course-leason-personalizados/course-leason-personalizados.component';
 //import { YouTubePlayerModule } from '@angular/youtube-player';
 
 
@@ -20,11 +21,13 @@ import { BinancepayComponent } from './binancepay/binancepay.component';
         TiendaAuthComponent,
         StudentDashboardComponent,
         CourseLeasonComponent,
+        CourseLeasonClaseComponent,
         BinancepayComponent
     ], imports: [
         CommonModule,
         TiendaAuthRoutingModule,
         SharedModule,
+        
        // YouTubePlayerModule,
         FormsModule, CartsComponent,
        

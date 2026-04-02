@@ -45,5 +45,10 @@ export class HomeService {
     return this.http.get(URL);
   }
 
+  homeproductosfisico(){
+    let URL = URL_SERVICIOS+"products_menbresia/"
+    return this.http.get(URL);
+  }
+
   
 }

@@ -279,6 +279,10 @@
                                 <a href="contactos"class="color-white">Contáctanos </a>
                                 
                             </li>
+                            <li class="with-megamenu has-menu-child-item position-static">
+                                <a href="personalizado"class="color-white">Personalizado </a>
+                                
+                            </li>
                             <li class="with-megamenu has-menu-child-item position-static" *ngIf="user">
                                <a href="#"class="color-white"  (click)="copyMessage('https://sniperproacademy.com/auth/login/?ref=')">Copiar mi Link</a> 
                              
@@ -477,8 +481,88 @@
                         </div>
                     </div>
                     
-                    <ng-container *ngFor="let COURSE of listCourses">
-                        <!-- Start Single Card  -->
+                    <!-- <ng-container *ngFor="let COURSE of listCourses"> -->
+                    <div class="col-12">
+
+                     <div class="table-responsive">
+                        <!--begin::Table-->
+                        <table class="table align-middle gs-0 gy-4">
+                            <!--begin::Table head-->
+                            <thead>
+                                <tr class="fw-bolder text-muted bg-light">
+                                    <th class="">curso</th>
+                                    <th class="">profesor</th>
+                                    <th class="">seccion</th>
+                                    <th class="">clase</th>
+                                    
+                                </tr>
+                            </thead>
+                            <!--end::Table head-->
+                            <!--begin::Table body-->
+                            <tbody>
+                                <ng-container *ngFor="let COURSE of listCourses">
+                                    <tr>
+                                        <td>
+                                            <a [href]="'/ver-curso/'+ COURSE.sectionCursos.cursos.id+'/'+COURSE.sectionCursos.id+'/'+COURSE.id" class="text-dark fw-bolder text-hover-primary mb-1 fs-6">{{ COURSE.sectionCursos.cursos.title }}</a>
+                                                    
+                                              
+                                            
+                                        </td>
+                                           <td>
+                                            <a [href]="'/ver-curso/'+ COURSE.sectionCursos.cursos.id+'/'+COURSE.sectionCursos.id+'/'+COURSE.id" class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6">{{ COURSE.sectionCursos.cursos.user.name  }} </a>
+                                            <!-- <span class="text-muted fw-bold text-muted d-block fs-7">Paid</span> -->
+                                        </td>
+    
+                                        <td>
+                                            <a [href]="'/ver-curso/'+ COURSE.sectionCursos.cursos.id+'/'+COURSE.sectionCursos.id+'/'+COURSE.id" class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6">{{ COURSE.sectionCursos.title  }} </a>
+                                            <!-- <span class="text-muted fw-bold text-muted d-block fs-7">Paid</span> -->
+                                        </td>
+                                        
+                                        <td class="text-end">
+                                             <a [href]="'/ver-curso/'+ COURSE.sectionCursos.cursos.id+'/'+COURSE.sectionCursos.id+'/'+COURSE.id" class="text-dark fw-bolder text-hover-primary d-block mb-1 fs-6">{{ COURSE.title  }} </a>
+                                            <!-- <span class="text-muted fw-bold text-muted d-block fs-7">Paid</span> -->
+                                        </td>
+                                    </tr>
+                                </ng-container>
+                                
+                            </tbody>
+                            <!--end::Table body-->
+                        </table>
+                        <!--end::Table-->
+                    </div>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+                        
                         <div class="col-lg-3 col-md-4 col-sm-6 col-12"  *ngIf="COURSE.title!='MENSUALIDAD'">
                             <div class="rbt-card variation-01 rbt-hover">
                                 <div class="rbt-card-img">
@@ -509,9 +593,9 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- End Single Card  -->
+                        
                     </ng-container>
-                    
+                     -->
                 </div>
   
             </div>
@@ -686,6 +770,11 @@
                     <a href="contactos">Contáctanos  </a>
                     
                 </li>
+                  <li class="  position-static">
+                    <a href="personalizado">Personalizado  </a>
+                    
+                </li>
+                
                    <li class="  position-static" *ngIf="user">
                    <a href="#"  (click)="copyMessage('https://sniperproacademy.com/auth/login/?ref=')">Copiar mi Link</a> 
                     
@@ -780,11 +869,11 @@
                     <li class="minicart-item">
                         <div class="thumbnail">
                             <a href="#">
-                                <img [src]="CART.curso.imagen" alt="Product Images">
+                                <img [src]="CART.productos.image1" alt="Product Images">
                             </a>
                         </div>
                         <div class="product-content">
-                            <h6 class="title"><a [routerLink]="['landing-curso/',CART.curso.slug]">{{ CART.curso.title }}</a></h6>
+                            <h6 class="title"><a [routerLink]="['landing-curso/',CART.productos.id_producto]">{{ CART.productos.name }}</a></h6>
       
                             <span class="quantity">1 * <span class="price">${{ CART.total }}</span></span>
                         </div>

@@ -162,22 +162,40 @@
                                                                 <ng-container *ngFor="let CLASE of SECTION.clases"> 
                                                                     <li  >
                                                                         <div class="course-content-left">
-                                                                            <div class="form-check mx-2">
+                                                                            
+
+
+
+                                                                                @if (clasespagadas.indexOf(CLASE.id) !== -1) {
+                                                                                    <div class="form-check mx-2">
                                                                                 <!-- [checked]="i == 0" -->
                                                                                <input type="checkbox" class="form-check-input" [checked]="COURSE_STUDENT.clases_checked.includes( CLASE.id.toString() )" (click)="checkedClase(CLASE)"  [id]="'exampleCheck'+CLASE.id">  
                                                                                 <label class="form-check-label" [for]="'exampleCheck'+CLASE.id">Check</label>
                                                                             </div>
-                                                                          
-                                                                      
-                                                                        <a href="#" onclick="return false;" (click)="selectedClase(CLASE,CLASE.title)">
-                                                                              
-                                                                            <div class="course-content-right">
-                                                                                <i class="feather-play-circle"></i> <span
-                                                                                class="text">{{ CLASE.title }}</span>
-                                                                                 <span class="min-lable">{{ CLASE.time }}</span>
-                                                                                <span class="rbt-badge variation-03 bg-primary-opacity"><i class="feather-eye"></i> Preview</span>
-                                                                            </div>
-                                                                        </a>
+                                                                                        <a href="#" onclick="return false;" (click)="selectedClase(CLASE,CLASE.title)">
+                                                                                        
+                                                                                        <div class="course-content-right">
+                                                                                            <i class="feather-play-circle"></i> <span
+                                                                                            class="text">{{ CLASE.title }}</span>
+                                                                                            <span class="min-lable">{{ CLASE.time }}</span>
+                                                                                            <span class="rbt-badge variation-03 bg-primary-opacity"><i class="feather-eye"></i> Preview</span>
+                                                                                        </div>
+                                                                                    </a>
+                                                                            
+                                                                       }   @else {
+                                                                                <a [href]="'/personalizado' "  >
+                                                                                        
+                                                                                        <div class="course-content-right">
+                                                                                            <i class="feather-play-circle"></i> <span
+                                                                                            class="text">{{ CLASE.title }}</span>
+                                                                                            <span class="min-lable">{{ CLASE.time }}</span>
+                                                                                            <span class="rbt-badge variation-03 bg-color-danger-opacity"><i class="feather-shopping-cart"></i> add</span>
+                                                                                        </div>
+                                                                                    </a>
+
+                                                                       }
+ 
+                                                                       
                                                                     </div>
                                                                     </li>
                                                                 </ng-container>

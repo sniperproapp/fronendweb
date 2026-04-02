@@ -15,6 +15,7 @@ import { PoliticasComponent } from './politicas/politicas.component';
 import { InstructoCursoComponent } from './instructor-curso/instructor-curso.component';
 import { equipoComponent } from './equipo/equipo.component';
 import { productosComponent } from './productos/productos.component';
+import { PersonalizadoComponent } from './personalizado/personalizado.component';
 
 const routes: Routes = [
   {
@@ -48,6 +49,10 @@ const routes: Routes = [
       {
         path: 'contactos',
         component: ContactosComponent,
+      },
+       {
+        path: 'personalizado',
+        component: PersonalizadoComponent,
       },
       {
         path: 'team',

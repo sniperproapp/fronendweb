@@ -114,8 +114,8 @@ ngAfterViewInit(): void {
       search: this.search
     }
     if(this.search.length > 0){
-      this.tiendaGuestService.searchCourse(data).subscribe((resp:any) => {
-     
+      this.tiendaGuestService.searchClases(data).subscribe((resp:any) => {
+       // console.log(resp)
         this.listCourses = resp;
       })
     }

@@ -37,7 +37,7 @@ export class CartsMensualComponent {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
     this.cartService.currentData$.subscribe((resp:any) => {
-   //  console.log(this.CARTS)
+      //console.log(resp)
       this.CARTS = resp;
       this.TOTAL_SUM = this.CARTS.reduce((sum:number,item:any) => sum + parseFloat(item.total),0);
     })

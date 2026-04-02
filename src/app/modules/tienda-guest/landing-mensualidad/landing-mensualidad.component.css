@@ -2,3 +2,8 @@
     color: black !important;
     margin-right: 0px;
 }
+/* style.css */
+.imagen-media-pantalla {
+  width: 50%; /* Ocupa la mitad del ancho del contenedor padre */
+  height: auto; /* Mantiene la proporción automáticamente */
+}

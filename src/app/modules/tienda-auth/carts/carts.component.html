@@ -31,9 +31,11 @@
                                 <thead>
                                     <tr>
                                         <th class="pro-thumbnail">Image</th>
-                                        <th class="pro-title">Course</th>
+                                        <th class="pro-title">Nombre</th>
                                         <th class="pro-price">Price</th>
                                         <th class="pro-quantity"></th>
+                                        @if (yesadress) {
+                                        <th class="pro-quantity">Cantidad</th>}
                                         <th class="pro-subtotal">Total</th>
                                         <th class="pro-remove">Remove</th>
                                     </tr>
@@ -41,17 +43,17 @@
                                 <tbody>
                                     <ng-container *ngFor="let CART of CARTS">
                                         <tr>
-                                            <td class="pro-thumbnail">
+                                            <td class="pro-thumbnail"> 
                                                 <a href="#">
-                                                    <img [src]="CART.curso.imagen" alt="Product">
+                                                    <img [src]="CART.productos.image1" alt="Product">
                                                 </a>
                                             </td>
-                                            <td class="pro-title"><a href="#">{{ CART.curso.title }}</a></td>
+                                            <td class="pro-title"><a href="#">{{ CART.productos.name }}</a></td>
                                             <td class="pro-price"><span>${{ CART.price_unit }}</span></td>
                                             <td class="pro-quantity">
                                                 <ng-container *ngIf="CART.code_cupon">
                                                     <small *ngIf="CART.type_discount == 1">
-                                                        Descuento : - {{ CART.discount }} %
+                                                        Descuento : - {{ CART.discount }} % 
                                                     </small>
                                                     <small *ngIf="CART.type_discount == 2">
                                                         Descuento : - {{ CART.discount }} USD
@@ -59,6 +61,17 @@
                                                     <br>
                                                     <small> CUPON: {{ CART.code_cupon }}</small>
                                                 </ng-container>
+                                                @if(CART.id_clase){
+                                                     <ng-container  >
+                                                    <small >
+                                                        CLASE : - {{ CART.name_clase }} 
+                                                    </small>
+                                                   
+                                                
+                                                   
+                                                </ng-container>
+                                                }
+                                               
                                                 <ng-container *ngIf="CART.code_discount">
                                                     <small *ngIf="CART.type_discount == 1">
                                                         Descuento : - {{ CART.discount }} %
@@ -72,6 +85,25 @@
                                                     <small> TIPO DE CAMPAÑA: {{ getNameCampaign(CART.campaign_discount) }}</small>
                                                 </ng-container>
                                             </td>
+                                            @if (yesadress) {
+
+                                                @if (CART.productos.tipo_articulo=="Fisico") {
+                                                         <td>
+                                                            <div class="col-md-6 col-12 mb--25">
+                                                                <input type="number" (input)="populate()"   [min]="1" [max]=CART.productos.inventario.cantidad_stock [(ngModel)]="CART.n_cantidad" name="n_cantidad" placeholder="">
+                                                             </div>
+                                                        </td>
+
+                                                }  @else {
+                                                     <td>
+                                                            <div class="col-md-6 col-12 mb--25">
+                                                                
+                                                             </div>
+                                                        </td>
+                                                }
+                                            }
+
+
                                             <td class="pro-subtotal"><span>${{ CART.total }}</span></td>
                                             <td class="pro-remove">
                                                 <a href="#" onclick="return false;" (click)="removeItem(CART)"><i class="feather-x"></i>
@@ -128,7 +160,25 @@
                                     <p>Sub Total <span>${{ sumatotal }}</span></p>
                                   
                                     <h2>Grand Total <span>${{ sumatotal }}</span></h2>
+
+                                    
                                 </div>
+                                 @if (yesadress) 
+                                     {
+                                        <div class="row">
+                                         
+                                         <div class="col-md-6 col-12 mb--25">
+                                            <input type="textarea" [(ngModel)]="adress" name="adress" placeholder="direccion de envio">
+                                        </div>
+                                        <div class="col-md-6 col-12 mb--25">
+                                            <input type="textarea" [(ngModel)]="telefono" name="telefono" placeholder="telefono">
+                                        </div>
+
+                                         
+                                       
+                                         </div>
+                                    }
+                            
 
                                 <div class="cart-submit-btn-group">
                                     <div class="single-button w-100">
@@ -136,7 +186,13 @@
                                             <span data-text="GENERAR LINK DE PAGO">GENERAR LINK DE PAGO</span>
                                            
                                         </button>  
-
+                                         
+                                         <div class="payment-box">
+  <h3>Finalizar Compra</h3>
+  <div #wompiContainer></div>
+</div>
+ 
+ 
                                         <!-- <div #paypal ></div> -->
                                           <a *ngIf="link_pay" [href]="link_pay" target="_blank" rel="noopener noreferrer">
                                           <h3>LINK DE PAGO {{link_pay}}</h3> 

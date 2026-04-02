@@ -32,6 +32,14 @@ export class TiendaGuestService {
    
   }
 
+  showproducto(slug:any,CAMPAING_SPECIAL = null){
+   
+      let URL = URL_SERVICIOS+"products_menbresia/producto/"+slug+"?TIME_NOW="+(new Date().getTime())+"&CAMPAING_SPECIAL="+(CAMPAING_SPECIAL ? CAMPAING_SPECIAL : '');
+      return this.http.get(URL);
+     
+   
+  }
+
 
   showCoursemen(slug:any,CAMPAING_SPECIAL = null){
    
@@ -41,6 +49,11 @@ export class TiendaGuestService {
    
   }
 
+
+   personalizadoclases(id:any){
+    let URL = URL_SERVICIOS+"video_paid/"+id 
+    return this.http.get(URL);
+  }
 
   homecursoscategory(id:any){
     let URL = URL_SERVICIOS+"courses/findtiendacategory/"+id 
@@ -57,6 +70,10 @@ export class TiendaGuestService {
   }
   searchCourse(data:any){
     let URL = URL_SERVICIOS+"courses/search-course";
+    return this.http.post(URL,data);
+  }
+  searchClases(data:any){
+    let URL = URL_SERVICIOS+"course_clase/search-course";
     return this.http.post(URL,data);
   }
 

@@ -21,6 +21,7 @@ import { PoliticasComponent } from './politicas/politicas.component';
 import { InstructoCursoComponent } from './instructor-curso/instructor-curso.component';
 import { equipoComponent } from './equipo/equipo.component';
 import { productosComponent } from './productos/productos.component';
+import { PersonalizadoComponent } from './personalizado/personalizado.component';
 
 
 @NgModule({ declarations: [
@@ -37,6 +38,7 @@ import { productosComponent } from './productos/productos.component';
         CartsMensualComponent,
         LandingMensualidadComponent,
         UpdatepassComponent,
+        PersonalizadoComponent,
         EliminarcuentaComponent,
         PoliticasComponent
     ], imports: [CommonModule,

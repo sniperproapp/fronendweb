@@ -15,8 +15,22 @@ export class TiendaAuthService {
 
   registerOrder(data:any){
     let headers = new HttpHeaders({'Authorization': this.authService.token});
-    let URL = URL_SERVICIOS+"sale";
+    let URL = URL_SERVICIOS+"sale_producto";
     return this.http.post(URL,data,{headers: headers});
+  }
+
+   registerOrderwompi(data:any){
+    let headers = new HttpHeaders({'Authorization': this.authService.token});
+    let URL = URL_SERVICIOS+"sale_producto/wompi";
+    return this.http.post(URL,data,{headers: headers});
+  }
+
+
+
+  resetearcarOrderwompi(data:any){
+    let headers = new HttpHeaders({'Authorization': this.authService.token});
+    let URL = URL_SERVICIOS+"sale_producto/resetcart";
+    return this.http.post(URL,DataTransfer,{headers: headers});
   }
   profileStudent(){
     let headers = new HttpHeaders({'Authorization': this.authService.token});
@@ -28,6 +42,13 @@ export class TiendaAuthService {
     let headers = new HttpHeaders({'Authorization': this.authService.token});
     let URL = URL_SERVICIOS+"referral/comisionesall";
     return this.http.get(URL,{headers: headers});
+  }
+
+
+   getsignature(formData:any){
+    let headers = new HttpHeaders({'Authorization': this.authService.token});
+    let URL = URL_SERVICIOS+"valid_pay/integrity-signature";
+    return this.http.post(URL,formData,{headers: headers});
   }
 
    getallsales(){
@@ -92,5 +113,11 @@ export class TiendaAuthService {
     let headers = new HttpHeaders({'Authorization': this.authService.token});
     let URL = URL_SERVICIOS+"courses/updatecheck";
     return this.http.post(URL,formData,{headers: headers});
+  }
+
+
+   personalizadoclases(id:any){
+    let URL = URL_SERVICIOS+"video_paid/"+id 
+    return this.http.get(URL);
   }
 }

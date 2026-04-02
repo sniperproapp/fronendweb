@@ -352,7 +352,7 @@
                                                                 </div>
                                                             </div>
                                                             <div class="rbt-card-bottom">
-                                                                <a class="rbt-btn btn-sm bg-primary-opacity w-100 text-center" href="/ver-curso/{{enrolled_course.course.id}}">Ir al Curso</a>
+                                                                <a class="rbt-btn btn-sm bg-primary-opacity w-100 text-center" [href]="'/ver-curso/'+ enrolled_course.course.id+'/'+null+'/'+null">Ir al Curso</a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -412,7 +412,7 @@
                                                                 </div>
                                                             </div>
                                                             <div class="rbt-card-bottom">
-                                                                <a class="rbt-btn btn-sm bg-primary-opacity w-100 text-center" [routerLink]="['/ver-curso/',actived_course_new.course.id]">Ir al Curso</a>
+                                                                <a class="rbt-btn btn-sm bg-primary-opacity w-100 text-center" [href]="'/ver-curso/'+ actived_course_new.course.id+'/'+null+'/'+null">Ir al Curso</a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -470,7 +470,7 @@
                                                                 </div>
                                                             </div>
                                                             <div class="rbt-card-bottom">
-                                                                <a class="rbt-btn btn-sm bg-primary-opacity w-100 text-center" [routerLink]="['ver-curso/',termined_course_new.course.id]"  >Ir al Curso</a>
+                                                                <a class="rbt-btn btn-sm bg-primary-opacity w-100 text-center" [href]="'/ver-curso/'+ termined_course_new.course.id+'/'+null+'/'+null"> Ir al Curso</a>
                                                             </div>
                                                         </div>
                                                     </div>

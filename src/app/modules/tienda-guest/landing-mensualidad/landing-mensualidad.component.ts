@@ -19,9 +19,9 @@ declare function showMoreBtn([]):any;
     standalone: false
 })
 export class LandingMensualidadComponent {
-
+  STOK:boolean=false
   SLUG:any = null;
-  COURSE_LANDING:any = null;
+  PRODUCTO_LANDING:any = null;
   COURSE_INSTRUCTOR:any = [];
   COURSE_CATEGORIES:any = []; 
   REVIEWS:any = [];
@@ -44,7 +44,7 @@ export class LandingMensualidadComponent {
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
-  
+      this.user = this.cartService.authService.user;
     this.activedRouter.params.subscribe((resp:any) => {
       
       this.SLUG = resp.slug;
@@ -52,23 +52,29 @@ export class LandingMensualidadComponent {
     this.activedRouter.queryParams.subscribe((resp:any) => {
       this.CAMPAING_SPECIAL = resp.campaing_discount;
     })
-    this.TiendaGuestService.showCoursemen(this.SLUG,this.CAMPAING_SPECIAL).subscribe((resp:any) => {
- 
-      this.COURSE_LANDING = resp;
-      this.cursostuden_have_course=this.COURSE_LANDING.cursostuden_have_course
-      this.requirements=JSON.parse(this.COURSE_LANDING.requirements)
-      this.who_is_it_for=JSON.parse(this.COURSE_LANDING.who_is_it_for)
-      this.TiendaGuestService.homecursoscategory(this.COURSE_LANDING.id_category_curso).subscribe((resp:any) => {
+    this.TiendaGuestService.showproducto(this.SLUG,this.CAMPAING_SPECIAL).subscribe((resp:any) => {
+    
+      //console.log(resp)
+      this.PRODUCTO_LANDING = resp;
+      if(this.PRODUCTO_LANDING.inventario.cantidad_stock){
+        this.STOK=true
+      }
+      
+
+      this.cursostuden_have_course=this.PRODUCTO_LANDING.cursostuden_have_course
+      this.requirements=JSON.parse(this.PRODUCTO_LANDING.requirements)
+      this.who_is_it_for=JSON.parse(this.PRODUCTO_LANDING.who_is_it_for)
+      this.TiendaGuestService.homecursoscategory(this.PRODUCTO_LANDING.id_category_curso).subscribe((resp:any) => {
         this.COURSE_CATEGORIES = resp ;
         
       })
 
 
-      this.TiendaGuestService.getreview(this.COURSE_LANDING.id).subscribe((resp:any) => {
+      this.TiendaGuestService.getreview(this.PRODUCTO_LANDING.id).subscribe((resp:any) => {
         this.REVIEWS = resp ;
         
       })
-      this.TiendaGuestService.homecursosuser(this.COURSE_LANDING.user.id).subscribe((resp:any) => {
+      this.TiendaGuestService.homecursosuser(this.PRODUCTO_LANDING.user.id).subscribe((resp:any) => {
         this.COURSE_INSTRUCTOR = resp;
        
        
@@ -80,7 +86,7 @@ export class LandingMensualidadComponent {
         }, 50);
       })
      
-      this.user = this.cartService.authService.user;
+    
      
     })
    
@@ -93,11 +99,9 @@ export class LandingMensualidadComponent {
       return COURSE.price_usd - CAMPAING_BANNER.discount;
     }
   }
-  getTotalPriceCourse(COURSE:any){
-    if(COURSE.discount_g){
-      return this.getNewTotal(COURSE,COURSE.discount_g);
-    }
-    return COURSE.price_usd;
+  getTotalPriceCourse(producto:any){
+    
+    return producto.price;
   }
 
   addCart(){
@@ -109,17 +113,17 @@ export class LandingMensualidadComponent {
      }
     let data = {
       id_user:this.user.id,
-      id_curso: this.COURSE_LANDING.id,
-      type_discount: this.COURSE_LANDING.discount_g ? this.COURSE_LANDING.discount_g.type_discount : null,
-      discount: this.COURSE_LANDING.discount_g ? this.COURSE_LANDING.discount_g.discount : null,
-      campaign_discount: this.COURSE_LANDING.discount_g ? this.COURSE_LANDING.discount_g.type_campaign : null,
+      id_producto: this.PRODUCTO_LANDING.id_producto,
+      type_discount: this.PRODUCTO_LANDING.discount_g ? this.PRODUCTO_LANDING.discount_g.type_discount : null,
+      discount: this.PRODUCTO_LANDING.discount_g ? this.PRODUCTO_LANDING.discount_g.discount : null,
+      campaign_discount: this.PRODUCTO_LANDING.discount_g ? this.PRODUCTO_LANDING.discount_g.type_campaign : null,
       code_cupon: null,
-      code_discount: this.COURSE_LANDING.discount_g ? this.COURSE_LANDING.discount_g.id : null,
-      price_unit: this.COURSE_LANDING.price_usd,
+      code_discount: this.PRODUCTO_LANDING.discount_g ? this.PRODUCTO_LANDING.discount_g.id : null,
+      price_unit: this.PRODUCTO_LANDING.price,
     
       
-      subtotal: this.getTotalPriceCourse(this.COURSE_LANDING),
-      total: this.getTotalPriceCourse(this.COURSE_LANDING),
+      subtotal: this.getTotalPriceCourse(this.PRODUCTO_LANDING),
+      total: this.getTotalPriceCourse(this.PRODUCTO_LANDING),
     }
 
     this.cartService.registerCartmensualidad(data).subscribe((resp:any) => {
@@ -127,9 +131,20 @@ export class LandingMensualidadComponent {
       if(resp.statusCode == 200){
         this.ToastrService .error(  resp.message, 'danger' );
       }else{
-        this.cartService.addCart(resp);
+      // console.log(resp)
+          this.cartService.resetCart();
+        setTimeout(() => {
+           
+          resp.forEach((cart:any) => {
+        //   console.log(cart)
+
+            this.cartService.addCart(cart);
+          });
+        }, 50);
+
+        
         this.ToastrService .success(  'GENERA EL LINK DE PAGO', 'Exito' );
-         this.router.navigateByUrl("/carrito-de-compra")
+        // this.router.navigateByUrl("/carrito-de-compra")landing-cursothis.router.navigateByUrl(`/ver-curso/${id}`);
       }
     });
   }

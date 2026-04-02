@@ -68,7 +68,7 @@ export class ExcelService {
   private mapJsonToExportableArray(data: Transaccion[]): any[] {
 
 
-    console.log(data)
+    //console.log(data)
     return data.map(t => ({
       'Total': t.total,
       'Nro. Transacción': t.n_transaccion,
